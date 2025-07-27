@@ -42,14 +42,16 @@ on:
       - "Cargo.toml"
       - "Cargo.lock"
       - "src/*"
-      - "Dockerfile"
+      - "ui/*"
+      - "packages/*"
   pull_request:
     branches: ["main"]
     paths:
       - "Cargo.toml"
       - "Cargo.lock"
       - "src/*"
-      - "Dockerfile"
+      - "ui/*"
+      - "packages/*"
       - ".github/workflows/ci.yaml"
       - "README.md"
   merge_group:
