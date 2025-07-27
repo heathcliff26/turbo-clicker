@@ -28,7 +28,7 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 
 ### Download binary
 
-1. Download the latest release
+1. Download the [latest release](https://github.com/heathcliff26/turbo-clicker/releases/latest)
 2. Unpack the archive into your installation folder
 3. Switch to the installation folder
 4. Install the desktop file to list the app in the search by running:
