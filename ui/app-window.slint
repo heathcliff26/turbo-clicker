@@ -36,7 +36,7 @@ export component AppWindow inherits Window {
 
     in-out property <int> delay: 20;
 
-    callback start-auto-click(delay: int, duration: int, startDelay: int);
+    callback start-auto-click(delay: int, start_delay: int, duration: int, use_start_delay: bool, use_duration: bool);
 
     function setDelay(value: int) {
         if (value < 20) {
@@ -96,8 +96,7 @@ export component AppWindow inherits Window {
         Button {
             text: "Start Auto-click";
             clicked => {
-                root.start-auto-click(root.delay, autoclickDuration.value,
-                                    autoclickStartDelay.value);
+                root.start-auto-click(delay, autoclickStartDelay.value, autoclickDuration.value, autoclickStartDelay.enabled, autoclickDuration.enabled);
             }
         }
     }
