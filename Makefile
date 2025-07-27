@@ -8,10 +8,6 @@ release:
 test:
 	cargo test
 
-# Run e2e tests
-test-e2e:
-	cargo test --features e2e e2e
-
 # Generate coverage profile
 coverprofile:
 	hack/coverprofile.sh
@@ -32,6 +28,10 @@ fmt:
 validate:
 	hack/validate.sh
 
+# Lint the metainfo file for Flatpak
+lint-metainfo:
+	flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream io.github.heathcliff26.turbo-clicker.metainfo.xml
+
 # Clean up generated files
 clean:
 	hack/clean.sh
@@ -47,12 +47,12 @@ help:
 .PHONY: \
 	release \
 	test \
-	test-e2e \
 	coverprofile \
 	lint \
 	doc \
 	fmt \
 	validate \
+	lint-metainfo \
 	clean \
 	help \
 	$(NULL)

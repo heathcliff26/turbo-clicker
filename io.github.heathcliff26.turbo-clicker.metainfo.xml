@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>io.github.heathcliff26.turbo-clicker</id>
+
+    <name>Turbo Clicker</name>
+    <summary>Graphical auto-clicker app</summary>
+
+    <metadata_license>MIT</metadata_license>
+    <project_license>Artistic-2.0</project_license>
+
+    <description>
+        <p>
+            Turbo Clicker is a GUI based auto-clicker for Linux. It is using uinput for creating a virtual mouse device. This allows it to simulate mouse clicks independently from x11 or wayland.
+        </p>
+    </description>
+
+    <url type="homepage">https://github.com/heathcliff26/turbo-clicker</url>
+    <developer id="io.github.heathcliff26">
+        <name>Heathcliff</name>
+    </developer>
+
+    <content_rating type="oars-1.1" />
+
+    <launchable type="desktop-id">io.github.heathcliff26.turbo-clicker.desktop</launchable>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#FFFFFF</color>
+        <color type="primary" scheme_preference="dark">#141414</color>
+    </branding>
+
+    <screenshots>
+        <screenshot type="default">
+            <image type="source">
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.1/screenshots/window-dark.png
+            </image>
+            <caption>Main window (Dark Theme)</caption>
+        </screenshot>
+        <screenshot type="default">
+            <image type="source">
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.1/screenshots/window-light.png
+            </image>
+            <caption>Main window (Light Theme)</caption>
+        </screenshot>
+    </screenshots>
+
+    <releases>
+        <release version="v0.0.1" date="2025-07-27" type="stable">
+            <description>
+                <p>Initial release</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.1</url>
+        </release>
+    </releases>
+
+</component>
