@@ -1,0 +1,8 @@
+# Cargo build directory
+/target
+
+# Release build output
+/dist
+
+# Test coverage report
+/*.profraw

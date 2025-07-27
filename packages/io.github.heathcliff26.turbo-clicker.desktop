@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+
+Name=Turbo Clicker
+Comment=GUI based auto-clicker for Linux
+Categories=Utility;
+Keywords=auto-clicker autoclicker clicker;
+
+Icon=@BASE_DIR/io.github.heathcliff26.turbo-clicker.svg
+Exec=@BASE_DIR/turbo-clicker
+Terminal=false

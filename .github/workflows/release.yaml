@@ -1,0 +1,65 @@
+---
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft:
+        description: "Create draft release"
+        type: boolean
+        default: true
+      update:
+        description: "Update existing release"
+        type: boolean
+        default: false
+      latest:
+        description: "Tag container as latest"
+        type: boolean
+        default: true
+      prerelease:
+        description: "Mark the release as a prerelease"
+        type: boolean
+        default: false
+
+jobs:
+  extract-version:
+    uses: heathcliff26/ci/.github/workflows/cargo-version.yaml@main
+    permissions:
+      contents: read
+
+  tag:
+    uses: heathcliff26/ci/.github/workflows/tag.yaml@main
+    needs: extract-version
+    permissions:
+      contents: write
+    with:
+      tag: ${{ needs.extract-version.outputs.version }}
+      overwrite: ${{ inputs.update }}
+    secrets: inherit
+
+  build:
+    uses: ./.github/workflows/ci.yaml
+    needs: tag
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+    with:
+      release: true
+      latest: ${{ inputs.latest }}
+    secrets: inherit
+
+  release:
+    uses: heathcliff26/ci/.github/workflows/release.yaml@main
+    needs:
+      - build
+      - extract-version
+    permissions:
+      contents: write
+    with:
+      draft: ${{ inputs.draft }}
+      update: ${{ inputs.update }}
+      tag: ${{ needs.extract-version.outputs.version }}
+      release-artifacts: "release/*"
+      artifacts: "turbo-clicker-*"
+      prerelease: ${{ inputs.prerelease }}

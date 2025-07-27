@@ -1,0 +1,104 @@
+import { Button, VerticalBox, HorizontalBox, SpinBox, Slider, CheckBox } from "std-widgets.slint";
+
+component OptionalIntInput inherits Rectangle {
+    in-out property <int> value: 0;
+    in-out property <bool> enabled: true;
+    in-out property <string> label: "";
+    in-out property <int> minimum: 0;
+    in-out property <int> maximum: 1000;
+    in-out property <int> step: 1;
+
+    HorizontalBox {
+        CheckBox {
+            checked: root.enabled;
+            text: root.label;
+            toggled => {
+                root.enabled = self.checked;
+            }
+        }
+
+        SpinBox {
+            minimum: root.minimum;
+            maximum: root.maximum;
+            step-size: root.step;
+            value: root.value;
+            enabled: root.enabled;
+            edited(value) => {
+                root.value = value;
+            }
+        }
+    }
+}
+
+export component AppWindow inherits Window {
+    title: "Turbo Clicker";
+    icon: @image-url("../packages/io.github.heathcliff26.turbo-clicker.svg");
+
+    in-out property <int> delay: 20;
+
+    callback start-auto-click(delay: int, duration: int, startDelay: int);
+
+    function setDelay(value: int) {
+        if (value < 20) {
+            delay = 20;
+        } else if (value > 1000) {
+            root.delay = 1000;
+        } else {
+            delay = Math.floor(value);
+        }
+    }
+
+    VerticalBox {
+        HorizontalBox {
+            delayLabel := Text {
+                text: "Dely between clicks (ms):";
+                vertical-alignment: center;
+            }
+
+            delayInput := SpinBox {
+                minimum: 20;
+                maximum: 1000;
+                step-size: 10;
+                value: root.delay;
+                edited(value) => {
+                    setDelay(value);
+                    delaySlider.value = root.delay;
+                }
+            }
+        }
+
+        delaySlider := Slider {
+            minimum: 20;
+            maximum: 1000;
+            step: 10;
+            value: root.delay;
+
+            changed(value) => {
+                setDelay(value);
+                delayInput.value = root.delay;
+            }
+        }
+
+        autoclickDuration := OptionalIntInput {
+            label: "Auto-click Duration (s): ";
+            value: 1;
+            minimum: 1;
+            maximum: 60;
+        }
+
+        autoclickStartDelay := OptionalIntInput {
+            label: "Auto-click start delay (s): ";
+            value: 1;
+            minimum: 1;
+            maximum: 60;
+        }
+
+        Button {
+            text: "Start Auto-click";
+            clicked => {
+                root.start-auto-click(root.delay, autoclickDuration.value,
+                                    autoclickStartDelay.value);
+            }
+        }
+    }
+}

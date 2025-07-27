@@ -1,0 +1,111 @@
+---
+name: CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "Release build"
+        type: boolean
+        default: false
+        required: false
+      dry-run:
+        description: "Do not push image"
+        type: boolean
+        default: false
+        required: false
+      latest:
+        description: "Tag latest"
+        type: boolean
+        default: false
+        required: false
+  workflow_call:
+    inputs:
+      release:
+        description: "Release build"
+        type: boolean
+        default: false
+        required: false
+      dry-run:
+        description: "Do not push image"
+        type: boolean
+        default: false
+        required: false
+      latest:
+        description: "Tag latest"
+        type: boolean
+        default: false
+        required: false
+  push:
+    branches: ["main"]
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "src/*"
+      - "Dockerfile"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "src/*"
+      - "Dockerfile"
+      - ".github/workflows/ci.yaml"
+      - "README.md"
+  merge_group:
+    branches: ["main"]
+
+jobs:
+  extract-version:
+    uses: heathcliff26/ci/.github/workflows/cargo-version.yaml@main
+    permissions:
+      contents: read
+
+  doc:
+    uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
+    permissions:
+      contents: read
+    with:
+      cmd: "make doc"
+
+  lint:
+    uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
+    permissions:
+      contents: read
+    with:
+      cmd: "make lint"
+
+  test:
+    uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
+    permissions:
+      contents: read
+    with:
+      cmd: "make test"
+
+  validate:
+    uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
+    permissions:
+      contents: read
+    with:
+      cmd: "make validate"
+
+  build-binary:
+    uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
+    needs:
+      - doc
+      - lint
+      - test
+      - validate
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+          - arch: arm64
+    with:
+      cmd: "make release"
+      artifact: "dist/turbo-clicker_linux-${{ matrix.arch }}.tar.gz"
+      artifact-name: "turbo-clicker-${{ matrix.arch }}"
+      architecture: "${{ matrix.arch }}"

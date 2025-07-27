@@ -1,0 +1,24 @@
+[package]
+name = "turbo-clicker"
+version = "0.0.1"
+authors = ["Heathcliff <heathcliff@heathcliff.eu"]
+edition = "2024"
+description = "GUI based auto-clicker for Linux. It uses uinput and should thus work independently of wayland or x11."
+readme = "README.md"
+repository = "https://github.com/heathcliff26/turbo-clicker"
+license = "Apache-2.0"
+exclude = [
+    ".github",
+    ".vscode",
+    "hack",
+    ".editorconfig",
+    ".sourcery.yaml",
+    "Makefile",
+]
+
+[dependencies]
+evdev = "0.13.1"
+slint = "1.12.1"
+
+[build-dependencies]
+slint-build = "1.12.1"
