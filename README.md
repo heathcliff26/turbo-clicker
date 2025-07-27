@@ -55,3 +55,6 @@ TODO?
 ## Credits
 
 Frontend framework: [slint](https://slint.dev/)
+
+![](img/MadeWithSlint-logo-dark.png#gh-dark-mode-only)
+![](img/MadeWithSlint-logo-light.png#gh-light-mode-only)
