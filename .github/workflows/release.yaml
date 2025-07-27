@@ -12,10 +12,6 @@ on:
         description: "Update existing release"
         type: boolean
         default: false
-      latest:
-        description: "Tag container as latest"
-        type: boolean
-        default: true
       prerelease:
         description: "Mark the release as a prerelease"
         type: boolean
@@ -44,9 +40,6 @@ jobs:
       contents: read
       packages: write
       security-events: write
-    with:
-      release: true
-      latest: ${{ inputs.latest }}
     secrets: inherit
 
   release:

@@ -3,39 +3,7 @@ name: CI
 
 on:
   workflow_dispatch:
-    inputs:
-      release:
-        description: "Release build"
-        type: boolean
-        default: false
-        required: false
-      dry-run:
-        description: "Do not push image"
-        type: boolean
-        default: false
-        required: false
-      latest:
-        description: "Tag latest"
-        type: boolean
-        default: false
-        required: false
   workflow_call:
-    inputs:
-      release:
-        description: "Release build"
-        type: boolean
-        default: false
-        required: false
-      dry-run:
-        description: "Do not push image"
-        type: boolean
-        default: false
-        required: false
-      latest:
-        description: "Tag latest"
-        type: boolean
-        default: false
-        required: false
   push:
     branches: ["main"]
     paths:
