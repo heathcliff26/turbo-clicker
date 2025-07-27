@@ -46,7 +46,9 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 3. Delete the installation folder.
 
 ### Flatpak
-TODO
+
+The app can be installed from [flathub](https://github.com/flathub/io.github.heathcliff26.turbo-clicker)
+
 ### RPM
 TODO?
 
