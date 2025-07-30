@@ -5,6 +5,8 @@ use std::error::Error;
 
 mod autoclicker;
 
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
 slint::include_modules!();
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -21,6 +23,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     };
 
     let ui = AppWindow::new()?;
+    ui.set_version(VERSION.into());
 
     ui.on_start_auto_click(
         move |delay: i32,

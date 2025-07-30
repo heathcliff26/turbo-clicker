@@ -9,9 +9,6 @@ name="$(yq -r '.package.name' "${base_dir}/Cargo.toml")"
 
 [ -d "${bin_dir}" ] || mkdir -p "${bin_dir}"
 
-CI_COMMIT_SHA="$(git rev-parse HEAD)"
-export CI_COMMIT_SHA
-
 cargo build --release
 
 case "$(uname -m)" in
