@@ -15,7 +15,6 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
   - [Installation](#installation)
     - [Download binary](#download-binary)
       - [Uninstalling](#uninstalling)
-    - [Flatpak](#flatpak)
     - [RPM](#rpm)
   - [Credits](#credits)
 
@@ -31,7 +30,7 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 1. Download the [latest release](https://github.com/heathcliff26/turbo-clicker/releases/latest)
 2. Unpack the archive into your installation folder
 3. Switch to the installation folder
-4. Install the desktop file to list the app in the search by running:
+4. Install the desktop file and udev rules by running:
 ```bash
 ./install-desktop.sh -i
 ```
@@ -39,15 +38,11 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 #### Uninstalling
 
 1. Switch to the installation folder
-2. Uninstall the desktop file by running:
+2. Uninstall by running:
 ```bash
 ./install-desktop.sh -u
 ```
-3. Delete the installation folder.
-
-### Flatpak
-
-The app can be installed from [flathub](https://github.com/flathub/io.github.heathcliff26.turbo-clicker)
+1. Delete the installation folder.
 
 ### RPM
 TODO?
