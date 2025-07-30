@@ -1,6 +1,10 @@
 SHELL := bash
 
-# Build the binary in release mode
+# Build the binary for testing
+build:
+	cargo build
+
+# Build the binary in release mode and create release bundle
 release:
 	hack/build-release.sh
 
@@ -45,6 +49,7 @@ help:
 	@echo "Run 'make <target>' to execute a specific target."
 
 .PHONY: \
+	build \
 	release \
 	test \
 	coverprofile \

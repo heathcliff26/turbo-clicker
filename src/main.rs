@@ -8,7 +8,18 @@ mod autoclicker;
 slint::include_modules!();
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut autoclicker = autoclicker::Autoclicker::new()?;
+    let mut autoclicker;
+    match autoclicker::Autoclicker::new() {
+        Ok(ac) => autoclicker = ac,
+        Err(e) => {
+            eprintln!("Error: {e}");
+            eprintln!(
+                "Please ensure this app has permissions to access /dev/uinput and that the uinput kernel module is loaded."
+            );
+            std::process::exit(1);
+        }
+    };
+
     let ui = AppWindow::new()?;
 
     ui.on_start_auto_click(
