@@ -15,7 +15,7 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
   - [Installation](#installation)
     - [Download binary](#download-binary)
       - [Uninstalling](#uninstalling)
-    - [RPM](#rpm)
+    - [Fedora Copr](#fedora-copr)
   - [Credits](#credits)
 
 ## Screenshots
@@ -34,6 +34,7 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 ```bash
 ./install-desktop.sh -i
 ```
+5. You might need to reboot so that the changed permissions of `/dev/uinput` are reflected.
 
 #### Uninstalling
 
@@ -42,10 +43,20 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 ```bash
 ./install-desktop.sh -u
 ```
-1. Delete the installation folder.
+3. Delete the installation folder.
 
-### RPM
-TODO?
+### Fedora Copr
+
+The app is available as an rpm by using the fedora copr repository [heathcliff26/turbo-clicker](https://copr.fedorainfracloud.org/coprs/heathcliff26/turbo-clicker/).
+1. Enable the copr repository
+```bash
+sudo dnf copr enable heathcliff26/turbo-clicker
+```
+2. Install the app
+```bash
+sudo dnf install turbo-clicker
+```
+3. You might need to reboot so that the changed permissions of `/dev/uinput` are reflected.
 
 ## Credits
 
