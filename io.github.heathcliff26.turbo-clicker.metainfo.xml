@@ -31,19 +31,30 @@
     <screenshots>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.1/screenshots/window-dark.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.2/screenshots/window-dark.png
             </image>
             <caption>Main window (Dark Theme)</caption>
         </screenshot>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.1/screenshots/window-light.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.2/screenshots/window-light.png
             </image>
             <caption>Main window (Light Theme)</caption>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="v0.0.2" date="2025-07-30" type="stable">
+            <description>
+                <p>Enabled installation as rpm via fedora copr</p>
+                <p>Increased font size to improve readability</p>
+                <p>Added about menu</p>
+                <p>Fixed missing device permissions</p>
+                <p>Made error message for missing device permissions more verbose</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.2</url>
+        </release>
+
         <release version="v0.0.1" date="2025-07-27" type="stable">
             <description>
                 <p>Initial release</p>
