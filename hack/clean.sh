@@ -4,7 +4,7 @@ set -e
 
 base_dir="$(dirname "${BASH_SOURCE[0]}" | xargs realpath | xargs dirname)"
 
-folders=("target" "dist")
+folders=("target" "dist" "tmp" "x86_64")
 files=()
 
 for folder in "${folders[@]}"; do
