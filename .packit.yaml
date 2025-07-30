@@ -1,0 +1,31 @@
+# See the documentation for more information:
+# https://packit.dev/docs/configuration/
+
+specfile_path: tmp/turbo-clicker.spec
+actions:
+  post-upstream-clone:
+    - mkdir tmp
+    - cp tools/turbo-clicker.spec tmp/
+
+# name in upstream package repository or registry (e.g. in PyPI)
+upstream_package_name: turbo-clicker
+# downstream (Fedora) RPM package name
+downstream_package_name: turbo-clicker
+
+jobs:
+  - job: copr_build
+    trigger: pull_request
+    branch: main
+    targets:
+      - fedora-all-x86_64
+      - fedora-all-aarch64
+    enable_net: true
+
+  - job: copr_build
+    trigger: release
+    targets:
+      - fedora-all-x86_64
+      - fedora-all-aarch64
+    enable_net: true
+    owner: heathcliff26
+    project: turbo-clicker

@@ -32,9 +32,9 @@ fmt:
 validate:
 	hack/validate.sh
 
-# Lint the metainfo file for Flatpak
-lint-metainfo:
-	flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream io.github.heathcliff26.turbo-clicker.metainfo.xml
+# Validate the appstream metainfo file
+validate-metainfo:
+	appstreamcli validate io.github.heathcliff26.turbo-clicker.metainfo.xml
 
 # Clean up generated files
 clean:
@@ -57,7 +57,7 @@ help:
 	doc \
 	fmt \
 	validate \
-	lint-metainfo \
+	validate-metainfo \
 	clean \
 	help \
 	$(NULL)

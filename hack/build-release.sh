@@ -26,7 +26,7 @@ aarch64 | arm64)
     ;;
 esac
 
-tmp_dir="${bin_dir}/tmp/${name}-${arch}"
+tmp_dir="${base_dir}/tmp/${name}-${arch}"
 [ -e "${tmp_dir}" ] && rm -rf "${tmp_dir}"
 mkdir -p "${tmp_dir}"
 cp packages/* "${base_dir}/target/release/${name}" "${tmp_dir}/"

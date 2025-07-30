@@ -6,3 +6,7 @@
 
 # Test coverage report
 /*.profraw
+
+# Packit RPM builds
+prepare_sources_result*/
+/tmp/
