@@ -1,3 +1,5 @@
+use std::sync::atomic::AtomicBool;
+use std::sync::atomic::Ordering;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
@@ -9,7 +11,7 @@ use evdev::{AttributeSet, KeyCode, KeyEvent};
 #[derive(Clone)]
 pub struct Autoclicker {
     device: Arc<Mutex<VirtualDevice>>,
-    running: Arc<Mutex<bool>>,
+    running: Arc<AtomicBool>,
 }
 
 impl Autoclicker {
@@ -24,7 +26,7 @@ impl Autoclicker {
 
         Ok(Autoclicker {
             device: Arc::new(Mutex::new(device)),
-            running: Arc::new(Mutex::new(false)),
+            running: Arc::new(AtomicBool::new(false)),
         })
     }
 
@@ -39,13 +41,10 @@ impl Autoclicker {
         duration: Option<u64>,
     ) -> bool {
         let running = Arc::clone(&self.running);
-        {
-            let mut running = running.lock().expect("Autoclicker running lock poisoned");
-            if *running {
-                return false;
-            }
-            *running = true;
+        if running.load(Ordering::SeqCst) {
+            return false;
         }
+        running.store(true, Ordering::SeqCst);
 
         if let Some(start_delay) = start_delay {
             println!("Waiting for {start_delay} s before starting autoclicker");
@@ -56,7 +55,7 @@ impl Autoclicker {
 
         thread::spawn(move || {
             println!("Autoclicker started with delay: {delay_ms} ms");
-            while *running.lock().expect("Autoclicker running lock poisoned") {
+            while running.load(Ordering::Acquire) {
                 match device
                     .lock()
                     .expect("Autoclicker device lock poisoned")
@@ -79,8 +78,7 @@ impl Autoclicker {
             thread::spawn(move || {
                 println!("Autoclicker will stop after {duration} s");
                 thread::sleep(Duration::from_secs(duration));
-                let mut running = running.lock().expect("Autoclicker running lock poisoned");
-                *running = false;
+                running.store(false, Ordering::Release);
             });
         }
 
