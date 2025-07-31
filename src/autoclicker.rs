@@ -7,11 +7,15 @@ use std::time::Duration;
 use evdev::uinput::VirtualDevice;
 use evdev::{AttributeSet, KeyCode, KeyEvent};
 
+#[cfg(test)]
+mod test;
+
 // Implement the autoclicker functionality using evdev
 #[derive(Clone)]
 pub struct Autoclicker {
     device: Arc<Mutex<VirtualDevice>>,
     running: Arc<AtomicBool>,
+    stopped: Arc<AtomicBool>,
 }
 
 impl Autoclicker {
@@ -27,6 +31,7 @@ impl Autoclicker {
         Ok(Autoclicker {
             device: Arc::new(Mutex::new(device)),
             running: Arc::new(AtomicBool::new(false)),
+            stopped: Arc::new(AtomicBool::new(true)),
         })
     }
 
@@ -41,10 +46,12 @@ impl Autoclicker {
         duration: Option<u64>,
     ) -> bool {
         let running = Arc::clone(&self.running);
-        if running.load(Ordering::SeqCst) {
+        let stopped = Arc::clone(&self.stopped);
+        if running.load(Ordering::SeqCst) || !stopped.load(Ordering::SeqCst) {
             return false;
         }
         running.store(true, Ordering::SeqCst);
+        stopped.store(false, Ordering::SeqCst);
 
         if let Some(start_delay) = start_delay {
             println!("Waiting for {start_delay} s before starting autoclicker");
@@ -55,7 +62,7 @@ impl Autoclicker {
 
         thread::spawn(move || {
             println!("Autoclicker started with delay: {delay_ms} ms");
-            while running.load(Ordering::Acquire) {
+            while running.load(Ordering::Relaxed) {
                 match device
                     .lock()
                     .expect("Autoclicker device lock poisoned")
@@ -70,6 +77,7 @@ impl Autoclicker {
                 };
                 thread::sleep(Duration::from_millis(delay_ms));
             }
+            stopped.store(true, Ordering::Release);
             println!("Autoclicker stopped");
         });
 

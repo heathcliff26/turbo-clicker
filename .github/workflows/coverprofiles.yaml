@@ -1,0 +1,26 @@
+---
+name: "Generate test cover report"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "src/*"
+      - "ui/*"
+      - "packages/*"
+      - "README.md"
+      - "hack/coverprofile.sh"
+
+jobs:
+  generate-reports:
+    uses: heathcliff26/ci/.github/workflows/testcover-report.yaml@main
+    secrets: inherit
+    permissions: {}
+    with:
+      coverprofile: "target/coverage/lcov.info"
+      script: "sudo chmod 666 /dev/uinput &&  make coverprofile"
