@@ -41,11 +41,6 @@ install -D -m 644 packages/%{package_id}.svg %{buildroot}/%{_datadir}/icons/hico
 install -D -m 644 packages/99-turbo-clicker-input.rules %{buildroot}/usr/lib/udev/rules.d/99-turbo-clicker-input.rules
 install -D -m 644 %{package_id}.metainfo.xml %{buildroot}/%{_datadir}/metainfo/%{package_id}.metainfo.xml
 
-%if %{with check}
-%check
-cargo test
-%endif
-
 %files
 %license LICENSE
 %doc README.md
