@@ -4,7 +4,7 @@
 specfile_path: tmp/turbo-clicker.spec
 actions:
   post-upstream-clone:
-    - mkdir tmp
+    - mkdir -p tmp
     - cp tools/turbo-clicker.spec tmp/
 
 # name in upstream package repository or registry (e.g. in PyPI)

@@ -42,10 +42,10 @@ install -D -m 644 %{package_id}.metainfo.xml %{buildroot}/%{_datadir}/metainfo/%
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
-/%{_datadir}/applications/%{package_id}.desktop
-/%{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
+%{_datadir}/applications/%{package_id}.desktop
+%{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
 /usr/lib/udev/rules.d/99-turbo-clicker-input.rules
-/%{_datadir}/metainfo/%{package_id}.metainfo.xml
+%{_datadir}/metainfo/%{package_id}.metainfo.xml
 
 %changelog
 %autochangelog
