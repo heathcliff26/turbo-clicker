@@ -44,6 +44,14 @@
     </screenshots>
 
     <releases>
+        <release version="v0.0.3" date="2025-08-01" type="stable">
+            <description>
+                <p>Reduce binary size.</p>
+                <p>Small performance improvement.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.3</url>
+        </release>
+
         <release version="v0.0.2" date="2025-07-30" type="stable">
             <description>
                 <p>Enabled installation as rpm via fedora copr</p>
