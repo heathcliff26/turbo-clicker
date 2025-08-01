@@ -6,6 +6,6 @@ Comment=GUI based auto-clicker for Linux
 Categories=Utility;
 Keywords=auto-clicker autoclicker clicker;
 
-Icon=@BASE_DIR/io.github.heathcliff26.turbo-clicker.svg
-Exec=@BASE_DIR/turbo-clicker
+Icon=io.github.heathcliff26.turbo-clicker
+Exec=turbo-clicker
 Terminal=false
