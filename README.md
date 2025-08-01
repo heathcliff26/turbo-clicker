@@ -32,7 +32,7 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 3. Switch to the installation folder
 4. Install the desktop file and udev rules by running:
 ```bash
-./install-desktop.sh -i
+./install.sh -i
 ```
 5. You might need to reboot so that the changed permissions of `/dev/uinput` are reflected.
 
@@ -41,7 +41,7 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 1. Switch to the installation folder
 2. Uninstall by running:
 ```bash
-./install-desktop.sh -u
+./install.sh -u
 ```
 3. Delete the installation folder.
 

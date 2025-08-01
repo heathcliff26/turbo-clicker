@@ -16,7 +16,6 @@ URL:            https://github.com/heathcliff26/turbo-clicker
 Source:         %{url}/archive/refs/tags/v%{version}.tar.gz
 
 BuildRequires: cargo >= 1.87
-BuildRequires: desktop-file-utils >= 0.27
 
 %global _description %{expand:
 GUI based auto-clicker for Linux. It uses uinput and should thus work
@@ -31,8 +30,6 @@ cargo vendor vendor
 
 %build
 cargo build --release --offline
-desktop-file-edit --set-icon=%{package_id} packages/%{package_id}.desktop
-desktop-file-edit --set-key Exec --set-value %{name} packages/%{package_id}.desktop
 
 %install
 install -D -m 755 target/release/%{name} %{buildroot}/%{_bindir}/%{name}
