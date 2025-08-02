@@ -56,3 +56,11 @@ jobs:
       release-artifacts: "release/*"
       artifacts: "turbo-clicker-*"
       prerelease: ${{ inputs.prerelease }}
+
+  publish-crate:
+    uses: heathcliff26/ci/.github/workflows/cargo-release.yaml@main
+    if: ${{ inputs.draft == false && inputs.update == false }}
+    needs: build
+    permissions:
+      contents: read
+    secrets: inherit
