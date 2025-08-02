@@ -39,6 +39,12 @@ install -D -m 755 packages/%{name}-pkexec-wrapper.sh %{buildroot}/%{_libexecdir}
 install -D -m 644 packages/%{package_id}.desktop %{buildroot}/%{_datadir}/applications/%{package_id}.desktop
 install -D -m 644 packages/%{package_id}.svg %{buildroot}/%{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
 install -D -m 644 %{package_id}.metainfo.xml %{buildroot}/%{_datadir}/metainfo/%{package_id}.metainfo.xml
+mkdir -p %{buildroot}/%{_sharedstatedir}/%{package_id}
+
+%preun
+if [ $1 -eq 0 ]; then
+    rm %{_sharedstatedir}/%{package_id}/*.json
+fi
 
 %files
 %license LICENSE
@@ -48,6 +54,7 @@ install -D -m 644 %{package_id}.metainfo.xml %{buildroot}/%{_datadir}/metainfo/%
 %{_datadir}/applications/%{package_id}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
 %{_datadir}/metainfo/%{package_id}.metainfo.xml
+%dir %{_sharedstatedir}/%{package_id}
 
 %changelog
 %autochangelog
