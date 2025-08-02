@@ -1,0 +1,25 @@
+export global GlobalState {
+    // The delay between clicks in milliseconds.
+    in-out property <int> delay: 20;
+    // The delay in seconds before starting the auto-click.
+    in-out property <int> start-delay: 1;
+    in-out property <bool> use-start-delay: true;
+    // The time to wait in seconds before stopping the auto-click.
+    in-out property <int> duration: 1;
+    in-out property <bool> use-duration: true;
+
+    // Application version. Needs to be populated from backend.
+    in-out property <string> version: "-";
+
+    callback start-auto-click();
+
+    public function setDelay(value: int) {
+        if (value < 20) {
+            delay = 20;
+        } else if (value > 1000) {
+            delay = 1000;
+        } else {
+            delay = Math.floor(value);
+        }
+    }
+}

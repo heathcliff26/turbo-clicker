@@ -1,0 +1,29 @@
+import { HorizontalBox, AboutSlint } from "std-widgets.slint";
+import { Page } from "page.slint";
+import { GlobalState } from "../global_state.slint";
+
+export component AboutPage inherits Page {
+    title: "About";
+    padding-top: 50px;
+
+    Text {
+        text: "Turbo Clicker";
+        horizontal-alignment: center;
+    }
+
+    Text {
+        text: "Version: v" + GlobalState.version;
+        horizontal-alignment: center;
+    }
+
+    // Spacer
+    Rectangle { }
+
+    HorizontalBox {
+        alignment: center;
+        AboutSlint {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}

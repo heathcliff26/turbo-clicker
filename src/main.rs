@@ -23,29 +23,33 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let ui = AppWindow::new()?;
-    ui.set_version(VERSION.into());
+    let app = AppWindow::new()?;
+    app.global::<GlobalState>().set_version(VERSION.into());
 
-    ui.on_start_auto_click(
-        move |delay: i32,
-              start_delay: i32,
-              duration: i32,
-              use_start_delay: bool,
-              use_duration: bool| {
-            let start_delay: Option<u64> = match use_start_delay {
-                true => Some(start_delay.try_into().unwrap()),
+    app.global::<GlobalState>().on_start_auto_click({
+        let app = app.as_weak();
+        move || {
+            let app = app.unwrap();
+            let global_state = app.global::<GlobalState>();
+
+            let start_delay: Option<u64> = match global_state.get_use_start_delay() {
+                true => Some(global_state.get_start_delay().try_into().unwrap()),
                 false => None,
             };
-            let duration: Option<u64> = match use_duration {
-                true => Some(duration.try_into().unwrap()),
+            let duration: Option<u64> = match global_state.get_use_duration() {
+                true => Some(global_state.get_duration().try_into().unwrap()),
                 false => None,
             };
 
-            autoclicker.autoclick(delay.try_into().unwrap(), start_delay, duration);
-        },
-    );
+            autoclicker.autoclick(
+                global_state.get_delay().try_into().unwrap(),
+                start_delay,
+                duration,
+            );
+        }
+    });
 
-    ui.run()?;
+    app.run()?;
 
     Ok(())
 }
