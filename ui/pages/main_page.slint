@@ -1,0 +1,83 @@
+import { Button, CheckBox, HorizontalBox, SpinBox, Slider } from "std-widgets.slint";
+import { Page } from "page.slint";
+import { GlobalState } from "../global_state.slint";
+
+component OptionalIntInput inherits Rectangle {
+    in-out property <int> value <=> input.value;
+    in-out property <bool> enabled <=> selected.checked;
+    in-out property <string> label <=> selected.text;
+    in-out property <int> minimum: 1;
+    in-out property <int> maximum: 1000;
+    in-out property <int> step: 1;
+
+    HorizontalBox {
+        selected := CheckBox { }
+
+        input := SpinBox {
+            minimum <=> root.minimum;
+            maximum <=> root.maximum;
+            step-size <=> root.step;
+            enabled <=> root.enabled;
+        }
+    }
+}
+
+export component MainPage inherits Page {
+    title: "App";
+
+    HorizontalBox {
+        Text {
+            text: "Delay between clicks (ms):";
+            vertical-alignment: center;
+        }
+
+        delayInput := SpinBox {
+            minimum: 20;
+            maximum: 1000;
+            step-size: 10;
+            value: GlobalState.delay;
+            edited(value) => {
+                GlobalState.setDelay(value);
+                delaySlider.value = GlobalState.delay;
+            }
+        }
+    }
+
+    delaySlider := Slider {
+        minimum: delayInput.minimum;
+        maximum: delayInput.maximum;
+        step: delayInput.step-size;
+        value: GlobalState.delay;
+
+        changed(value) => {
+            GlobalState.setDelay(value);
+            delayInput.value = GlobalState.delay;
+        }
+    }
+
+    OptionalIntInput {
+        label: "Auto-click Duration (s): ";
+        value <=> GlobalState.duration;
+        enabled <=> GlobalState.use-duration;
+        minimum: 1;
+        maximum: 60;
+    }
+
+    OptionalIntInput {
+        label: "Auto-click start delay (s): ";
+        value <=> GlobalState.start-delay;
+        enabled <=> GlobalState.use-start-delay;
+        minimum: 1;
+        maximum: 60;
+    }
+
+    // Spacer
+    Rectangle { }
+
+    Button {
+        text: "Start Auto-click";
+        clicked => {
+            GlobalState.start-auto-click();
+        }
+    }
+}

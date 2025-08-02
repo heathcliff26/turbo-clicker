@@ -1,0 +1,84 @@
+import { HorizontalBox, Palette } from "std-widgets.slint";
+
+component NavBarItem inherits Rectangle {
+    in property <int> tab-index;
+    in property <bool> selected;
+    in property <bool> has-focus;
+    in-out property <string> text <=> label.text;
+
+    callback clicked <=> touch.clicked;
+
+    min-height: l.preferred-height;
+    accessible-role: tab;
+    accessible-label: root.text;
+    accessible-item-index: root.tab-index;
+    accessible-item-selectable: true;
+    accessible-item-selected: root.selected;
+    accessible-action-default => {
+        self.clicked();
+    }
+
+    states [
+        pressed when touch.pressed: {
+            state.opacity: 0.8;
+        }
+        hover when touch.has-hover: {
+            state.opacity: 0.6;
+        }
+        selected when root.selected: {
+            state.opacity: 1;
+        }
+        focused when root.has-focus: {
+            state.opacity: 0.8;
+        }
+    ]
+
+    state := Rectangle {
+        opacity: 0;
+        background: Palette.background;
+
+        animate opacity { duration: 150ms; }
+    }
+
+    l := HorizontalBox {
+        y: (parent.height - self.height) / 2;
+        spacing: 0px;
+        alignment: center;
+
+        label := Text {
+            vertical-alignment: center;
+            accessible-role: none;
+        }
+    }
+
+    touch := TouchArea {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+export component NavBar inherits Rectangle {
+    in property <[string]> model: [];
+    out property <int> current-item: 0;
+
+    height: 50px;
+
+    Rectangle {
+        background: Palette.background.darker(0.2);
+    }
+
+    HorizontalBox {
+        padding-top: 0px;
+        padding-bottom: 0px;
+
+        for item[index] in root.model: NavBarItem {
+            clicked => {
+                root.current-item = index;
+            }
+
+            tab-index: index;
+            text: item;
+            selected: index == root.current-item;
+        }
+    }
+}

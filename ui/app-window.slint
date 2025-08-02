@@ -1,158 +1,22 @@
-import { Button, VerticalBox, HorizontalBox, SpinBox, Slider, CheckBox, Palette, AboutSlint } from "std-widgets.slint";
+import { GlobalState } from "global_state.slint";
+import { MainPage, AboutPage } from "pages/pages.slint";
+import { NavBar } from "nav-bar.slint";
 
-component OptionalIntInput inherits Rectangle {
-    in-out property <int> value: 0;
-    in-out property <bool> enabled: true;
-    in-out property <string> label: "";
-    in-out property <int> minimum: 0;
-    in-out property <int> maximum: 1000;
-    in-out property <int> step: 1;
-
-    HorizontalBox {
-        CheckBox {
-            checked: root.enabled;
-            text: root.label;
-            toggled => {
-                root.enabled = self.checked;
-            }
-        }
-
-        SpinBox {
-            minimum: root.minimum;
-            maximum: root.maximum;
-            step-size: root.step;
-            value: root.value;
-            enabled: root.enabled;
-            edited(value) => {
-                root.value = value;
-            }
-        }
-    }
-}
+export { GlobalState }
 
 export component AppWindow inherits Window {
     title: "Turbo Clicker";
     icon: @image-url("../packages/io.github.heathcliff26.turbo-clicker.svg");
     default-font-size: 18px;
+    preferred-height: 400px;
+    preferred-width: 500px;
 
-    in-out property <int> delay: 20;
-    in-out property <string> version: "-";
-
-    callback start-auto-click(delay: int, start_delay: int, duration: int, use_start_delay: bool, use_duration: bool);
-
-    function setDelay(value: int) {
-        if (value < 20) {
-            delay = 20;
-        } else if (value > 1000) {
-            root.delay = 1000;
-        } else {
-            delay = Math.floor(value);
-        }
-    }
-
-    MenuBar {
-        Menu {
-            title: "☰";
-            MenuItem {
-                title: "About";
-                activated => {
-                    aboutPopup.show();
-                }
-            }
-        }
-    }
-
-    aboutPopup := PopupWindow {
-        close-policy: close-on-click-outside;
-        x: (parent.width - self.width) / 2;
-        y: (parent.height - self.height) / 2;
-        width: 200px;
-        height: 220px;
-
-        Rectangle {
-            width: 100%;
-            height: 100%;
-            background: Palette.alternate-background;
-
-            VerticalBox {
-                Text {
-                    text: "Turbo Clicker";
-                    horizontal-alignment: center;
-                }
-
-                Text {
-                    text: "Version: v" + root.version;
-                    horizontal-alignment: center;
-                }
-
-                HorizontalBox {
-                    alignment: center;
-                    AboutSlint {
-                        width: 100px;
-                        height: 100px;
-                    }
-                }
-
-                Button {
-                    text: "Close";
-                    clicked => {
-                        aboutPopup.close();
-                    }
-                }
-            }
-        }
-    }
-
-    VerticalBox {
-        HorizontalBox {
-            delayLabel := Text {
-                text: "Delay between clicks (ms):";
-                vertical-alignment: center;
-            }
-
-            delayInput := SpinBox {
-                minimum: 20;
-                maximum: 1000;
-                step-size: 10;
-                value: root.delay;
-                edited(value) => {
-                    setDelay(value);
-                    delaySlider.value = root.delay;
-                }
-            }
+    VerticalLayout {
+        nav-bar := NavBar {
+            model: ["App", "About"];
         }
 
-        delaySlider := Slider {
-            minimum: 20;
-            maximum: 1000;
-            step: 10;
-            value: root.delay;
-
-            changed(value) => {
-                setDelay(value);
-                delayInput.value = root.delay;
-            }
-        }
-
-        autoclickDuration := OptionalIntInput {
-            label: "Auto-click Duration (s): ";
-            value: 1;
-            minimum: 1;
-            maximum: 60;
-        }
-
-        autoclickStartDelay := OptionalIntInput {
-            label: "Auto-click start delay (s): ";
-            value: 1;
-            minimum: 1;
-            maximum: 60;
-        }
-
-        Button {
-            text: "Start Auto-click";
-            clicked => {
-                root.start-auto-click(delay, autoclickStartDelay.value, autoclickDuration.value, autoclickStartDelay.enabled, autoclickDuration.enabled);
-            }
-        }
+        if(nav-bar.current-item == 0): MainPage { }
+        if(nav-bar.current-item == 1): AboutPage { }
     }
 }
