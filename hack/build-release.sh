@@ -25,7 +25,7 @@ esac
 
 tmp_dir="${base_dir}/tmp/${name}-${arch}"
 [ -e "${tmp_dir}" ] && rm -rf "${tmp_dir}"
-mkdir -p "${tmp_dir}"
-cp packages/* "${base_dir}/target/release/${name}" "${tmp_dir}/"
-tar -C "${tmp_dir}" -czf "${bin_dir}/${name}_linux-${arch}.tar.gz" .
+mkdir -p "${tmp_dir}/${name}"
+cp packages/* "${base_dir}/target/release/${name}" "${tmp_dir}/${name}"
+tar -C "${tmp_dir}" -czf "${bin_dir}/${name}_linux-${arch}.tar.gz" "${name}"
 rm -rf "${tmp_dir}"
