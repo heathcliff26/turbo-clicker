@@ -1,0 +1,10 @@
+import { VerticalBox } from "std-widgets.slint";
+
+export component Page inherits VerticalBox {
+    in property <string> title: "title";
+
+    accessible-role: tab-panel;
+    accessible-label: root.title;
+
+    @children
+}
