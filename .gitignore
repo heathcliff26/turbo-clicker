@@ -9,4 +9,6 @@
 
 # Packit RPM builds
 prepare_sources_result*/
-/tmp/
+/tmp
+/x86_64
+/aarch64

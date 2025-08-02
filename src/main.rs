@@ -2,9 +2,11 @@
 // Prevent console window in addition to Slint window in Windows release builds when, e.g., starting the app via file manager. Ignored on other platforms.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use state::State;
 use std::error::Error;
 
 mod autoclicker;
+mod state;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
@@ -25,6 +27,17 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let app = AppWindow::new()?;
     app.global::<GlobalState>().set_version(VERSION.into());
+
+    let state = match State::from_file() {
+        Ok(state) => state,
+        Err(e) => {
+            eprintln!("Failed to load state: {e}");
+            None
+        }
+    };
+    if let Some(state) = state {
+        state.update_app(&app);
+    }
 
     app.global::<GlobalState>().on_start_auto_click({
         let app = app.as_weak();
@@ -50,6 +63,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     });
 
     app.run()?;
+
+    let state = State::from_app(&app);
+    if let Err(e) = state.save_to_file() {
+        eprintln!("Failed to save state: {e}");
+    }
 
     Ok(())
 }

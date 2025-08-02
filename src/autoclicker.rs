@@ -10,7 +10,7 @@ use evdev::{AttributeSet, KeyCode, KeyEvent};
 #[cfg(test)]
 mod test;
 
-// Implement the autoclicker functionality using evdev
+/// Implement the autoclicker functionality using evdev
 #[derive(Clone)]
 pub struct Autoclicker {
     device: Arc<Mutex<VirtualDevice>>,
@@ -19,9 +19,9 @@ pub struct Autoclicker {
 }
 
 impl Autoclicker {
-    // Create a new Autoclicker instance.
-    // This will create a virtual mouse device "turbo-clicker-mouse" that can emit key events.
-    // Will fail if the device cannot be created.
+    /// Create a new Autoclicker instance.
+    /// This will create a virtual mouse device "turbo-clicker-mouse" that can emit key events.
+    /// Will fail if the device cannot be created.
     pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let device = VirtualDevice::builder()?
             .name("turbo-clicker-mouse")
@@ -35,10 +35,10 @@ impl Autoclicker {
         })
     }
 
-    // Start the autoclicker with the given delay in milliseconds between clicks.
-    // If a start delay (in seconds) is provided, it will wait for it before starting.
-    // If a duration (in seconds) is provided, it will stop the autoclicker after that duration.
-    // Returns true if the autoclicker was started, false if it was already running.
+    /// Start the autoclicker with the given delay in milliseconds between clicks.
+    /// If a start delay (in seconds) is provided, it will wait for it before starting.
+    /// If a duration (in seconds) is provided, it will stop the autoclicker after that duration.
+    /// Returns true if the autoclicker was started, false if it was already running.
     pub fn autoclick(
         &mut self,
         delay_ms: u64,

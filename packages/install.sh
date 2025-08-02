@@ -39,6 +39,9 @@ install_app() {
 
     xdg-desktop-menu forceupdate
     xdg-icon-resource forceupdate
+
+    echo "Creating folder for application state"
+    sudo mkdir -p "/var/lib/${APP_ID}" || echo "Failed to create /var/lib/${APP_ID}, you may need to create it manually"
 }
 
 uninstall_app() {
@@ -47,6 +50,8 @@ uninstall_app() {
 
     echo "Removing desktop file and icon"
     rm -f "${share_dir}/icons/hicolor/scalable/apps/${APP_ID}.svg" "${share_dir}/applications/${APP_ID}.desktop"
+
+    echo "You can delete the app state folder /var/lib/${APP_ID} if you no longer need it."
 }
 
 while [[ "$#" -gt 0 ]]; do
