@@ -15,6 +15,8 @@ License:        Apache-2.0
 URL:            https://github.com/heathcliff26/turbo-clicker
 Source:         %{url}/archive/refs/tags/v%{version}.tar.gz
 
+Requires: polkit
+
 BuildRequires: cargo >= 1.87
 
 %global _description %{expand:
@@ -33,18 +35,18 @@ cargo build --release --offline
 
 %install
 install -D -m 755 target/release/%{name} %{buildroot}/%{_bindir}/%{name}
+install -D -m 755 packages/%{name}-pkexec-wrapper.sh %{buildroot}/%{_libexecdir}/%{name}-pkexec-wrapper.sh
 install -D -m 644 packages/%{package_id}.desktop %{buildroot}/%{_datadir}/applications/%{package_id}.desktop
 install -D -m 644 packages/%{package_id}.svg %{buildroot}/%{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
-install -D -m 644 packages/99-turbo-clicker-input.rules %{buildroot}/usr/lib/udev/rules.d/99-turbo-clicker-input.rules
 install -D -m 644 %{package_id}.metainfo.xml %{buildroot}/%{_datadir}/metainfo/%{package_id}.metainfo.xml
 
 %files
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
+%{_libexecdir}/%{name}-pkexec-wrapper.sh
 %{_datadir}/applications/%{package_id}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
-/usr/lib/udev/rules.d/99-turbo-clicker-input.rules
 %{_datadir}/metainfo/%{package_id}.metainfo.xml
 
 %changelog

@@ -28,22 +28,22 @@ GUI based auto-clicker for Linux. It uses uinput and should thus work independen
 ### Download binary
 
 1. Download the [latest release](https://github.com/heathcliff26/turbo-clicker/releases/latest)
-2. Unpack the archive into your installation folder
-3. Switch to the installation folder
-4. Install the desktop file and udev rules by running:
+2. Unpack the archive
+3. Install the app for your user by running:
+   - You can install it globally by running the script with `sudo`
 ```bash
 ./install.sh -i
 ```
-5. You might need to reboot so that the changed permissions of `/dev/uinput` are reflected.
 
 #### Uninstalling
 
-1. Switch to the installation folder
+1. Switch to the folder with the installation script
 2. Uninstall by running:
+   - Run with `sudo` if you installed it globally
 ```bash
 ./install.sh -u
 ```
-3. Delete the installation folder.
+3. Delete the folder.
 
 ### Fedora Copr
 
@@ -56,7 +56,6 @@ sudo dnf copr enable heathcliff26/turbo-clicker
 ```bash
 sudo dnf install turbo-clicker
 ```
-3. You might need to reboot so that the changed permissions of `/dev/uinput` are reflected.
 
 ## Credits
 

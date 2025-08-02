@@ -7,5 +7,5 @@ Categories=Utility;
 Keywords=auto-clicker autoclicker clicker;
 
 Icon=io.github.heathcliff26.turbo-clicker
-Exec=turbo-clicker
+Exec=/usr/libexec/turbo-clicker-pkexec-wrapper.sh
 Terminal=false
