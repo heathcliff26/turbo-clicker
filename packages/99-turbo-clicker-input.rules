@@ -1,2 +1,0 @@
-# Turbo Clicker udev write access
-KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"

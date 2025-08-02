@@ -1,12 +1,20 @@
 #!/bin/bash
 
+set -e
+
 base_dir="$(dirname "${BASH_SOURCE[0]}" | xargs realpath)"
 
 APP_ID="io.github.heathcliff26.turbo-clicker"
 BINARY="turbo-clicker"
 
-bin_dir="/usr/local/bin"
-icon_dir="/usr/share/icons/hicolor"
+usr_dir="$HOME/.local"
+if [ "$(id -u)" -eq 0 ]; then
+    usr_dir="/usr"
+fi
+
+bin_dir="${usr_dir}/bin"
+libexec_dir="${usr_dir}/libexec"
+share_dir="${usr_dir}/share"
 
 help() {
     echo "Integrate Turbo Clicker with common desktop environments."
@@ -16,38 +24,39 @@ help() {
     echo "       -h | --help       -- show usage"
 }
 
-install() {
+install_app() {
     echo "Installing binary to ${bin_dir}/${BINARY}"
-    sudo cp "${base_dir}/${BINARY}" "${bin_dir}/${BINARY}"
+    install -Dm755 "${base_dir}/${BINARY}" "${bin_dir}/${BINARY}"
+    install -Dm755 "${base_dir}/turbo-clicker-pkexec-wrapper.sh" "${libexec_dir}/turbo-clicker-pkexec-wrapper.sh"
+    [ "$(id -u)" -eq 0 ] || sed -i "s#/usr/bin/turbo-clicker#${bin_dir}/${BINARY}#g" "${libexec_dir}/turbo-clicker-pkexec-wrapper.sh"
 
     echo "Installing desktop file"
-    sudo xdg-desktop-menu install "${base_dir}/${APP_ID}.desktop"
+    install -Dm644 "${base_dir}/${APP_ID}.desktop" "${share_dir}/applications/${APP_ID}.desktop"
+    [ "$(id -u)" -eq 0 ] || sed -i "s#/usr/libexec#${libexec_dir}#g" "${share_dir}/applications/${APP_ID}.desktop"
 
     echo "Installing icon"
-    sudo mkdir -p "${icon_dir}/scalable/apps"
-    sudo cp "${base_dir}/${APP_ID}.svg" "${icon_dir}/scalable/apps/${APP_ID}.svg"
+    install -Dm644 "${base_dir}/${APP_ID}.svg" "${share_dir}/icons/hicolor/scalable/apps/${APP_ID}.svg"
 
     xdg-desktop-menu forceupdate
     xdg-icon-resource forceupdate
 }
 
-uninstall() {
+uninstall_app() {
     echo "Removing binary"
-    sudo rm "${bin_dir}/${BINARY}"
+    rm -f "${bin_dir}/${BINARY}" "${libexec_dir}/turbo-clicker-pkexec-wrapper.sh"
 
     echo "Removing desktop file and icon"
-    sudo xdg-desktop-menu uninstall "${APP_ID}.desktop"
-    sudo rm "${icon_dir}/scalable/apps/${APP_ID}.svg"
+    rm -f "${share_dir}/icons/hicolor/scalable/apps/${APP_ID}.svg" "${share_dir}/applications/${APP_ID}.desktop"
 }
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
     -i | --install)
-        install
+        install_app
         exit 0
         ;;
     -u | --uninstall)
-        uninstall
+        uninstall_app
         exit 0
         ;;
     -h | --help)
@@ -60,7 +69,6 @@ while [[ "$#" -gt 0 ]]; do
         exit 1
         ;;
     esac
-    shift
 done
 
 help
