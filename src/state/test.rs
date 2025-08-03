@@ -167,6 +167,67 @@ fn state_save_to_file() {
 
 #[test]
 #[serial]
+fn get_state_file_path_env() {
+    let expected_user = "test_user";
+    unsafe {
+        env::set_var(ORIGINAL_USER_ENV_VAR, expected_user);
+    }
+
+    let path = get_state_file_path();
+    let user = extract_user_from_path(&path);
+    assert_eq!(
+        expected_user, user,
+        "User should match the environment variable"
+    );
+
+    unsafe {
+        env::remove_var(ORIGINAL_USER_ENV_VAR);
+    }
+}
+
+#[test]
+#[serial]
+fn get_state_file_path_empty_env() {
+    unsafe {
+        env::set_var(ORIGINAL_USER_ENV_VAR, "");
+    }
+
+    let path = get_state_file_path();
+    let user = extract_user_from_path(&path);
+    assert!(!user.is_empty(), "User should not be empty");
+
+    unsafe {
+        env::remove_var(ORIGINAL_USER_ENV_VAR);
+    }
+}
+
+#[test]
+#[serial]
+fn get_state_file_path_libc() {
+    unsafe {
+        env::remove_var(ORIGINAL_USER_ENV_VAR);
+    }
+
+    let path = get_state_file_path();
+    let user = extract_user_from_path(&path);
+    assert!(!user.is_empty(), "User should not be empty");
+}
+
+fn extract_user_from_path(path: &str) -> String {
+    let path = path
+        .strip_prefix(SHARED_STATE_DIR)
+        .expect("Should strip SHARED_STATE_DIR from path");
+    let path = path
+        .strip_suffix(".json")
+        .expect("Should strip .json from path");
+    let user = path
+        .strip_prefix("/state_")
+        .expect("Should strip '/state_' from path");
+    user.to_string()
+}
+
+#[test]
+#[serial]
 fn get_current_user_from_libc() {
     unsafe {
         env::remove_var(ORIGINAL_USER_ENV_VAR);
