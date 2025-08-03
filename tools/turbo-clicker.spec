@@ -27,11 +27,9 @@ independently of wayland or x11.}
 
 %prep
 %autosetup -n turbo-clicker-%{version} -p1
-# Need network for this part
-cargo vendor vendor
 
 %build
-cargo build --release --offline
+cargo build --release
 
 %install
 install -D -m 755 target/release/%{name} %{buildroot}/%{_bindir}/%{name}
