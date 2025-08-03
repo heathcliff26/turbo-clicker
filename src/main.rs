@@ -65,6 +65,17 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
     });
 
+    app.global::<GlobalState>().on_settings_changed({
+        let app = app.as_weak();
+        move || {
+            let app = app.unwrap();
+            let state = State::from_app(&app);
+            if let Err(e) = state.save_to_file() {
+                eprintln!("Failed to save settings: {e}");
+            }
+        }
+    });
+
     app.run()?;
 
     let state = State::from_app(&app);

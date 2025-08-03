@@ -1,3 +1,5 @@
+import { Palette } from "std-widgets.slint";
+
 export global GlobalState {
     // The delay between clicks in milliseconds.
     in-out property <int> delay: 20;
@@ -8,10 +10,13 @@ export global GlobalState {
     in-out property <int> duration: 1;
     in-out property <bool> use-duration: true;
 
+    in-out property <bool> dark-mode: true;
+
     // Application version. Needs to be populated from backend.
     in-out property <string> version: "-";
 
     callback start-auto-click();
+    callback settings-changed();
 
     public function setDelay(value: int) {
         if (value < 20) {
@@ -21,5 +26,14 @@ export global GlobalState {
         } else {
             delay = Math.floor(value);
         }
+    }
+
+    public function setColorScheme() {
+        Palette.color-scheme = dark-mode ? ColorScheme.dark : ColorScheme.light;
+    }
+
+    changed dark-mode => {
+        setColorScheme();
+        settings-changed();
     }
 }

@@ -27,6 +27,7 @@ pub struct State {
     pub duration: u64,
     pub use_start_delay: bool,
     pub use_duration: bool,
+    pub dark_mode: bool,
 }
 
 impl State {
@@ -40,6 +41,7 @@ impl State {
             duration: global_state.get_duration().try_into().unwrap(),
             use_start_delay: global_state.get_use_start_delay(),
             use_duration: global_state.get_use_duration(),
+            dark_mode: global_state.get_dark_mode(),
         }
     }
 
@@ -68,6 +70,7 @@ impl State {
         global_state.set_duration(self.duration as i32);
         global_state.set_use_start_delay(self.use_start_delay);
         global_state.set_use_duration(self.use_duration);
+        global_state.set_dark_mode(self.dark_mode);
     }
 
     /// Save the state to user specific state file.

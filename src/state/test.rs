@@ -9,6 +9,7 @@ fn state_from_app() {
         duration: 10,
         use_start_delay: false,
         use_duration: true,
+        dark_mode: true,
     };
 
     i_slint_backend_testing::init_no_event_loop();
@@ -19,6 +20,7 @@ fn state_from_app() {
     global_state.set_duration(expected_state.duration as i32);
     global_state.set_use_start_delay(expected_state.use_start_delay);
     global_state.set_use_duration(expected_state.use_duration);
+    global_state.set_dark_mode(expected_state.dark_mode);
 
     assert_eq!(
         expected_state,
@@ -35,6 +37,7 @@ fn state_update_app() {
         duration: 15,
         use_start_delay: true,
         use_duration: false,
+        dark_mode: false,
     };
 
     i_slint_backend_testing::init_no_event_loop();
@@ -66,6 +69,11 @@ fn state_update_app() {
         state.use_duration,
         global_state.get_use_duration(),
         "GlobalState use_duration should match State use_duration"
+    );
+    assert_eq!(
+        state.dark_mode,
+        global_state.get_dark_mode(),
+        "GlobalState dark_mode should match State dark_mode"
     );
 }
 
@@ -103,6 +111,7 @@ fn state_from_file() {
         duration: 1,
         use_start_delay: true,
         use_duration: true,
+        dark_mode: false,
     };
 
     assert_eq!(
@@ -124,6 +133,7 @@ fn state_save_to_file() {
         duration: 25,
         use_start_delay: true,
         use_duration: true,
+        dark_mode: true,
     };
 
     let user = "save_to_file_test_user";
