@@ -18,6 +18,7 @@ Source:         %{url}/archive/refs/tags/v%{version}.tar.gz
 Requires: polkit
 
 BuildRequires: cargo >= 1.87
+BuildRequires: qt6-qtbase-devel qt6-qtwayland-devel
 
 %global _description %{expand:
 GUI based auto-clicker for Linux. It uses uinput and should thus work
