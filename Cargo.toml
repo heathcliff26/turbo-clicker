@@ -21,7 +21,12 @@ evdev = "0.13.1"
 libc = "0.2.174"
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.142"
-slint = { version = "1.12.1", default-features = false, features = ["std", "accessibility", "compat-1-2", "backend-qt"] }
+slint = { version = "1.12.1", default-features = false, features = [
+    "std",
+    "accessibility",
+    "compat-1-2",
+    "backend-qt",
+] }
 
 [build-dependencies]
 slint-build = "1.12.1"
