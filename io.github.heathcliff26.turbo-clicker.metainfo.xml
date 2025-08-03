@@ -31,19 +31,30 @@
     <screenshots>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.2/screenshots/window-dark.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.4/screenshots/window-dark.png
             </image>
             <caption>Main window (Dark Theme)</caption>
         </screenshot>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.2/screenshots/window-light.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.4/screenshots/window-light.png
             </image>
             <caption>Main window (Light Theme)</caption>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="v0.0.4" date="2025-08-03" type="stable">
+            <description>
+                <p>Redesigned UI to use pages instead of popups.</p>
+                <p>Changed backend to QT6 from winit.</p>
+                <p>Save application state and settings across instances.</p>
+                <p>Fix missing icon in dash.</p>
+                <p>Run app as root instead of changing device permissions.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.4</url>
+        </release>
+
         <release version="v0.0.3" date="2025-08-01" type="stable">
             <description>
                 <p>Reduce binary size.</p>
