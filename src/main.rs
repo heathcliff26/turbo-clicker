@@ -9,6 +9,7 @@ mod autoclicker;
 mod state;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
+const APP_ID: &str = concat!("io.github.heathcliff26.", env!("CARGO_PKG_NAME"));
 
 slint::include_modules!();
 
@@ -27,6 +28,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     let app = AppWindow::new()?;
     app.global::<GlobalState>().set_version(VERSION.into());
+
+    slint::set_xdg_app_id(APP_ID).expect("Failed to set XDG app ID");
 
     let state = match State::from_file() {
         Ok(state) => state,
