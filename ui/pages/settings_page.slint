@@ -1,0 +1,14 @@
+import { Page } from "page.slint";
+import { GlobalState } from "../global_state.slint";
+import { Switch } from "std-widgets.slint";
+
+export component SettingsPage inherits Page {
+    title: "Settings";
+    padding: 10px;
+    alignment: start;
+
+    Switch {
+        text: "Dark Mode";
+        checked <=> GlobalState.dark-mode;
+    }
+}

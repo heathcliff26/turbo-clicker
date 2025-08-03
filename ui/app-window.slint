@@ -1,5 +1,5 @@
 import { GlobalState } from "global_state.slint";
-import { MainPage, AboutPage } from "pages/pages.slint";
+import { MainPage, AboutPage, SettingsPage } from "pages/pages.slint";
 import { NavBar } from "nav-bar.slint";
 
 export { GlobalState }
@@ -11,12 +11,17 @@ export component AppWindow inherits Window {
     preferred-height: 400px;
     preferred-width: 500px;
 
+    init => {
+        GlobalState.setColorScheme();
+    }
+
     VerticalLayout {
         nav-bar := NavBar {
-            model: ["App", "About"];
+            model: ["App", "Settings", "About"];
         }
 
         if(nav-bar.current-item == 0): MainPage { }
-        if(nav-bar.current-item == 1): AboutPage { }
+        if(nav-bar.current-item == 1): SettingsPage { }
+        if(nav-bar.current-item == 2): AboutPage { }
     }
 }
