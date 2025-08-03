@@ -90,7 +90,10 @@ impl State {
 
 /// Combine the common directory with the invoking user's name and return the path to the state.
 fn get_state_file_path() -> String {
-    let mut user = env::var(ORIGINAL_USER_ENV_VAR).ok();
+    let mut user = match env::var(ORIGINAL_USER_ENV_VAR) {
+        Ok(user) if !user.is_empty() => Some(user),
+        _ => None,
+    };
 
     if user.is_none() {
         user = get_current_user();
