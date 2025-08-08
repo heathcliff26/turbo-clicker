@@ -1,4 +1,4 @@
-import { Button, CheckBox, HorizontalBox, SpinBox, Slider } from "std-widgets.slint";
+import { Button, CheckBox, HorizontalBox, SpinBox, Slider, Switch, Palette } from "std-widgets.slint";
 import { Page } from "page.slint";
 import { GlobalState } from "../global_state.slint";
 
@@ -24,6 +24,26 @@ component OptionalIntInput inherits Rectangle {
 
 export component MainPage inherits Page {
     title: "App";
+
+    Switch {
+        text: "Hotkey";
+        // TODO: This is for testing
+        checked <=> GlobalState.hotkey-enabled;
+    }
+
+    Rectangle {
+        background: Palette.alternate-background;
+
+        property <[string]> hotkey: GlobalState.hotkey;
+
+        HorizontalBox {
+            alignment: center;
+            spacing: 0px;
+            for key[i] in hotkey: Text {
+                text: i == hotkey.length - 1 ? "'" + key + "'" : "'" + key + "' + ";
+            }
+        }
+    }
 
     HorizontalBox {
         Text {

@@ -1,6 +1,6 @@
 import { Page } from "page.slint";
 import { GlobalState } from "../global_state.slint";
-import { Switch } from "std-widgets.slint";
+import { Switch, Palette, HorizontalBox } from "std-widgets.slint";
 
 export component SettingsPage inherits Page {
     title: "Settings";
@@ -10,5 +10,26 @@ export component SettingsPage inherits Page {
     Switch {
         text: "Dark Mode";
         checked <=> GlobalState.dark-mode;
+    }
+
+    // Spacer
+    Rectangle { }
+
+    Text {
+        text: "Hotkey:";
+    }
+
+    Rectangle {
+        background: Palette.alternate-background;
+
+        property <[string]> hotkey: GlobalState.hotkey;
+
+        HorizontalBox {
+            alignment: center;
+            spacing: 0px;
+            for key[i] in hotkey: Text {
+                text: i == hotkey.length - 1 ? "'" + key + "'" : "'" + key + "' + ";
+            }
+        }
     }
 }
