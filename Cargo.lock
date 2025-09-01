@@ -4119,7 +4119,7 @@ dependencies = [
 
 [[package]]
 name = "turbo-clicker"
-version = "0.0.4"
+version = "0.0.5"
 dependencies = [
  "evdev",
  "i-slint-backend-testing",
