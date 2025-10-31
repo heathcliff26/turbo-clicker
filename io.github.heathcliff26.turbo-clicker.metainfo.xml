@@ -44,6 +44,13 @@
     </screenshots>
 
     <releases>
+        <release version="v0.0.7" date="2025-11-01" type="stable">
+            <description>
+                <p>Update dependencies</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.7</url>
+        </release>
+
         <release version="v0.0.6" date="2025-10-01" type="stable">
             <description>
                 <p>Update dependencies</p>
