@@ -63,18 +63,12 @@ impl Autoclicker {
         thread::spawn(move || {
             println!("Autoclicker started with delay: {delay_ms} ms");
             while running.load(Ordering::Relaxed) {
-                match device
-                    .lock()
-                    .expect("Autoclicker device lock poisoned")
-                    .emit(&[
-                        *KeyEvent::new(KeyCode::BTN_LEFT, 1),
-                        *KeyEvent::new(KeyCode::BTN_LEFT, 0),
-                    ]) {
-                    Ok(_) => {}
-                    Err(e) => {
-                        eprintln!("Failed to emit click event: {e}");
-                    }
-                };
+                let mut device = device.lock().expect("Autoclicker device lock poisoned");
+                emit_click_event(&mut device, 1); // Mouse button down
+                emit_click_event(&mut device, 0); // Mouse button up
+                // Explicitly drop the lock before sleeping
+                drop(device);
+
                 thread::sleep(Duration::from_millis(delay_ms));
             }
             stopped.store(true, Ordering::Release);
@@ -92,4 +86,13 @@ impl Autoclicker {
 
         true
     }
+}
+
+fn emit_click_event(device: &mut VirtualDevice, value: i32) {
+    match device.emit(&[*KeyEvent::new(KeyCode::BTN_LEFT, value)]) {
+        Ok(_) => {}
+        Err(e) => {
+            eprintln!("Failed to emit click event: {e}");
+        }
+    };
 }
