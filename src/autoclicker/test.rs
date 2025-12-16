@@ -1,7 +1,7 @@
 use super::*;
 
-#[test]
-fn new_autoclicker() {
+#[tokio::test]
+async fn new_autoclicker() {
     let autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
 
     assert!(
@@ -13,7 +13,7 @@ fn new_autoclicker() {
         "stopped should be true"
     );
 
-    let mut device = autoclicker.device.lock().expect("Device lock poisoned");
+    let mut device = autoclicker.device.lock().await;
     let nodes = device
         .enumerate_dev_nodes_blocking()
         .expect("Failed to enumerate device nodes");
@@ -21,12 +21,12 @@ fn new_autoclicker() {
     assert_eq!(1, nodes.count(), "There should be one device node");
 }
 
-#[test]
-fn autoclick_should_stop_when_signaled() {
+#[tokio::test]
+async fn autoclick_should_stop_when_signaled() {
     let mut autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
     let delay_ms = 20;
 
-    let started = autoclicker.autoclick(delay_ms, None, None);
+    let started = autoclicker.autoclick(delay_ms, None, None).await;
     assert!(started, "Autoclicker should start");
     assert!(
         autoclicker.running.load(Ordering::SeqCst),
@@ -39,9 +39,9 @@ fn autoclick_should_stop_when_signaled() {
 
     // Wait for the loop to start, then stop it and wait out a full delay.
     // Delay should not be less than 10ms, as otherwise the timing here might not work out.
-    std::thread::sleep(std::time::Duration::from_millis(10));
+    sleep(Duration::from_millis(10)).await;
     autoclicker.running.store(false, Ordering::Release);
-    std::thread::sleep(std::time::Duration::from_millis(delay_ms));
+    sleep(Duration::from_millis(delay_ms)).await;
 
     assert!(
         autoclicker.stopped.load(Ordering::SeqCst),
@@ -49,20 +49,20 @@ fn autoclick_should_stop_when_signaled() {
     );
 }
 
-#[test]
-fn autoclick_should_not_start_if_already_running() {
+#[tokio::test]
+async fn autoclick_should_not_start_if_already_running() {
     let mut autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
 
     autoclicker.running.store(true, Ordering::SeqCst);
-    let started = autoclicker.autoclick(20, None, None);
+    let started = autoclicker.autoclick(20, None, None).await;
     assert!(!started, "Autoclicker should not start if already running");
 }
 
-#[test]
-fn autoclick_should_not_start_when_still_running() {
+#[tokio::test]
+async fn autoclick_should_not_start_when_still_running() {
     let mut autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
 
     autoclicker.stopped.store(false, Ordering::SeqCst);
-    let started = autoclicker.autoclick(20, None, None);
+    let started = autoclicker.autoclick(20, None, None).await;
     assert!(!started, "Autoclicker should not start if already running");
 }
