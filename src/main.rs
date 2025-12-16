@@ -6,6 +6,7 @@ use state::State;
 use std::error::Error;
 
 mod autoclicker;
+mod hotkey;
 mod state;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -26,6 +27,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
             std::process::exit(1);
         }
     };
+    let global_hotkey = hotkey::HotkeyPortal::register().await?;
+    autoclicker.trigger_on_hotkey(global_hotkey.clone()).await?;
 
     let app = AppWindow::new()?;
     app.global::<GlobalState>().set_version(VERSION.into());
@@ -75,6 +78,15 @@ async fn main() -> Result<(), Box<dyn Error>> {
             if let Err(e) = state.save_to_file() {
                 eprintln!("Failed to save settings: {e}");
             }
+        }
+    });
+
+    app.global::<GlobalState>().on_configure_hotkey({
+        move || {
+            let global_hotkey = global_hotkey.clone();
+            tokio::spawn(async move {
+                global_hotkey.configure_hotkey().await;
+            });
         }
     });
 

@@ -2,11 +2,16 @@ use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 use std::time::Duration;
+
 use tokio::sync::Mutex;
 use tokio::time::sleep;
 
+use futures_util::StreamExt;
+
 use evdev::uinput::VirtualDevice;
 use evdev::{AttributeSet, KeyCode, KeyEvent};
+
+use crate::hotkey::HotkeyPortal;
 
 #[cfg(test)]
 mod test;
@@ -86,6 +91,22 @@ impl Autoclicker {
         }
 
         true
+    }
+
+    /// Listen to the event stream and trigger the autoclicker on each event.
+    pub async fn trigger_on_hotkey(&self, portal: HotkeyPortal) -> Result<(), ashpd::Error> {
+        let mut stream = portal.activated_stream().await?;
+        let mut autoclicker = self.clone();
+        tokio::spawn(async move {
+            while stream.next().await.is_some() {
+                println!("Hotkey activated");
+                let started = autoclicker.autoclick(20, None, None).await;
+                if !started {
+                    autoclicker.running.store(false, Ordering::Release);
+                }
+            }
+        });
+        Ok(())
     }
 }
 

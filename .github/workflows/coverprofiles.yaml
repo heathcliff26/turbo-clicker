@@ -23,4 +23,5 @@ jobs:
     permissions: {}
     with:
       coverprofile: "target/coverage/lcov.info"
-      script: "sudo chmod 666 /dev/uinput &&  make coverprofile"
+      script: "sudo chmod 666 /dev/uinput && make coverprofile"
+      additional-packages: "libwayland-dev"
