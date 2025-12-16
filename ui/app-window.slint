@@ -1,5 +1,5 @@
 import { GlobalState } from "global_state.slint";
-import { MainPage, AboutPage, SettingsPage } from "pages/pages.slint";
+import { MainPage, AboutPage, SettingsPage, CounterPage } from "pages/pages.slint";
 import { NavBar } from "nav-bar.slint";
 
 export { GlobalState }
@@ -17,11 +17,12 @@ export component AppWindow inherits Window {
 
     VerticalLayout {
         nav-bar := NavBar {
-            model: ["App", "Settings", "About"];
+            model: ["App", "Click Counter", "Settings", "About"];
         }
 
         if(nav-bar.current-item == 0): MainPage { }
-        if(nav-bar.current-item == 1): SettingsPage { }
-        if(nav-bar.current-item == 2): AboutPage { }
+        if(nav-bar.current-item == 1): CounterPage { }
+        if(nav-bar.current-item == 2): SettingsPage { }
+        if(nav-bar.current-item == 3): AboutPage { }
     }
 }

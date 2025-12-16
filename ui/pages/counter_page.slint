@@ -1,0 +1,27 @@
+import { Page } from "page.slint";
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component CounterPage inherits Page {
+    title: "Click Counter";
+
+
+    property <int> counter: 0;
+    VerticalBox {
+        Text {
+            text: "Counter: \{root.counter}";
+        }
+
+        Button {
+            text: "Click Me";
+            clicked => {
+                root.counter += 1;
+            }
+        }
+        Button {
+            text: "Reset Counter";
+            clicked => {
+                root.counter = 0;
+            }
+        }
+    }
+}
