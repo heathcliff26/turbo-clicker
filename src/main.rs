@@ -13,10 +13,11 @@ const APP_ID: &str = concat!("io.github.heathcliff26.", env!("CARGO_PKG_NAME"));
 
 slint::include_modules!();
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let mut autoclicker;
-    match autoclicker::Autoclicker::new() {
-        Ok(ac) => autoclicker = ac,
+// Need 2 threads here, one will be blocked by the Slint event loop.
+#[tokio::main(flavor = "multi_thread", worker_threads = 2)]
+async fn main() -> Result<(), Box<dyn Error>> {
+    let autoclicker = match autoclicker::Autoclicker::new() {
+        Ok(ac) => ac,
         Err(e) => {
             eprintln!("Error: {e}");
             eprintln!(
@@ -57,11 +58,12 @@ fn main() -> Result<(), Box<dyn Error>> {
                 false => None,
             };
 
-            autoclicker.autoclick(
-                global_state.get_delay().try_into().unwrap(),
-                start_delay,
-                duration,
-            );
+            let delay = global_state.get_delay().try_into().unwrap();
+
+            let mut autoclicker = autoclicker.clone();
+            tokio::spawn(async move {
+                autoclicker.autoclick(delay, start_delay, duration).await;
+            });
         }
     });
 

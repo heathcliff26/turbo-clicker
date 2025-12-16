@@ -1,8 +1,9 @@
+use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
-use std::sync::{Arc, Mutex};
-use std::thread;
 use std::time::Duration;
+use tokio::sync::Mutex;
+use tokio::time::sleep;
 
 use evdev::uinput::VirtualDevice;
 use evdev::{AttributeSet, KeyCode, KeyEvent};
@@ -39,7 +40,7 @@ impl Autoclicker {
     /// If a start delay (in seconds) is provided, it will wait for it before starting.
     /// If a duration (in seconds) is provided, it will stop the autoclicker after that duration.
     /// Returns true if the autoclicker was started, false if it was already running.
-    pub fn autoclick(
+    pub async fn autoclick(
         &mut self,
         delay_ms: u64,
         start_delay: Option<u64>,
@@ -55,21 +56,21 @@ impl Autoclicker {
 
         if let Some(start_delay) = start_delay {
             println!("Waiting for {start_delay} s before starting autoclicker");
-            thread::sleep(Duration::from_secs(start_delay));
+            sleep(Duration::from_secs(start_delay)).await;
         }
 
         let device = Arc::clone(&self.device);
 
-        thread::spawn(move || {
+        tokio::spawn(async move {
             println!("Autoclicker started with delay: {delay_ms} ms");
             while running.load(Ordering::Relaxed) {
-                let mut device = device.lock().expect("Autoclicker device lock poisoned");
+                let mut device = device.lock().await;
                 emit_click_event(&mut device, 1); // Mouse button down
                 emit_click_event(&mut device, 0); // Mouse button up
                 // Explicitly drop the lock before sleeping
                 drop(device);
 
-                thread::sleep(Duration::from_millis(delay_ms));
+                sleep(Duration::from_millis(delay_ms)).await;
             }
             stopped.store(true, Ordering::Release);
             println!("Autoclicker stopped");
@@ -77,9 +78,9 @@ impl Autoclicker {
 
         if let Some(duration) = duration {
             let running = Arc::clone(&self.running);
-            thread::spawn(move || {
+            tokio::spawn(async move {
                 println!("Autoclicker will stop after {duration} s");
-                thread::sleep(Duration::from_secs(duration));
+                sleep(Duration::from_secs(duration)).await;
                 running.store(false, Ordering::Release);
             });
         }

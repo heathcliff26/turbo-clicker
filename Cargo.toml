@@ -27,6 +27,7 @@ slint = { version = "1.14.1", default-features = false, features = [
     "compat-1-2",
     "backend-qt",
 ] }
+tokio = { version = "1.48.0", features = ["macros", "rt-multi-thread", "sync", "time"] }
 
 [build-dependencies]
 slint-build = "1.14.1"
