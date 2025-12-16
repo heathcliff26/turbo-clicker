@@ -1,6 +1,6 @@
 [package]
 name = "turbo-clicker"
-version = "0.0.7"
+version = "0.0.8"
 authors = ["Heathcliff <heathcliff@heathcliff.eu>"]
 edition = "2024"
 description = "GUI based auto-clicker for Linux. It uses uinput and should thus work independently of wayland or x11."

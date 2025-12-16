@@ -31,19 +31,27 @@
     <screenshots>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.4/screenshots/window-dark.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.8/screenshots/window-dark.png
             </image>
             <caption>Main window (Dark Theme)</caption>
         </screenshot>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.4/screenshots/window-light.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.8/screenshots/window-light.png
             </image>
             <caption>Main window (Light Theme)</caption>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="v0.0.8" date="2025-12-16" type="stable">
+            <description>
+                <p>Fix autoclick not working on Fedora 43</p>
+                <p>Add new tab to test autoclicks in the app</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.8</url>
+        </release>
+
         <release version="v0.0.7" date="2025-11-01" type="stable">
             <description>
                 <p>Update dependencies</p>
