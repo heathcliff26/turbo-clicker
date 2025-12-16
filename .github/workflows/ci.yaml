@@ -37,6 +37,7 @@ jobs:
       contents: read
     with:
       cmd: "make doc"
+      additional-packages: "libwayland-dev"
 
   lint:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -44,6 +45,7 @@ jobs:
       contents: read
     with:
       cmd: "make lint"
+      additional-packages: "libwayland-dev"
 
   test:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -51,6 +53,7 @@ jobs:
       contents: read
     with:
       cmd: "sudo chmod 666 /dev/uinput && make test"
+      additional-packages: "libwayland-dev"
 
   validate:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -79,3 +82,4 @@ jobs:
       artifact: "dist/turbo-clicker_linux-${{ matrix.arch }}.tar.gz"
       artifact-name: "turbo-clicker-${{ matrix.arch }}"
       architecture: "${{ matrix.arch }}"
+      additional-packages: "libwayland-dev"
