@@ -15,7 +15,7 @@
         <div>
             <p class="heading">Lines</p>
             <p class="title has-text-danger">
-                <abbr title="0 / 51">0 %</abbr></p>
+                <abbr title="0 / 53">0 %</abbr></p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         <div>
             <p class="heading">Functions</p>
             <p class="title has-text-danger">
-                <abbr title="0 / 3">0 %</abbr></p>
+                <abbr title="0 / 5">0 %</abbr></p>
         </div>
     </div>
 
@@ -287,13 +287,13 @@
                 <a href="#16">16</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F; Need 2 threads here, one will be blocked by the Slint event loop.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -309,7 +309,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">    let mut autoclicker;</pre>
+                <pre class="has-background-white py-0 px-2">#[tokio::main(flavor = &quot;multi_thread&quot;, worker_threads = 2)]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -325,7 +325,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    match autoclicker::Autoclicker::new() {</pre>
+                <pre class="has-background-danger-light py-0 px-2">async fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -341,7 +341,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        Ok(ac) =&gt; autoclicker = ac,</pre>
+                <pre class="has-background-danger-light py-0 px-2">    let autoclicker = match autoclicker::Autoclicker::new() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -357,7 +357,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        Err(e) =&gt; {</pre>
+                <pre class="has-background-danger-light py-0 px-2">        Ok(ac) =&gt; ac,</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -373,7 +373,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            eprintln!(&quot;Error: {e}&quot;);</pre>
+                <pre class="has-background-danger-light py-0 px-2">        Err(e) =&gt; {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -389,7 +389,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            eprintln!(</pre>
+                <pre class="has-background-danger-light py-0 px-2">            eprintln!(&quot;Error: {e}&quot;);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -405,7 +405,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                &quot;Please ensure this app has permissions to access &#x2F;dev&#x2F;uinput and that the uinput kernel module is loaded.&quot;</pre>
+                <pre class="has-background-danger-light py-0 px-2">            eprintln!(</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -413,6 +413,22 @@
                 id="24"
                 role="cell">
                 <a href="#24">24</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
+                
+            </div>
+            <div class="column has-background-danger-light p-0"
+                 role="cell">
+                <pre class="has-background-danger-light py-0 px-2">                &quot;Please ensure this app has permissions to access &#x2F;dev&#x2F;uinput and that the uinput kernel module is loaded.&quot;</pre>
+            </div>
+        </div><div class="columns p-0 m-0" role="row">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="25"
+                role="cell">
+                <a href="#25">25</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
@@ -426,9 +442,9 @@
         </div><div class="columns p-0 m-0" role="row">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="25"
+                id="26"
                 role="cell">
-                <a href="#25">25</a>
+                <a href="#26">26</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
@@ -438,22 +454,6 @@
             <div class="column has-background-danger-light p-0"
                  role="cell">
                 <pre class="has-background-danger-light py-0 px-2">            std::process::exit(1);</pre>
-            </div>
-        </div><div class="columns p-0 m-0" role="row">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="26"
-                role="cell">
-                <a href="#26">26</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
-                
-            </div>
-            <div class="column has-background-white p-0"
-                 role="cell">
-                <pre class="has-background-white py-0 px-2">        }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -469,7 +469,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">    };</pre>
+                <pre class="has-background-white py-0 px-2">        }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -485,7 +485,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">    };</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -495,13 +495,13 @@
                 <a href="#29">29</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    let app = AppWindow::new()?;</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -517,7 +517,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    app.global::&lt;GlobalState&gt;().set_version(VERSION.into());</pre>
+                <pre class="has-background-danger-light py-0 px-2">    let app = AppWindow::new()?;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -525,6 +525,22 @@
                 id="31"
                 role="cell">
                 <a href="#31">31</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
+                
+            </div>
+            <div class="column has-background-danger-light p-0"
+                 role="cell">
+                <pre class="has-background-danger-light py-0 px-2">    app.global::&lt;GlobalState&gt;().set_version(VERSION.into());</pre>
+            </div>
+        </div><div class="columns p-0 m-0" role="row">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="32"
+                role="cell">
+                <a href="#32">32</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
@@ -538,9 +554,9 @@
         </div><div class="columns p-0 m-0" role="row">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="32"
+                id="33"
                 role="cell">
-                <a href="#32">32</a>
+                <a href="#33">33</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
@@ -554,9 +570,9 @@
         </div><div class="columns p-0 m-0" role="row">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="33"
+                id="34"
                 role="cell">
-                <a href="#33">33</a>
+                <a href="#34">34</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
@@ -566,22 +582,6 @@
             <div class="column has-background-white p-0"
                  role="cell">
                 <pre class="has-background-white py-0 px-2"></pre>
-            </div>
-        </div><div class="columns p-0 m-0" role="row">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="34"
-                role="cell">
-                <a href="#34">34</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
-                
-            </div>
-            <div class="column has-background-danger-light p-0"
-                 role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    let state = match State::from_file() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -597,7 +597,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        Ok(state) =&gt; state,</pre>
+                <pre class="has-background-danger-light py-0 px-2">    let state = match State::from_file() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -613,7 +613,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        Err(e) =&gt; {</pre>
+                <pre class="has-background-danger-light py-0 px-2">        Ok(state) =&gt; state,</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -629,7 +629,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            eprintln!(&quot;Failed to load state: {e}&quot;);</pre>
+                <pre class="has-background-danger-light py-0 px-2">        Err(e) =&gt; {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -645,7 +645,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            None</pre>
+                <pre class="has-background-danger-light py-0 px-2">            eprintln!(&quot;Failed to load state: {e}&quot;);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -655,13 +655,13 @@
                 <a href="#39">39</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">        }</pre>
+                <pre class="has-background-danger-light py-0 px-2">            None</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -677,7 +677,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">    };</pre>
+                <pre class="has-background-white py-0 px-2">        }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -687,13 +687,13 @@
                 <a href="#41">41</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    if let Some(state) = state {</pre>
+                <pre class="has-background-white py-0 px-2">    };</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -709,7 +709,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        state.update_app(&amp;app);</pre>
+                <pre class="has-background-danger-light py-0 px-2">    if let Some(state) = state {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -725,7 +725,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    }</pre>
+                <pre class="has-background-danger-light py-0 px-2">        state.update_app(&amp;app);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -735,13 +735,13 @@
                 <a href="#44">44</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-danger-light py-0 px-2">    }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -751,13 +751,13 @@
                 <a href="#45">45</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    app.global::&lt;GlobalState&gt;().on_start_auto_click({</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -773,7 +773,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        let app = app.as_weak();</pre>
+                <pre class="has-background-danger-light py-0 px-2">    app.global::&lt;GlobalState&gt;().on_start_auto_click({</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -789,7 +789,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        move || {</pre>
+                <pre class="has-background-danger-light py-0 px-2">        let app = app.as_weak();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -805,7 +805,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            let app = app.unwrap();</pre>
+                <pre class="has-background-danger-light py-0 px-2">        move || {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -821,7 +821,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            let global_state = app.global::&lt;GlobalState&gt;();</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let app = app.unwrap();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -831,13 +831,13 @@
                 <a href="#50">50</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-danger-light py-0 px-2">            let global_state = app.global::&lt;GlobalState&gt;();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -847,13 +847,13 @@
                 <a href="#51">51</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            let start_delay: Option&lt;u64&gt; = match global_state.get_use_start_delay() {</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -869,7 +869,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                true =&gt; Some(global_state.get_start_delay().try_into().unwrap()),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let start_delay: Option&lt;u64&gt; = match global_state.get_use_start_delay() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -885,7 +885,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                false =&gt; None,</pre>
+                <pre class="has-background-danger-light py-0 px-2">                true =&gt; Some(global_state.get_start_delay().try_into().unwrap()),</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -895,13 +895,13 @@
                 <a href="#54">54</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">            };</pre>
+                <pre class="has-background-danger-light py-0 px-2">                false =&gt; None,</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -911,13 +911,13 @@
                 <a href="#55">55</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            let duration: Option&lt;u64&gt; = match global_state.get_use_duration() {</pre>
+                <pre class="has-background-white py-0 px-2">            };</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -933,7 +933,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                true =&gt; Some(global_state.get_duration().try_into().unwrap()),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let duration: Option&lt;u64&gt; = match global_state.get_use_duration() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -949,7 +949,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                false =&gt; None,</pre>
+                <pre class="has-background-danger-light py-0 px-2">                true =&gt; Some(global_state.get_duration().try_into().unwrap()),</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -959,13 +959,13 @@
                 <a href="#58">58</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">            };</pre>
+                <pre class="has-background-danger-light py-0 px-2">                false =&gt; None,</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -981,7 +981,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">            };</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -991,13 +991,13 @@
                 <a href="#60">60</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            autoclicker.autoclick(</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1013,7 +1013,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                global_state.get_delay().try_into().unwrap(),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let delay = global_state.get_delay().try_into().unwrap();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1023,13 +1023,13 @@
                 <a href="#62">62</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                start_delay,</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1045,7 +1045,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                duration,</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let mut autoclicker = autoclicker.clone();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1055,13 +1055,13 @@
                 <a href="#64">64</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">            );</pre>
+                <pre class="has-background-danger-light py-0 px-2">            tokio::spawn(async move {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1077,7 +1077,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        }</pre>
+                <pre class="has-background-danger-light py-0 px-2">                autoclicker.autoclick(delay, start_delay, duration).await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1085,6 +1085,38 @@
                 id="66"
                 role="cell">
                 <a href="#66">66</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
+                
+            </div>
+            <div class="column has-background-danger-light p-0"
+                 role="cell">
+                <pre class="has-background-danger-light py-0 px-2">            });</pre>
+            </div>
+        </div><div class="columns p-0 m-0" role="row">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="67"
+                role="cell">
+                <a href="#67">67</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
+                
+            </div>
+            <div class="column has-background-danger-light p-0"
+                 role="cell">
+                <pre class="has-background-danger-light py-0 px-2">        }</pre>
+            </div>
+        </div><div class="columns p-0 m-0" role="row">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="68"
+                role="cell">
+                <a href="#68">68</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
@@ -1098,9 +1130,9 @@
         </div><div class="columns p-0 m-0" role="row">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="67"
+                id="69"
                 role="cell">
-                <a href="#67">67</a>
+                <a href="#69">69</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
@@ -1110,38 +1142,6 @@
             <div class="column has-background-white p-0"
                  role="cell">
                 <pre class="has-background-white py-0 px-2"></pre>
-            </div>
-        </div><div class="columns p-0 m-0" role="row">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="68"
-                role="cell">
-                <a href="#68">68</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
-                
-            </div>
-            <div class="column has-background-danger-light p-0"
-                 role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    app.global::&lt;GlobalState&gt;().on_settings_changed({</pre>
-            </div>
-        </div><div class="columns p-0 m-0" role="row">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="69"
-                role="cell">
-                <a href="#69">69</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
-                
-            </div>
-            <div class="column has-background-danger-light p-0"
-                 role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        let app = app.as_weak();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1157,7 +1157,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        move || {</pre>
+                <pre class="has-background-danger-light py-0 px-2">    app.global::&lt;GlobalState&gt;().on_settings_changed({</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1173,7 +1173,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            let app = app.unwrap();</pre>
+                <pre class="has-background-danger-light py-0 px-2">        let app = app.as_weak();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1189,7 +1189,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            let state = State::from_app(&amp;app);</pre>
+                <pre class="has-background-danger-light py-0 px-2">        move || {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1205,7 +1205,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            if let Err(e) = state.save_to_file() {</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let app = app.unwrap();</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1221,7 +1221,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">                eprintln!(&quot;Failed to save settings: {e}&quot;);</pre>
+                <pre class="has-background-danger-light py-0 px-2">            let state = State::from_app(&amp;app);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1237,7 +1237,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            }</pre>
+                <pre class="has-background-danger-light py-0 px-2">            if let Err(e) = state.save_to_file() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1253,7 +1253,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        }</pre>
+                <pre class="has-background-danger-light py-0 px-2">                eprintln!(&quot;Failed to save settings: {e}&quot;);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1263,13 +1263,13 @@
                 <a href="#77">77</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">    });</pre>
+                <pre class="has-background-danger-light py-0 px-2">            }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1279,13 +1279,13 @@
                 <a href="#78">78</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-danger-light py-0 px-2">        }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1295,13 +1295,13 @@
                 <a href="#79">79</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    app.run()?;</pre>
+                <pre class="has-background-white py-0 px-2">    });</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1333,7 +1333,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    let state = State::from_app(&amp;app);</pre>
+                <pre class="has-background-danger-light py-0 px-2">    app.run()?;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1343,13 +1343,13 @@
                 <a href="#82">82</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
+                role="cell" aria-label="no coverage">
                 
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    if let Err(e) = state.save_to_file() {</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1365,7 +1365,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        eprintln!(&quot;Failed to save state: {e}&quot;);</pre>
+                <pre class="has-background-danger-light py-0 px-2">    let state = State::from_app(&amp;app);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1381,7 +1381,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    }</pre>
+                <pre class="has-background-danger-light py-0 px-2">    if let Err(e) = state.save_to_file() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1391,13 +1391,13 @@
                 <a href="#85">85</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
                 
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-danger-light py-0 px-2">        eprintln!(&quot;Failed to save state: {e}&quot;);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1413,7 +1413,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">    Ok(())</pre>
+                <pre class="has-background-danger-light py-0 px-2">    }</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1429,6 +1429,38 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
+                <pre class="has-background-danger-light py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0" role="row">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="88"
+                role="cell">
+                <a href="#88">88</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
+                
+            </div>
+            <div class="column has-background-danger-light p-0"
+                 role="cell">
+                <pre class="has-background-danger-light py-0 px-2">    Ok(())</pre>
+            </div>
+        </div><div class="columns p-0 m-0" role="row">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="89"
+                role="cell">
+                <a href="#89">89</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
+                role="cell" aria-label="0">
+                
+            </div>
+            <div class="column has-background-danger-light p-0"
+                 role="cell">
                 <pre class="has-background-danger-light py-0 px-2">}</pre>
             </div>
         </div></div>
@@ -1436,7 +1468,7 @@
         <footer class="footer">
             
                 <div class="content has-text-centered">
-                    <p class="heading">Date: 2025-12-16 12:28</p>
+                    <p class="heading">Date: 2025-12-16 13:25</p>
                 </div>
             
         </footer>

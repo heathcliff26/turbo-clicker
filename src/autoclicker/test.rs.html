@@ -14,8 +14,8 @@
         <div class="level-item has-text-centered">
         <div>
             <p class="heading">Lines</p>
-            <p class="title has-text-warning">
-                <abbr title="39 / 44">88.64 %</abbr></p>
+            <p class="title has-text-success">
+                <abbr title="41 / 45">91.11 %</abbr></p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         <div>
             <p class="heading">Functions</p>
             <p class="title has-text-success">
-                <abbr title="4 / 4">100 %</abbr></p>
+                <abbr title="8 / 8">100 %</abbr></p>
         </div>
     </div>
 
@@ -85,7 +85,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">#[test]</pre>
+                <pre class="has-background-white py-0 px-2">#[tokio::test]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -101,7 +101,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">fn new_autoclicker() {</pre>
+                <pre class="has-background-success-light py-0 px-2">async fn new_autoclicker() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -293,7 +293,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    let mut device = autoclicker.device.lock().expect(&quot;Device lock poisoned&quot;);</pre>
+                <pre class="has-background-success-light py-0 px-2">    let mut device = autoclicker.device.lock().await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -421,7 +421,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">#[test]</pre>
+                <pre class="has-background-white py-0 px-2">#[tokio::test]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -437,7 +437,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">fn autoclick_should_stop_when_signaled() {</pre>
+                <pre class="has-background-success-light py-0 px-2">async fn autoclick_should_stop_when_signaled() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -501,7 +501,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    let started = autoclicker.autoclick(delay_ms, None, None);</pre>
+                <pre class="has-background-success-light py-0 px-2">    let started = autoclicker.autoclick(delay_ms, None, None).await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -709,7 +709,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    std::thread::sleep(std::time::Duration::from_millis(10));</pre>
+                <pre class="has-background-success-light py-0 px-2">    sleep(Duration::from_millis(10)).await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -741,7 +741,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    std::thread::sleep(std::time::Duration::from_millis(delay_ms));</pre>
+                <pre class="has-background-success-light py-0 px-2">    sleep(Duration::from_millis(delay_ms)).await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -799,13 +799,13 @@
                 <a href="#48">48</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger"
-                role="cell" aria-label="0">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success"
+                role="cell" aria-label="1">
+                1
             </div>
-            <div class="column has-background-danger-light p-0"
+            <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">        &quot;stopped should be true after stopping&quot;</pre>
+                <pre class="has-background-success-light py-0 px-2">        &quot;stopped should be true after stopping&quot;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -815,13 +815,13 @@
                 <a href="#49">49</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white"
-                role="cell" aria-label="no coverage">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success"
+                role="cell" aria-label="1">
+                1
             </div>
-            <div class="column has-background-white p-0"
+            <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">    );</pre>
+                <pre class="has-background-success-light py-0 px-2">    );</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -869,7 +869,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">#[test]</pre>
+                <pre class="has-background-white py-0 px-2">#[tokio::test]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -885,7 +885,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">fn autoclick_should_not_start_if_already_running() {</pre>
+                <pre class="has-background-success-light py-0 px-2">async fn autoclick_should_not_start_if_already_running() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -949,7 +949,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    let started = autoclicker.autoclick(20, None, None);</pre>
+                <pre class="has-background-success-light py-0 px-2">    let started = autoclicker.autoclick(20, None, None).await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1013,7 +1013,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">#[test]</pre>
+                <pre class="has-background-white py-0 px-2">#[tokio::test]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1029,7 +1029,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">fn autoclick_should_not_start_when_still_running() {</pre>
+                <pre class="has-background-success-light py-0 px-2">async fn autoclick_should_not_start_when_still_running() {</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1093,7 +1093,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    let started = autoclicker.autoclick(20, None, None);</pre>
+                <pre class="has-background-success-light py-0 px-2">    let started = autoclicker.autoclick(20, None, None).await;</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1132,7 +1132,7 @@
         <footer class="footer">
             
                 <div class="content has-text-centered">
-                    <p class="heading">Date: 2025-12-16 12:28</p>
+                    <p class="heading">Date: 2025-12-16 13:25</p>
                 </div>
             
         </footer>
