@@ -1,6 +1,5 @@
 use std::sync::Arc;
-use std::sync::atomic::AtomicBool;
-use std::sync::atomic::Ordering;
+use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::time::Duration;
 
 use enigo::{Button, Coordinate, Direction, Enigo, Mouse, Settings};
@@ -45,7 +44,7 @@ impl Autoclicker {
     /// Returns true if the autoclicker was started, false if it was already running.
     pub async fn autoclick(
         &mut self,
-        delay_ms: u64,
+        delay_ms: Arc<AtomicU64>,
         start_delay: Option<u64>,
         duration: Option<u64>,
     ) -> bool {
@@ -65,13 +64,16 @@ impl Autoclicker {
         let enigo = Arc::clone(&self.enigo);
 
         tokio::spawn(async move {
-            println!("Autoclicker started with delay: {delay_ms} ms");
+            println!(
+                "Autoclicker started with delay: {} ms",
+                delay_ms.load(Ordering::Relaxed)
+            );
             while running.load(Ordering::Relaxed) {
                 if let Err(e) = enigo.lock().await.button(Button::Left, Direction::Click) {
                     eprintln!("Failed to click mouse button: {e}");
                 };
 
-                sleep(Duration::from_millis(delay_ms)).await;
+                sleep(Duration::from_millis(delay_ms.load(Ordering::Acquire))).await;
             }
             stopped.store(true, Ordering::Release);
             println!("Autoclicker stopped");
@@ -90,13 +92,19 @@ impl Autoclicker {
     }
 
     /// Listen to the event stream and trigger the autoclicker on each event.
-    pub async fn trigger_on_hotkey(&self, portal: HotkeyPortal) -> Result<(), ashpd::Error> {
+    pub async fn trigger_on_hotkey(
+        &self,
+        portal: HotkeyPortal,
+        delay_ms: Arc<AtomicU64>,
+    ) -> Result<(), ashpd::Error> {
         let mut stream = portal.activated_stream().await?;
         let mut autoclicker = self.clone();
         tokio::spawn(async move {
             while stream.next().await.is_some() {
                 println!("Hotkey activated");
-                let started = autoclicker.autoclick(20, None, None).await;
+                let started = autoclicker
+                    .autoclick(Arc::clone(&delay_ms), None, None)
+                    .await;
                 if !started {
                     autoclicker.running.store(false, Ordering::Release);
                 }
