@@ -446,7 +446,7 @@ dependencies = [
  "anyhow",
  "arrayvec",
  "log",
- "nom",
+ "nom 7.1.3",
  "num-rational",
  "v_frame",
 ]
@@ -522,18 +522,6 @@ name = "bitstream-io"
 version = "2.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6099cdc01846bc367c4e7dd630dc5966dccf36b652fae7a74e17b640411a91b2"
-
-[[package]]
-name = "bitvec"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1bc2832c24239b0141d5674bb9174f9d68a8b5b3f2753311927c172ca46f7e9c"
-dependencies = [
- "funty",
- "radium",
- "tap",
- "wyz",
-]
 
 [[package]]
 name = "block2"
@@ -681,7 +669,7 @@ version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6fac387a98bb7c37292057cffc56d62ecb629900026402633ae9160df93a8766"
 dependencies = [
- "nom",
+ "nom 7.1.3",
 ]
 
 [[package]]
@@ -872,6 +860,19 @@ name = "core-graphics"
 version = "0.24.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fa95a34622365fa5bbf40b20b75dba8dfa8c94c734aea8ac9a5ca38af14316f1"
+dependencies = [
+ "bitflags 2.9.4",
+ "core-foundation 0.10.1",
+ "core-graphics-types 0.2.0",
+ "foreign-types",
+ "libc",
+]
+
+[[package]]
+name = "core-graphics"
+version = "0.25.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "064badf302c3194842cf2c5d61f56cc88e54a759313879cdf03abdd27d0c3b97"
 dependencies = [
  "bitflags 2.9.4",
  "core-foundation 0.10.1",
@@ -1127,6 +1128,31 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a3d8a32ae18130a3c84dd492d4215c3d913c3b07c6b63c2eb3eb7ff1101ab7bf"
 
 [[package]]
+name = "enigo"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "71c6c56e50f7acae2906a0dcbb34529ca647e40421119ad5d12e7f8ba6e50010"
+dependencies = [
+ "core-foundation 0.10.1",
+ "core-graphics 0.25.0",
+ "foreign-types-shared",
+ "libc",
+ "log",
+ "nom 8.0.0",
+ "objc2 0.6.2",
+ "objc2-app-kit 0.3.2",
+ "objc2-foundation 0.3.2",
+ "tempfile",
+ "wayland-client",
+ "wayland-protocols-misc",
+ "wayland-protocols-wlr",
+ "windows 0.61.3",
+ "x11rb",
+ "xkbcommon",
+ "xkeysym",
+]
+
+[[package]]
 name = "enumflags2"
 version = "0.7.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1196,18 +1222,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ad9cdb4b747e485a12abb0e6566612956c7a1bafa3bdb8d682c5b6d403589e48"
 dependencies = [
  "num-traits",
-]
-
-[[package]]
-name = "evdev"
-version = "0.13.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25b686663ba7f08d92880ff6ba22170f1df4e83629341cba34cf82cd65ebea99"
-dependencies = [
- "bitvec",
- "cfg-if",
- "libc",
- "nix 0.29.0",
 ]
 
 [[package]]
@@ -1421,12 +1435,6 @@ checksum = "cb4cb245038516f5f85277875cdaa4f7d2c9a0fa0468de06ed190163b1581fcf"
 dependencies = [
  "percent-encoding",
 ]
-
-[[package]]
-name = "funty"
-version = "2.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
 
 [[package]]
 name = "futures"
@@ -2534,18 +2542,6 @@ checksum = "650eef8c711430f1a879fdd01d4745a7deea475becfb90269c06775983bbf086"
 
 [[package]]
 name = "nix"
-version = "0.29.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "71e2746dc3a24dd78b3cfcb7be93368c6de9963d30f43a6a73998a9cf4b17b46"
-dependencies = [
- "bitflags 2.9.4",
- "cfg-if",
- "cfg_aliases",
- "libc",
-]
-
-[[package]]
-name = "nix"
 version = "0.30.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "74523f3a35e05aba87a1d978330aef40f67b0304ac79c1c00b294c9830543db6"
@@ -2565,6 +2561,15 @@ checksum = "d273983c5a657a70a3e8f2a01329822f3b8c8172b73826411a55751e404a0a4a"
 dependencies = [
  "memchr",
  "minimal-lexical",
+]
+
+[[package]]
+name = "nom"
+version = "8.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df9761775871bdef83bee530e60050f7e54b1105350d6884eb0fb4f46c2f9405"
+dependencies = [
+ "memchr",
 ]
 
 [[package]]
@@ -3342,12 +3347,6 @@ name = "r-efi"
 version = "5.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "69cdb34c158ceb288df11e18b4bd39de994f6657d83847bdffdbd7f346754b0f"
-
-[[package]]
-name = "radium"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc33ff2d4973d518d823d61aa239014831e521c75da58e3df4840d3f47749d09"
 
 [[package]]
 name = "rand"
@@ -4160,12 +4159,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "tap"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "55937e1799185b12863d447f42597ed69d9928686b8d88a1df17376a097d8369"
-
-[[package]]
 name = "tar"
 version = "0.4.44"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4480,7 +4473,7 @@ name = "turbo-clicker"
 version = "0.0.8"
 dependencies = [
  "ashpd",
- "evdev",
+ "enigo",
  "futures-util",
  "i-slint-backend-testing",
  "libc",
@@ -4833,6 +4826,19 @@ dependencies = [
  "bitflags 2.9.4",
  "wayland-backend",
  "wayland-client",
+ "wayland-scanner",
+]
+
+[[package]]
+name = "wayland-protocols-misc"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2dfe33d551eb8bffd03ff067a8b44bb963919157841a99957151299a6307d19c"
+dependencies = [
+ "bitflags 2.9.4",
+ "wayland-backend",
+ "wayland-client",
+ "wayland-protocols",
  "wayland-scanner",
 ]
 
@@ -5521,15 +5527,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea2f10b9bb0928dfb1b42b65e1f9e36f7f54dbdf08457afefb38afcdec4fa2bb"
 
 [[package]]
-name = "wyz"
-version = "0.5.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed"
-dependencies = [
- "tap",
-]
-
-[[package]]
 name = "x11-dl"
 version = "2.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5576,6 +5573,17 @@ name = "xcursor"
 version = "0.3.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bec9e4a500ca8864c5b47b8b482a73d62e4237670e5b5f1d6b9e3cae50f28f2b"
+
+[[package]]
+name = "xkbcommon"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a7a974f48060a14e95705c01f24ad9c3345022f4d97441b8a36beb7ed5c4a02d"
+dependencies = [
+ "libc",
+ "memmap2",
+ "xkeysym",
+]
 
 [[package]]
 name = "xkbcommon-dl"
@@ -5669,7 +5677,7 @@ dependencies = [
  "futures-core",
  "futures-lite",
  "hex",
- "nix 0.30.1",
+ "nix",
  "ordered-stream",
  "serde",
  "serde_repr",

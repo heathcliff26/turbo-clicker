@@ -20,10 +20,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let autoclicker = match autoclicker::Autoclicker::new() {
         Ok(ac) => ac,
         Err(e) => {
-            eprintln!("Error: {e}");
-            eprintln!(
-                "Please ensure this app has permissions to access /dev/uinput and that the uinput kernel module is loaded."
-            );
+            eprintln!("Failed to initialize autoclicker: {e}");
             std::process::exit(1);
         }
     };
