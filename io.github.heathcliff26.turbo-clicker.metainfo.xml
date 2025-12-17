@@ -10,7 +10,10 @@
 
     <description>
         <p>
-            Turbo Clicker is a GUI based auto-clicker for Linux. It is using uinput for creating a virtual mouse device. This allows it to simulate mouse clicks independently from x11 or wayland.
+            Turbo Clicker is a GUI based auto-clicker for Linux (Wayland). It simulates virtual input via x11/wayland-client.
+        </p>
+        <p>
+            The user needs to accept remote access permissions for the app.
         </p>
     </description>
 
