@@ -3,39 +3,37 @@ use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 use std::time::Duration;
 
+use enigo::{Button, Coordinate, Direction, Enigo, Mouse, Settings};
 use tokio::sync::Mutex;
 use tokio::time::sleep;
 
 use futures_util::StreamExt;
-
-use evdev::uinput::VirtualDevice;
-use evdev::{AttributeSet, KeyCode, KeyEvent};
 
 use crate::hotkey::HotkeyPortal;
 
 #[cfg(test)]
 mod test;
 
-/// Implement the autoclicker functionality using evdev
+/// Implement the autoclicker functionality
 #[derive(Clone)]
 pub struct Autoclicker {
-    device: Arc<Mutex<VirtualDevice>>,
+    enigo: Arc<Mutex<Enigo>>,
     running: Arc<AtomicBool>,
     stopped: Arc<AtomicBool>,
 }
 
 impl Autoclicker {
     /// Create a new Autoclicker instance.
-    /// This will create a virtual mouse device "turbo-clicker-mouse" that can emit key events.
-    /// Will fail if the device cannot be created.
+    /// This will initialize the enigo instance for virtual input.
+    /// Returns an error if the enigo instance cannot be created.
     pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
-        let device = VirtualDevice::builder()?
-            .name("turbo-clicker-mouse")
-            .with_keys(&AttributeSet::from_iter([KeyCode::BTN_LEFT]))?
-            .build()?;
+        let mut enigo = Enigo::new(&Settings::default())?;
+
+        // Move the mouse slightly to ensure the permission prompt is triggered.
+        enigo.move_mouse(1, 1, Coordinate::Rel)?;
 
         Ok(Autoclicker {
-            device: Arc::new(Mutex::new(device)),
+            enigo: Arc::new(Mutex::new(enigo)),
             running: Arc::new(AtomicBool::new(false)),
             stopped: Arc::new(AtomicBool::new(true)),
         })
@@ -64,16 +62,14 @@ impl Autoclicker {
             sleep(Duration::from_secs(start_delay)).await;
         }
 
-        let device = Arc::clone(&self.device);
+        let enigo = Arc::clone(&self.enigo);
 
         tokio::spawn(async move {
             println!("Autoclicker started with delay: {delay_ms} ms");
             while running.load(Ordering::Relaxed) {
-                let mut device = device.lock().await;
-                emit_click_event(&mut device, 1); // Mouse button down
-                emit_click_event(&mut device, 0); // Mouse button up
-                // Explicitly drop the lock before sleeping
-                drop(device);
+                if let Err(e) = enigo.lock().await.button(Button::Left, Direction::Click) {
+                    eprintln!("Failed to click mouse button: {e}");
+                };
 
                 sleep(Duration::from_millis(delay_ms)).await;
             }
@@ -108,13 +104,4 @@ impl Autoclicker {
         });
         Ok(())
     }
-}
-
-fn emit_click_event(device: &mut VirtualDevice, value: i32) {
-    match device.emit(&[*KeyEvent::new(KeyCode::BTN_LEFT, value)]) {
-        Ok(_) => {}
-        Err(e) => {
-            eprintln!("Failed to emit click event: {e}");
-        }
-    };
 }

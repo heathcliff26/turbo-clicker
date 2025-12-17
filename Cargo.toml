@@ -18,7 +18,7 @@ exclude = [
 
 [dependencies]
 ashpd = { version = "0.12.0", features = ["wayland"] }
-evdev = "0.13.2"
+enigo = { version = "0.6.1", features = ["wayland"] }
 futures-util = "0.3.31"
 libc = "0.2.177"
 serde = { version = "1.0.228", features = ["derive"] }
@@ -29,7 +29,12 @@ slint = { version = "1.14.1", default-features = false, features = [
     "compat-1-2",
     "backend-qt",
 ] }
-tokio = { version = "1.48.0", features = ["macros", "rt-multi-thread", "sync", "time"] }
+tokio = { version = "1.48.0", features = [
+    "macros",
+    "rt-multi-thread",
+    "sync",
+    "time",
+] }
 
 [build-dependencies]
 slint-build = "1.14.1"

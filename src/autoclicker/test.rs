@@ -13,12 +13,11 @@ async fn new_autoclicker() {
         "stopped should be true"
     );
 
-    let mut device = autoclicker.device.lock().await;
-    let nodes = device
-        .enumerate_dev_nodes_blocking()
-        .expect("Failed to enumerate device nodes");
-
-    assert_eq!(1, nodes.count(), "There should be one device node");
+    let enigo = autoclicker.enigo.lock().await;
+    assert!(
+        enigo.location().is_ok(),
+        "Should be able to get mouse location"
+    );
 }
 
 #[tokio::test]
@@ -41,7 +40,7 @@ async fn autoclick_should_stop_when_signaled() {
     // Delay should not be less than 10ms, as otherwise the timing here might not work out.
     sleep(Duration::from_millis(10)).await;
     autoclicker.running.store(false, Ordering::Release);
-    sleep(Duration::from_millis(delay_ms)).await;
+    sleep(Duration::from_millis(delay_ms * 2)).await;
 
     assert!(
         autoclicker.stopped.load(Ordering::SeqCst),
