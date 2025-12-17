@@ -13,7 +13,6 @@ if [ "$(id -u)" -eq 0 ]; then
 fi
 
 bin_dir="${usr_dir}/bin"
-libexec_dir="${usr_dir}/libexec"
 share_dir="${usr_dir}/share"
 
 help() {
@@ -27,31 +26,24 @@ help() {
 install_app() {
     echo "Installing binary to ${bin_dir}/${BINARY}"
     install -Dm755 "${base_dir}/${BINARY}" "${bin_dir}/${BINARY}"
-    install -Dm755 "${base_dir}/turbo-clicker-pkexec-wrapper.sh" "${libexec_dir}/turbo-clicker-pkexec-wrapper.sh"
-    [ "$(id -u)" -eq 0 ] || sed -i "s#/usr/bin/turbo-clicker#${bin_dir}/${BINARY}#g" "${libexec_dir}/turbo-clicker-pkexec-wrapper.sh"
 
     echo "Installing desktop file"
     install -Dm644 "${base_dir}/${APP_ID}.desktop" "${share_dir}/applications/${APP_ID}.desktop"
-    [ "$(id -u)" -eq 0 ] || sed -i "s#/usr/libexec#${libexec_dir}#g" "${share_dir}/applications/${APP_ID}.desktop"
+    sed -i "s#/usr/bin/turbo-clicker#${bin_dir}/${BINARY}#g" "${share_dir}/applications/${APP_ID}.desktop"
 
     echo "Installing icon"
     install -Dm644 "${base_dir}/${APP_ID}.svg" "${share_dir}/icons/hicolor/scalable/apps/${APP_ID}.svg"
 
     xdg-desktop-menu forceupdate
     xdg-icon-resource forceupdate
-
-    echo "Creating folder for application state"
-    sudo mkdir -p "/var/lib/${APP_ID}" || echo "Failed to create /var/lib/${APP_ID}, you may need to create it manually"
 }
 
 uninstall_app() {
     echo "Removing binary"
-    rm -f "${bin_dir}/${BINARY}" "${libexec_dir}/turbo-clicker-pkexec-wrapper.sh"
+    rm -f "${bin_dir}/${BINARY}"
 
     echo "Removing desktop file and icon"
     rm -f "${share_dir}/icons/hicolor/scalable/apps/${APP_ID}.svg" "${share_dir}/applications/${APP_ID}.desktop"
-
-    echo "You can delete the app state folder /var/lib/${APP_ID} if you no longer need it."
 }
 
 while [[ "$#" -gt 0 ]]; do

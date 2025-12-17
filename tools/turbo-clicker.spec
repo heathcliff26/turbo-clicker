@@ -21,8 +21,9 @@ BuildRequires: cargo >= 1.87
 BuildRequires: qt6-qtbase-devel qt6-qtwayland-devel
 
 %global _description %{expand:
-GUI based auto-clicker for Linux. It uses uinput and should thus work
-independently of wayland or x11.}
+GUI based auto-clicker for Linux (Wayland).
+It simulates virtual input via x11/wayland-client.
+The user needs to accept remote access permissions for the app.}
 
 %description %{_description}
 
@@ -34,26 +35,17 @@ cargo build --release
 
 %install
 install -D -m 755 target/release/%{name} %{buildroot}/%{_bindir}/%{name}
-install -D -m 755 packages/%{name}-pkexec-wrapper.sh %{buildroot}/%{_libexecdir}/%{name}-pkexec-wrapper.sh
 install -D -m 644 packages/%{package_id}.desktop %{buildroot}/%{_datadir}/applications/%{package_id}.desktop
 install -D -m 644 packages/%{package_id}.svg %{buildroot}/%{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
 install -D -m 644 %{package_id}.metainfo.xml %{buildroot}/%{_datadir}/metainfo/%{package_id}.metainfo.xml
-mkdir -p %{buildroot}/%{_sharedstatedir}/%{package_id}
-
-%preun
-if [ $1 -eq 0 ]; then
-    rm %{_sharedstatedir}/%{package_id}/*.json
-fi
 
 %files
 %license LICENSE
 %doc README.md
 %{_bindir}/%{name}
-%{_libexecdir}/%{name}-pkexec-wrapper.sh
 %{_datadir}/applications/%{package_id}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{package_id}.svg
 %{_datadir}/metainfo/%{package_id}.metainfo.xml
-%dir %{_sharedstatedir}/%{package_id}
 
 %changelog
 %autochangelog

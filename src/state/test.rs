@@ -81,14 +81,14 @@ fn state_update_app() {
 #[serial]
 fn state_from_not_existing_file() {
     unsafe {
-        env::set_var(ORIGINAL_USER_ENV_VAR, "from_not_existing_file_test_user");
+        env::set_var(XDG_STATE_HOME, "/not/an/existing/directory");
     }
 
     let state = State::from_file().expect("Should not fail");
     assert!(state.is_none(), "Should return None for non-existing file");
 
     unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
+        env::remove_var(XDG_STATE_HOME);
     }
 }
 
@@ -96,7 +96,7 @@ fn state_from_not_existing_file() {
 #[serial]
 fn state_from_file() {
     unsafe {
-        env::set_var(ORIGINAL_USER_ENV_VAR, "from_file_test_user");
+        env::set_var(XDG_STATE_HOME, "testdata");
     }
 
     let state = State::from_file().expect("Should not fail");
@@ -120,7 +120,7 @@ fn state_from_file() {
     );
 
     unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
+        env::remove_var(XDG_STATE_HOME);
     }
 }
 
@@ -136,15 +136,15 @@ fn state_save_to_file() {
         dark_mode: true,
     };
 
-    let user = "save_to_file_test_user";
+    let tmp_dir = "/tmp/turbo-clicker-tests";
 
     unsafe {
-        env::set_var(ORIGINAL_USER_ENV_VAR, user);
+        env::set_var(XDG_STATE_HOME, tmp_dir);
     }
 
     state.save_to_file().expect("Should save state to file");
 
-    let path = format!("{SHARED_STATE_DIR}/state_{user}.json");
+    let path = format!("{tmp_dir}/{XDG_STATE_HOME_DIR}/state.json");
 
     assert!(
         fs::exists(&path).expect("Should check if file exists"),
@@ -161,87 +161,65 @@ fn state_save_to_file() {
     fs::remove_file(&path).expect("Should remove state file");
 
     unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
+        env::remove_var(XDG_STATE_HOME);
     }
 }
 
 #[test]
 #[serial]
-fn get_state_file_path_env() {
-    let expected_user = "test_user";
+fn get_state_file_path_env_set() {
+    let expected_dir = "some/path";
     unsafe {
-        env::set_var(ORIGINAL_USER_ENV_VAR, expected_user);
+        env::set_var(XDG_STATE_HOME, expected_dir);
     }
+    let expected_dir = format!("{expected_dir}/{XDG_STATE_HOME_DIR}/state.json");
 
     let path = get_state_file_path();
-    let user = extract_user_from_path(&path);
+    assert_eq!(expected_dir, path, "Path should match");
+
+    unsafe {
+        env::remove_var(XDG_STATE_HOME);
+    }
+}
+
+#[test]
+#[serial]
+fn get_state_file_path_empty_env_variable() {
+    unsafe {
+        env::set_var(XDG_STATE_HOME, "");
+    }
+
+    let home_dir = env::var(HOME).expect("HOME variable should be set");
+
+    let path = get_state_file_path();
     assert_eq!(
-        expected_user, user,
-        "User should match the environment variable"
+        format!("{home_dir}/{XDG_STATE_HOME_DEFAULT}/{XDG_STATE_HOME_DIR}/state.json"),
+        path,
+        "Path should match"
     );
 
     unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
+        env::remove_var(XDG_STATE_HOME);
     }
 }
 
 #[test]
 #[serial]
-fn get_state_file_path_empty_env() {
+fn get_state_file_path_home_unset() {
+    let home_dir = env::var(HOME).expect("HOME variable should be set");
     unsafe {
-        env::set_var(ORIGINAL_USER_ENV_VAR, "");
+        env::set_var(XDG_STATE_HOME, "");
+        env::remove_var(HOME);
     }
 
     let path = get_state_file_path();
-    let user = extract_user_from_path(&path);
-    assert!(!user.is_empty(), "User should not be empty");
+    assert_eq!(
+        format!("./{XDG_STATE_HOME_DEFAULT}/{XDG_STATE_HOME_DIR}/state.json"),
+        path,
+        "Path should match"
+    );
 
     unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
-    }
-}
-
-#[test]
-#[serial]
-fn get_state_file_path_libc() {
-    unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
-    }
-
-    let path = get_state_file_path();
-    let user = extract_user_from_path(&path);
-    assert!(!user.is_empty(), "User should not be empty");
-}
-
-fn extract_user_from_path(path: &str) -> String {
-    let path = path
-        .strip_prefix(SHARED_STATE_DIR)
-        .expect("Should strip SHARED_STATE_DIR from path");
-    let path = path
-        .strip_suffix(".json")
-        .expect("Should strip .json from path");
-    let user = path
-        .strip_prefix("/state_")
-        .expect("Should strip '/state_' from path");
-    user.to_string()
-}
-
-#[test]
-#[serial]
-fn get_current_user_from_libc() {
-    unsafe {
-        env::remove_var(ORIGINAL_USER_ENV_VAR);
-    }
-
-    let user = get_current_user();
-    assert!(user.is_some(), "Should get user from libc");
-
-    let env_user = env::var("USER");
-    if let Ok(env_user) = env_user {
-        assert_eq!(
-            Some(env_user),
-            user,
-            "Should match the USER environment variable"
-        );
+        env::set_var(HOME, home_dir);
     }
 }

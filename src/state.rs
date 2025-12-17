@@ -3,17 +3,12 @@ use serde::{Deserialize, Serialize};
 use slint::ComponentHandle;
 use std::env;
 use std::error::Error;
-use std::ffi::CStr;
 use std::fs;
-use std::mem;
-use std::ptr;
 
-#[cfg(not(test))]
-static SHARED_STATE_DIR: &str = "/var/lib/io.github.heathcliff26.turbo-clicker";
-#[cfg(test)]
-static SHARED_STATE_DIR: &str = "testdata";
-
-static ORIGINAL_USER_ENV_VAR: &str = "ORIGINAL_USER";
+static XDG_STATE_HOME_DIR: &str = "io.github.heathcliff26.turbo-clicker";
+static XDG_STATE_HOME: &str = "XDG_STATE_HOME";
+static XDG_STATE_HOME_DEFAULT: &str = ".local/state";
+static HOME: &str = "HOME";
 
 #[cfg(test)]
 mod test;
@@ -47,8 +42,7 @@ impl State {
 
     /// Load the state from the user specific state file.
     pub fn from_file() -> Result<Option<Self>, Box<dyn Error>> {
-        let path = get_state_file_path();
-        Self::from_path(&path)
+        Self::from_path(&get_state_file_path())
     }
 
     /// Load the state from the given file path.
@@ -75,76 +69,48 @@ impl State {
 
     /// Save the state to user specific state file.
     pub fn save_to_file(&self) -> Result<(), Box<dyn Error>> {
-        if !fs::exists(SHARED_STATE_DIR)? {
-            match fs::create_dir_all(SHARED_STATE_DIR) {
-                Ok(_) => {}
-                Err(e) => {
-                    eprintln!("Failed to create folder '{SHARED_STATE_DIR}' for states");
-                    return Err(Box::new(e));
-                }
-            };
-        }
-
-        let file = fs::File::create(get_state_file_path())?;
+        let path = get_state_file_path();
+        create_parent_folder_if_not_exists(&path)?;
+        let file = fs::File::create(path)?;
         serde_json::to_writer(file, self)?;
         Ok(())
     }
 }
 
-/// Combine the common directory with the invoking user's name and return the path to the state.
+/// Read the XDG state directory from the environment and return the full path to the state file.
 fn get_state_file_path() -> String {
-    let mut user = match env::var(ORIGINAL_USER_ENV_VAR) {
-        Ok(user) if !user.is_empty() => Some(user),
+    let mut path = match env::var(XDG_STATE_HOME) {
+        Ok(path) if !path.is_empty() => Some(path),
         _ => None,
     };
 
-    if user.is_none() {
-        user = get_current_user();
+    if path.is_none() {
+        path = match env::var(HOME) {
+            Ok(home) if !home.is_empty() => Some(format!("{home}/{XDG_STATE_HOME_DEFAULT}")),
+            _ => None,
+        }
     }
 
-    if let Some(user) = user {
-        return format!("{SHARED_STATE_DIR}/state_{user}.json");
-    }
+    let path = path.unwrap_or(format!("./{XDG_STATE_HOME_DEFAULT}"));
 
-    eprintln!("Failed to find the invoking user, falling back to unknown_user_state.json.");
-    format!("{SHARED_STATE_DIR}/unknown_user_state.json")
+    format!("{path}/{XDG_STATE_HOME_DIR}/state.json")
 }
 
-/// Use libc to get the current user's name.
-fn get_current_user() -> Option<String> {
-    unsafe {
-        let uid = libc::getuid();
-
-        let mut passwd: libc::passwd = mem::zeroed();
-
-        let buf_size = match libc::sysconf(libc::_SC_GETPW_R_SIZE_MAX) {
-            n if n < 0 => 512,
-            n => n as usize,
-        };
-        let mut buf = vec![0; buf_size];
-
-        let mut result = ptr::null_mut();
-
-        let exit_code = libc::getpwuid_r(
-            uid,
-            &mut passwd,
-            buf.as_mut_ptr(),
-            buf.capacity() as libc::size_t,
-            &mut result,
-        );
-        if exit_code != 0 || result.is_null() {
-            eprintln!(
-                "Failed to get current user name: {}",
-                std::io::Error::last_os_error()
-            );
-            return None;
-        }
-        match CStr::from_ptr(passwd.pw_name).to_str() {
-            Ok(name) => Some(name.to_string()),
+/// Create the parent directory of the given file if it does not exist
+fn create_parent_folder_if_not_exists(path: &str) -> Result<(), Box<dyn Error>> {
+    let dir = std::path::Path::new(path)
+        .parent()
+        .ok_or("Failed to get parent directory")?
+        .to_str()
+        .ok_or("Failed to convert parent directory to string")?;
+    if !fs::exists(dir)? {
+        match fs::create_dir_all(dir) {
+            Ok(_) => {}
             Err(e) => {
-                eprintln!("Failed to convert user name to string: {e}");
-                None
+                eprintln!("Failed to create directory '{dir}' for states");
+                return Err(Box::new(e));
             }
-        }
+        };
     }
+    Ok(())
 }
