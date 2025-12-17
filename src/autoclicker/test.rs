@@ -23,9 +23,11 @@ async fn new_autoclicker() {
 #[tokio::test]
 async fn autoclick_should_stop_when_signaled() {
     let mut autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
-    let delay_ms = 20;
+    let delay_ms = Arc::new(AtomicU64::new(20));
 
-    let started = autoclicker.autoclick(delay_ms, None, None).await;
+    let started = autoclicker
+        .autoclick(Arc::clone(&delay_ms), None, None)
+        .await;
     assert!(started, "Autoclicker should start");
     assert!(
         autoclicker.running.load(Ordering::SeqCst),
@@ -40,7 +42,7 @@ async fn autoclick_should_stop_when_signaled() {
     // Delay should not be less than 10ms, as otherwise the timing here might not work out.
     sleep(Duration::from_millis(10)).await;
     autoclicker.running.store(false, Ordering::Release);
-    sleep(Duration::from_millis(delay_ms * 2)).await;
+    sleep(Duration::from_millis(delay_ms.load(Ordering::Acquire) * 2)).await;
 
     assert!(
         autoclicker.stopped.load(Ordering::SeqCst),
@@ -53,7 +55,9 @@ async fn autoclick_should_not_start_if_already_running() {
     let mut autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
 
     autoclicker.running.store(true, Ordering::SeqCst);
-    let started = autoclicker.autoclick(20, None, None).await;
+    let started = autoclicker
+        .autoclick(Arc::new(AtomicU64::new(20)), None, None)
+        .await;
     assert!(!started, "Autoclicker should not start if already running");
 }
 
@@ -62,6 +66,8 @@ async fn autoclick_should_not_start_when_still_running() {
     let mut autoclicker = Autoclicker::new().expect("Failed to create autoclicker");
 
     autoclicker.stopped.store(false, Ordering::SeqCst);
-    let started = autoclicker.autoclick(20, None, None).await;
+    let started = autoclicker
+        .autoclick(Arc::new(AtomicU64::new(20)), None, None)
+        .await;
     assert!(!started, "Autoclicker should not start if already running");
 }

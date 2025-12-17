@@ -27,6 +27,7 @@ export global GlobalState {
         } else {
             delay = Math.floor(value);
         }
+        settings-changed();
     }
 
     public function setColorScheme() {

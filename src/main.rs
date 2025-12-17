@@ -4,6 +4,7 @@
 
 use state::State;
 use std::error::Error;
+use std::sync::{Arc, atomic::AtomicU64, atomic::Ordering};
 
 mod autoclicker;
 mod hotkey;
@@ -24,8 +25,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
             std::process::exit(1);
         }
     };
-    let global_hotkey = hotkey::HotkeyPortal::register().await?;
-    autoclicker.trigger_on_hotkey(global_hotkey.clone()).await?;
 
     let app = AppWindow::new()?;
     app.global::<GlobalState>().set_version(VERSION.into());
@@ -39,12 +38,21 @@ async fn main() -> Result<(), Box<dyn Error>> {
             None
         }
     };
+
     if let Some(state) = state {
         state.update_app(&app);
     }
+    let autoclicker_delay: u64 = app.global::<GlobalState>().get_delay().try_into().unwrap();
+    let autoclicker_delay = Arc::new(AtomicU64::new(autoclicker_delay));
+
+    let global_hotkey = hotkey::HotkeyPortal::register().await?;
+    autoclicker
+        .trigger_on_hotkey(global_hotkey.clone(), Arc::clone(&autoclicker_delay))
+        .await?;
 
     app.global::<GlobalState>().on_start_auto_click({
         let app = app.as_weak();
+        let autoclicker_delay = Arc::clone(&autoclicker_delay);
         move || {
             let app = app.unwrap();
             let global_state = app.global::<GlobalState>();
@@ -58,7 +66,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 false => None,
             };
 
-            let delay = global_state.get_delay().try_into().unwrap();
+            let delay = Arc::clone(&autoclicker_delay);
 
             let mut autoclicker = autoclicker.clone();
             tokio::spawn(async move {
@@ -69,8 +77,16 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     app.global::<GlobalState>().on_settings_changed({
         let app = app.as_weak();
+        let autoclicker_delay = Arc::clone(&autoclicker_delay);
         move || {
             let app = app.unwrap();
+            let global_state = app.global::<GlobalState>();
+
+            autoclicker_delay.store(
+                global_state.get_delay().try_into().unwrap(),
+                Ordering::Release,
+            );
+
             let state = State::from_app(&app);
             if let Err(e) = state.save_to_file() {
                 eprintln!("Failed to save settings: {e}");
