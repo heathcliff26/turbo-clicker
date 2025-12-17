@@ -65,3 +65,5 @@ jobs:
     permissions:
       contents: read
     secrets: inherit
+    with:
+      additional-packages: "libwayland-dev  libxkbcommon-dev"
