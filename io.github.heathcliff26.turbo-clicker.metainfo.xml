@@ -47,10 +47,19 @@
     </screenshots>
 
     <releases>
+        <release version="v0.1.0" date="2025-12-17" type="stable">
+            <description>
+                <p>Breaking change: Run app as current user.</p>
+                <p>Use virtual inputs instead of uinput.</p>
+                <p>Add option to trigger autoclick with a global hotkey.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.0</url>
+        </release>
+
         <release version="v0.0.8" date="2025-12-16" type="stable">
             <description>
-                <p>Fix autoclick not working on Fedora 43</p>
-                <p>Add new tab to test autoclicks in the app</p>
+                <p>Fix autoclick not working on Fedora 43.</p>
+                <p>Add new tab to test autoclicks in the app.</p>
             </description>
             <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.8</url>
         </release>
