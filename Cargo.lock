@@ -4476,7 +4476,6 @@ dependencies = [
  "enigo",
  "futures-util",
  "i-slint-backend-testing",
- "libc",
  "serde",
  "serde_json",
  "serial_test",
