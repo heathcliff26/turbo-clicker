@@ -5,7 +5,8 @@
 
 # Turbo Clicker
 
-GUI based auto-clicker for Linux. It uses uinput and should thus work independently of wayland or x11.
+GUI based auto-clicker for Linux (Wayland). It simulates virtual input via x11/wayland-client.
+The user needs to accept remote access permissions for the app.
 
 ## Table of Contents
 
