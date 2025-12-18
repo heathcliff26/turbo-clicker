@@ -73,7 +73,13 @@ impl Autoclicker {
                     eprintln!("Failed to click mouse button: {e}");
                 };
 
-                sleep(Duration::from_millis(delay_ms.load(Ordering::Acquire))).await;
+                let mut elapsed_time_ms = 0;
+                while running.load(Ordering::Relaxed)
+                    && elapsed_time_ms < delay_ms.load(Ordering::Acquire)
+                {
+                    sleep(Duration::from_millis(10)).await;
+                    elapsed_time_ms += 10;
+                }
             }
             stopped.store(true, Ordering::Release);
             println!("Autoclicker stopped");
