@@ -10,6 +10,9 @@ mod autoclicker;
 mod hotkey;
 mod state;
 
+#[cfg(test)]
+mod test;
+
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 const APP_ID: &str = concat!("io.github.heathcliff26.", env!("CARGO_PKG_NAME"));
 
@@ -31,17 +34,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     slint::set_xdg_app_id(APP_ID).expect("Failed to set XDG app ID");
 
-    let state = match State::from_file() {
-        Ok(state) => state,
-        Err(e) => {
-            eprintln!("Failed to load state: {e}");
-            None
-        }
-    };
+    init_global_state(&app);
 
-    if let Some(state) = state {
-        state.update_app(&app);
-    }
     let autoclicker_delay: u64 = app.global::<GlobalState>().get_delay().try_into().unwrap();
     let autoclicker_delay = Arc::new(AtomicU64::new(autoclicker_delay));
 
@@ -50,11 +44,50 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .trigger_on_hotkey(global_hotkey.clone(), Arc::clone(&autoclicker_delay))
         .await?;
 
+    register_start_auto_click(&app, autoclicker, autoclicker_delay.clone());
+    register_settings_changed(&app, autoclicker_delay);
+    register_configure_hotkey(&app, global_hotkey);
+
+    app.run()?;
+
+    save_global_state(&app);
+
+    Ok(())
+}
+
+/// Initialize the global state from the saved state file.
+fn init_global_state(app: &AppWindow) {
+    let state = match State::from_file() {
+        Ok(state) => state,
+        Err(e) => {
+            eprintln!("Failed to load state: {e}");
+            None
+        }
+    };
+    if let Some(state) = state {
+        state.update_app(app);
+    }
+}
+
+/// Save the global state to file.
+fn save_global_state(app: &AppWindow) {
+    let state = State::from_app(app);
+    if let Err(e) = state.save_to_file() {
+        eprintln!("Failed to save state: {e}");
+    }
+}
+
+/// Register the callback for clicking the "Start Auto-click" button.
+fn register_start_auto_click(
+    app: &AppWindow,
+    autoclicker: autoclicker::Autoclicker,
+    autoclicker_delay: Arc<AtomicU64>,
+) {
+    let app_weak = app.as_weak();
+
     app.global::<GlobalState>().on_start_auto_click({
-        let app = app.as_weak();
-        let autoclicker_delay = Arc::clone(&autoclicker_delay);
         move || {
-            let app = app.unwrap();
+            let app = app_weak.unwrap();
             let global_state = app.global::<GlobalState>();
 
             let start_delay: Option<u64> = match global_state.get_use_start_delay() {
@@ -74,12 +107,15 @@ async fn main() -> Result<(), Box<dyn Error>> {
             });
         }
     });
+}
+
+/// Register the callback for setting changes.
+fn register_settings_changed(app: &AppWindow, autoclicker_delay: Arc<AtomicU64>) {
+    let app_weak = app.as_weak();
 
     app.global::<GlobalState>().on_settings_changed({
-        let app = app.as_weak();
-        let autoclicker_delay = Arc::clone(&autoclicker_delay);
         move || {
-            let app = app.unwrap();
+            let app = app_weak.unwrap();
             let global_state = app.global::<GlobalState>();
 
             autoclicker_delay.store(
@@ -87,13 +123,13 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 Ordering::Release,
             );
 
-            let state = State::from_app(&app);
-            if let Err(e) = state.save_to_file() {
-                eprintln!("Failed to save settings: {e}");
-            }
+            save_global_state(&app);
         }
     });
+}
 
+/// Register the callback for configuring the hotkey.
+fn register_configure_hotkey(app: &AppWindow, global_hotkey: hotkey::HotkeyPortal) {
     app.global::<GlobalState>().on_configure_hotkey({
         move || {
             let global_hotkey = global_hotkey.clone();
@@ -102,13 +138,4 @@ async fn main() -> Result<(), Box<dyn Error>> {
             });
         }
     });
-
-    app.run()?;
-
-    let state = State::from_app(&app);
-    if let Err(e) = state.save_to_file() {
-        eprintln!("Failed to save state: {e}");
-    }
-
-    Ok(())
 }
