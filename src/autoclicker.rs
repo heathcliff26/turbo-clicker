@@ -29,7 +29,7 @@ impl Autoclicker {
         let mut enigo = Enigo::new(&Settings::default())?;
 
         // Move the mouse slightly to ensure the permission prompt is triggered.
-        enigo.move_mouse(1, 1, Coordinate::Rel)?;
+        enigo.move_mouse(0, 0, Coordinate::Rel)?;
 
         Ok(Autoclicker {
             enigo: Arc::new(Mutex::new(enigo)),
