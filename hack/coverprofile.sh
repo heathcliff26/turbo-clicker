@@ -6,7 +6,7 @@ base_dir="$(dirname "${BASH_SOURCE[0]}" | xargs realpath | xargs dirname)"
 
 pushd "${base_dir}" >/dev/null
 
-excludes=("/*" "target/*")
+excludes=("/*" "target/*" "src/test/*")
 
 if ! command -v grcov >/dev/null 2>&1; then
     echo "Installing grcov"

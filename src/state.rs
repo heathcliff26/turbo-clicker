@@ -5,10 +5,10 @@ use std::env;
 use std::error::Error;
 use std::fs;
 
-static XDG_STATE_HOME_DIR: &str = "io.github.heathcliff26.turbo-clicker";
-static XDG_STATE_HOME: &str = "XDG_STATE_HOME";
-static XDG_STATE_HOME_DEFAULT: &str = ".local/state";
-static HOME: &str = "HOME";
+pub const XDG_STATE_HOME_DIR: &str = "io.github.heathcliff26.turbo-clicker";
+pub const XDG_STATE_HOME: &str = "XDG_STATE_HOME";
+pub const XDG_STATE_HOME_DEFAULT: &str = ".local/state";
+pub const HOME: &str = "HOME";
 
 #[cfg(test)]
 mod test;

@@ -50,7 +50,7 @@ impl Autoclicker {
     ) -> bool {
         let running = Arc::clone(&self.running);
         let stopped = Arc::clone(&self.stopped);
-        if running.load(Ordering::SeqCst) || !stopped.load(Ordering::SeqCst) {
+        if self.is_running() || !self.is_stopped() {
             return false;
         }
         running.store(true, Ordering::SeqCst);
@@ -111,5 +111,14 @@ impl Autoclicker {
             }
         });
         Ok(())
+    }
+
+    /// Check if the autoclicker is currently running.
+    pub fn is_running(&self) -> bool {
+        self.running.load(Ordering::SeqCst)
+    }
+    /// Check if the autoclicker is currently stopped.
+    pub fn is_stopped(&self) -> bool {
+        self.stopped.load(Ordering::SeqCst)
     }
 }

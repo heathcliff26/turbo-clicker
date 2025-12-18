@@ -158,8 +158,7 @@ fn state_save_to_file() {
 
     assert_eq!(state, loaded_state, "Loaded state should match saved state");
 
-    fs::remove_file(&path).expect("Should remove state file");
-
+    fs::remove_dir_all(tmp_dir).expect("Should remove temporary directory");
     unsafe {
         env::remove_var(XDG_STATE_HOME);
     }
