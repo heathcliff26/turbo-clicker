@@ -4481,6 +4481,7 @@ dependencies = [
  "serial_test",
  "slint",
  "slint-build",
+ "tempfile",
  "tokio",
 ]
 

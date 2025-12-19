@@ -4,6 +4,7 @@ use slint::ComponentHandle;
 use std::env;
 use std::error::Error;
 use std::fs;
+use std::path::Path;
 
 pub const XDG_STATE_HOME_DIR: &str = "io.github.heathcliff26.turbo-clicker";
 pub const XDG_STATE_HOME: &str = "XDG_STATE_HOME";
@@ -42,15 +43,18 @@ impl State {
 
     /// Load the state from the user specific state file.
     pub fn from_file() -> Result<Option<Self>, Box<dyn Error>> {
-        Self::from_path(&get_state_file_path())
+        Self::from_path(get_state_file_path())
     }
 
     /// Load the state from the given file path.
-    pub fn from_path(path: &str) -> Result<Option<Self>, Box<dyn Error>> {
-        if !fs::exists(path)? {
+    pub fn from_path<P>(path: P) -> Result<Option<Self>, Box<dyn Error>>
+    where
+        P: AsRef<Path>,
+    {
+        if !fs::exists(&path)? {
             return Ok(None);
         };
-        let file = fs::File::open(path)?;
+        let file = fs::File::open(&path)?;
         let state: State = serde_json::from_reader(file)?;
         Ok(Some(state))
     }
