@@ -136,20 +136,17 @@ fn state_save_to_file() {
         dark_mode: true,
     };
 
-    let tmp_dir = "/tmp/turbo-clicker-tests";
+    let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
 
     unsafe {
-        env::set_var(XDG_STATE_HOME, tmp_dir);
+        env::set_var(XDG_STATE_HOME, tmp_dir.path());
     }
 
     state.save_to_file().expect("Should save state to file");
 
-    let path = format!("{tmp_dir}/{XDG_STATE_HOME_DIR}/state.json");
+    let path = tmp_dir.path().join(XDG_STATE_HOME_DIR).join("state.json");
 
-    assert!(
-        fs::exists(&path).expect("Should check if file exists"),
-        "State file should exist after saving"
-    );
+    assert!(path.exists(), "State file should exist after saving");
 
     let loaded_state = match State::from_path(&path).expect("Should load state from file") {
         Some(s) => s,
@@ -158,7 +155,6 @@ fn state_save_to_file() {
 
     assert_eq!(state, loaded_state, "Loaded state should match saved state");
 
-    fs::remove_dir_all(tmp_dir).expect("Should remove temporary directory");
     unsafe {
         env::remove_var(XDG_STATE_HOME);
     }

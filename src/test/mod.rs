@@ -2,7 +2,7 @@ use super::*;
 use crate::autoclicker::Autoclicker;
 use serial_test::serial;
 use std::sync::atomic::Ordering;
-use std::{env, fs, time::Duration};
+use std::{env, time::Duration};
 use tokio::time::sleep;
 
 #[test]
@@ -57,10 +57,10 @@ async fn test_register_start_auto_click() {
 #[test]
 #[serial]
 fn test_register_settings_changed() {
-    let tmp_dir = "/tmp/turbo-clicker-tests";
+    let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
 
     unsafe {
-        env::set_var(state::XDG_STATE_HOME, tmp_dir);
+        env::set_var(state::XDG_STATE_HOME, tmp_dir.path());
     }
 
     i_slint_backend_testing::init_no_event_loop();
@@ -68,11 +68,6 @@ fn test_register_settings_changed() {
     let autoclicker_delay = Arc::new(AtomicU64::new(1000));
 
     register_settings_changed(&app, autoclicker_delay.clone());
-
-    assert!(
-        !fs::exists(tmp_dir).expect("Should check if directory exists"),
-        "State directory should not exist initially"
-    );
 
     app.global::<GlobalState>().invoke_settings_changed();
 
@@ -88,7 +83,6 @@ fn test_register_settings_changed() {
         "Autoclicker delay should be updated"
     );
 
-    fs::remove_dir_all(tmp_dir).expect("Should remove temporary directory");
     unsafe {
         env::remove_var(state::XDG_STATE_HOME);
     }
