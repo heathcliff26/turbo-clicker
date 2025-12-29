@@ -1,0 +1,24 @@
+---
+name: "Rust Audit Check"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 6 * * 0'
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - '.github/workflows/audit.yaml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    uses: heathcliff26/ci/.github/workflows/rustcheck-audit.yaml@main
+    permissions:
+      issues: write
+      checks: write
