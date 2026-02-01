@@ -47,6 +47,12 @@
     </screenshots>
 
     <releases>
+        <release version="v0.1.2" date="2026-02-01" type="stable">
+            <description>
+                <p>Small maintenance update.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.2</url>
+        </release>
         <release version="v0.1.1" date="2026-01-01" type="stable">
             <description>
                 <p>Small maintenance update.</p>
