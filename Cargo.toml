@@ -17,12 +17,12 @@ exclude = [
 ]
 
 [dependencies]
-ashpd = { version = "0.12.1", features = ["wayland"] }
+ashpd = { version = "0.12.3", features = ["wayland"] }
 enigo = { version = "0.6.1", features = ["wayland"] }
-futures-util = "0.3.31"
+futures-util = "0.3.32"
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
-slint = { version = "1.15.0", default-features = false, features = [
+slint = { version = "1.15.1", default-features = false, features = [
     "std",
     "accessibility",
     "compat-1-2",
@@ -36,12 +36,12 @@ tokio = { version = "1.49.0", features = [
 ] }
 
 [build-dependencies]
-slint-build = "1.15.0"
+slint-build = "1.15.1"
 
 [dev-dependencies]
-i-slint-backend-testing = "1.15.0"
-serial_test = "3.3.1"
-tempfile = "3.24.0"
+i-slint-backend-testing = "1.15.1"
+serial_test = "3.4.0"
+tempfile = "3.26.0"
 
 [profile.release]
 strip = "symbols"
