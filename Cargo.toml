@@ -17,7 +17,7 @@ exclude = [
 ]
 
 [dependencies]
-ashpd = { version = "0.12.3", features = ["wayland"] }
+ashpd = { version = "0.13.0", features = ["wayland"] }
 enigo = { version = "0.6.1", features = ["wayland"] }
 futures-util = "0.3.32"
 serde = { version = "1.0.228", features = ["derive"] }
