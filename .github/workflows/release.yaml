@@ -66,4 +66,4 @@ jobs:
       contents: read
     secrets: inherit
     with:
-      additional-packages: "libwayland-dev libfontconfig-dev  libxkbcommon-dev"
+      additional-packages: "libwayland-dev libfontconfig-dev qt6-base-dev qt6-wayland-dev libxkbcommon-dev"
