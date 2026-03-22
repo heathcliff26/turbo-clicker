@@ -37,7 +37,7 @@ jobs:
       contents: read
     with:
       cmd: "make doc"
-      additional-packages: "libwayland-dev libfontconfig-dev"
+      additional-packages: "libwayland-dev libfontconfig-dev qt6-base-dev qt6-wayland-dev libxkbcommon-dev"
 
   lint:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -45,7 +45,7 @@ jobs:
       contents: read
     with:
       cmd: "make lint"
-      additional-packages: "libwayland-dev libfontconfig-dev"
+      additional-packages: "libwayland-dev libfontconfig-dev qt6-base-dev qt6-wayland-dev libxkbcommon-dev"
 
   test:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -53,7 +53,7 @@ jobs:
       contents: read
     with:
       cmd: "xvfb-run -a make test"
-      additional-packages: "libwayland-dev libfontconfig-dev libxkbcommon-dev xvfb xsel"
+      additional-packages: "libwayland-dev libfontconfig-dev qt6-base-dev qt6-wayland-dev libxkbcommon-dev xvfb xsel"
 
   validate:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -82,4 +82,4 @@ jobs:
       artifact: "dist/turbo-clicker_linux-${{ matrix.arch }}.tar.gz"
       artifact-name: "turbo-clicker-${{ matrix.arch }}"
       architecture: "${{ matrix.arch }}"
-      additional-packages: "libwayland-dev libfontconfig-dev  libxkbcommon-dev"
+      additional-packages: "libwayland-dev libfontconfig-dev qt6-base-dev qt6-wayland-dev libxkbcommon-dev"
