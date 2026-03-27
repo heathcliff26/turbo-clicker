@@ -40,9 +40,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let autoclicker_delay = Arc::new(AtomicU64::new(autoclicker_delay));
 
     let global_hotkey = hotkey::HotkeyPortal::register().await?;
-    autoclicker
-        .trigger_on_hotkey(global_hotkey.clone(), Arc::clone(&autoclicker_delay))
-        .await?;
+    autoclicker.trigger_on_hotkey(global_hotkey.clone(), Arc::clone(&autoclicker_delay));
 
     register_start_auto_click(&app, autoclicker, autoclicker_delay.clone());
     register_settings_changed(&app, autoclicker_delay);
