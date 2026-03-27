@@ -98,14 +98,17 @@ impl Autoclicker {
     }
 
     /// Listen to the event stream and trigger the autoclicker on each event.
-    pub async fn trigger_on_hotkey(
-        &self,
-        portal: HotkeyPortal,
-        delay_ms: Arc<AtomicU64>,
-    ) -> Result<(), ashpd::Error> {
-        let mut stream = portal.activated_stream().await?;
+    pub fn trigger_on_hotkey(&self, portal: HotkeyPortal, delay_ms: Arc<AtomicU64>) {
+        let portal = portal.clone();
         let mut autoclicker = self.clone();
         tokio::spawn(async move {
+            let mut stream = match portal.activated_stream().await {
+                Ok(s) => s,
+                Err(e) => {
+                    eprintln!("Failed to receive hotkey activation events: {e}");
+                    return;
+                }
+            };
             while stream.next().await.is_some() {
                 println!("Hotkey activated");
                 let started = autoclicker
@@ -116,7 +119,6 @@ impl Autoclicker {
                 }
             }
         });
-        Ok(())
     }
 
     /// Check if the autoclicker is currently running.
