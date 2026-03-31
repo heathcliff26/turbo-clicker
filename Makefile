@@ -1,27 +1,27 @@
 SHELL := bash
 
 # Build the binary for testing
-build:
+build: install-deps
 	cargo build
 
 # Build the binary in release mode and create release bundle
-release:
+release: install-deps
 	hack/build-release.sh
 
 # Run cargo test
-test:
+test: install-deps
 	cargo test
 
 # Generate coverage profile
-coverprofile:
+coverprofile: install-deps
 	hack/coverprofile.sh
 
 # Run linter (clippy)
-lint:
+lint: install-deps
 	cargo clippy -- --deny warnings
 
 # Build the docs, fail on warnings
-doc:
+doc: install-deps
 	RUSTDOCFLAGS='--deny warnings' cargo doc --no-deps
 
 # Format the code
@@ -35,6 +35,10 @@ validate:
 # Validate the appstream metainfo file
 validate-metainfo:
 	appstreamcli validate io.github.heathcliff26.turbo-clicker.metainfo.xml
+
+# Install all dependencies needed for development
+install-deps:
+	hack/install-deps.sh
 
 # Clean up generated files
 clean:
@@ -58,6 +62,7 @@ help:
 	fmt \
 	validate \
 	validate-metainfo \
+	install-deps \
 	clean \
 	help \
 	$(NULL)
