@@ -1,0 +1,29 @@
+---
+name: Build Builder Image
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches: [main]
+    paths:
+      - "hack/builder/*"
+  pull_request:
+    branches: [main]
+    paths:
+      - "hack/builder/*"
+      - ".github/workflows/build-builder.yaml"
+  merge_group:
+    branches: ["main"]
+
+jobs:
+  build:
+    uses: heathcliff26/ci/.github/workflows/build-container.yaml@main
+    permissions:
+      contents: read
+      packages: write
+    with:
+      app: rust-qt-builder
+      dry-run: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
+      context: hack/builder
+    secrets: inherit
