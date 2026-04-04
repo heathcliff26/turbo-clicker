@@ -36,14 +36,14 @@ jobs:
     permissions:
       contents: read
     with:
-      cmd: "make doc"
+      cmd: "hack/containerized make doc"
 
   lint:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
     permissions:
       contents: read
     with:
-      cmd: "make lint"
+      cmd: "hack/containerized make lint"
 
   test:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -58,7 +58,7 @@ jobs:
     permissions:
       contents: read
     with:
-      cmd: "make validate"
+      cmd: "hack/containerized make validate"
 
   build-binary:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
@@ -69,14 +69,7 @@ jobs:
       - validate
     permissions:
       contents: read
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - arch: amd64
-          - arch: arm64
     with:
       cmd: "make release"
-      artifact: "dist/turbo-clicker_linux-${{ matrix.arch }}.tar.gz"
-      artifact-name: "turbo-clicker-${{ matrix.arch }}"
-      architecture: "${{ matrix.arch }}"
+      artifact: "dist/turbo-clicker_linux-*.tar.gz"
+      artifact-name: "turbo-clicker"

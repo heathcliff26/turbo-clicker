@@ -1,12 +1,12 @@
 SHELL := bash
 
 # Build the binary for testing
-build: install-deps
+build:
 	cargo build
 
 # Build the binary in release mode and create release bundle
-release: install-deps
-	hack/build-release.sh
+release:
+	hack/containerized goreleaser release --skip=announce,publish,validate --clean
 
 # Run cargo test
 test: install-deps
@@ -17,11 +17,11 @@ coverprofile: install-deps
 	hack/coverprofile.sh
 
 # Run linter (clippy)
-lint: install-deps
+lint:
 	cargo clippy -- --deny warnings
 
 # Build the docs, fail on warnings
-doc: install-deps
+doc:
 	RUSTDOCFLAGS='--deny warnings' cargo doc --no-deps
 
 # Format the code
