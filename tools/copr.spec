@@ -28,10 +28,10 @@ The user needs to accept remote access permissions for the app.}
 %description %{_description}
 
 %prep
-%autosetup -n turbo-clicker-%{version} -p1
+%autosetup -n %{name}-%{version} -p1
 
 %build
-cargo build --release
+CI_COMMIT_SHA="$(cat tools/git-commit.txt)" cargo build --release --locked
 
 %install
 install -D -m 755 target/release/%{name} %{buildroot}/%{_bindir}/%{name}

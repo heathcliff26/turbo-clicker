@@ -1,11 +1,11 @@
 # See the documentation for more information:
 # https://packit.dev/docs/configuration/
 
-specfile_path: tmp/turbo-clicker.spec
+specfile_path: tmp/copr.spec
 actions:
   post-upstream-clone:
     - mkdir -p tmp
-    - cp tools/turbo-clicker.spec tmp/
+    - cp tools/copr.spec tmp/
 
 # name in upstream package repository or registry (e.g. in PyPI)
 upstream_package_name: turbo-clicker

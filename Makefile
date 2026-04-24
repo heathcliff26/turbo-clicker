@@ -2,7 +2,7 @@ SHELL := bash
 
 # Build the binary for testing
 build:
-	cargo build
+	CI_COMMIT_SHA="$(shell git rev-parse HEAD)" cargo build
 
 # Build the binary in release mode and create release bundle
 release:

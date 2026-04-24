@@ -12,8 +12,9 @@ export global GlobalState {
 
     in-out property <bool> dark-mode: true;
 
-    // Application version. Needs to be populated from backend.
+    // Application version information. Needs to be populated from backend.
     in-out property <string> version: "-";
+    in-out property <string> commit: "unknown";
 
     callback start-auto-click();
     callback settings-changed();
