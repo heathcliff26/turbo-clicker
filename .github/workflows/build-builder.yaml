@@ -18,7 +18,7 @@ on:
 
 jobs:
   build:
-    uses: heathcliff26/ci/.github/workflows/build-container.yaml@main
+    uses: heathcliff26/ci/.github/workflows/build-amd64-container.yaml@main
     permissions:
       contents: read
       packages: write
