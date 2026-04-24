@@ -14,6 +14,7 @@ mod state;
 mod test;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
+const COMMIT: Option<&str> = option_env!("CI_COMMIT_SHA");
 const APP_ID: &str = concat!("io.github.heathcliff26.", env!("CARGO_PKG_NAME"));
 
 slint::include_modules!();
@@ -31,6 +32,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let app = AppWindow::new()?;
     app.global::<GlobalState>().set_version(VERSION.into());
+    if let Some(mut commit) = COMMIT {
+        if commit.len() > 7 {
+            commit = &commit[..7];
+        }
+        app.global::<GlobalState>().set_commit(commit.into());
+    }
 
     slint::set_xdg_app_id(APP_ID).expect("Failed to set XDG app ID");
 
