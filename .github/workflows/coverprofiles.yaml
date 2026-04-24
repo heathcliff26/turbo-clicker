@@ -1,5 +1,5 @@
 ---
-name: "Generate test cover report"
+name: "Coverprofiles"
 
 on:
   workflow_dispatch:
@@ -20,7 +20,8 @@ jobs:
   generate-reports:
     uses: heathcliff26/ci/.github/workflows/testcover-report.yaml@main
     secrets: inherit
-    permissions: {}
+    permissions:
+      contents: read
     with:
       coverprofile: "target/coverage/lcov.info"
       script: "xvfb-run -a make coverprofile"
