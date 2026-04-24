@@ -1,4 +1,4 @@
-FROM docker.io/library/rust:1.94.1
+FROM docker.io/library/rust:1.95.0
 
 LABEL   org.opencontainers.image.authors="heathcliff@heathcliff.eu" \
         org.opencontainers.image.description="Builder and CI image for rust projects. Can be used to cross-compile." \
@@ -7,7 +7,7 @@ LABEL   org.opencontainers.image.authors="heathcliff@heathcliff.eu" \
         org.opencontainers.image.title="rust-qt-builder"
 
 # renovate: datasource=github-releases depName=goreleaser/goreleaser extractVersion=^(?<version>.*)$
-ARG GORELEASER_VERSION=v2.15.2
+ARG GORELEASER_VERSION=v2.15.4
 
 COPY install-deps.sh .
 RUN ./install-deps.sh
