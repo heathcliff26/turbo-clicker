@@ -1,5 +1,5 @@
 ---
-name: Build Builder Image
+name: Builder Image
 
 on:
   workflow_dispatch:
