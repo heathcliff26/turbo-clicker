@@ -47,6 +47,12 @@
     </screenshots>
 
     <releases>
+        <release version="v0.1.5" date="2026-06-01" type="stable">
+            <description>
+                <p>Small maintenance update.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.5</url>
+        </release>
         <release version="v0.1.4" date="2026-03-27" type="stable">
             <description>
                 <p>Fixed problem in build CI where resulting binary artifact would not run.</p>
