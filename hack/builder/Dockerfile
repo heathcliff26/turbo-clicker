@@ -7,7 +7,7 @@ LABEL   org.opencontainers.image.authors="heathcliff@heathcliff.eu" \
         org.opencontainers.image.title="rust-qt-builder"
 
 # renovate: datasource=github-releases depName=goreleaser/goreleaser extractVersion=^(?<version>.*)$
-ARG GORELEASER_VERSION=v2.15.4
+ARG GORELEASER_VERSION=v2.16.0
 
 COPY install-deps.sh .
 RUN ./install-deps.sh
