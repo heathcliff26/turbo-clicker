@@ -54,7 +54,7 @@ jobs:
       update: ${{ inputs.update }}
       tag: ${{ needs.extract-version.outputs.version }}
       release-artifacts: "release/*"
-      artifacts: "turbo-clicker-*"
+      artifacts: "turbo-clicker"
       prerelease: ${{ inputs.prerelease }}
     secrets: inherit
 
