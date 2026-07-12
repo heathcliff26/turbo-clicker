@@ -1,4 +1,4 @@
-FROM docker.io/library/rust:1.96.0
+FROM docker.io/library/rust:1.97.0
 
 LABEL   org.opencontainers.image.authors="heathcliff@heathcliff.eu" \
         org.opencontainers.image.description="Builder and CI image for rust projects. Can be used to cross-compile." \
