@@ -47,6 +47,13 @@
     </screenshots>
 
     <releases>
+        <release version="v0.2.0" date="2026-08-09" type="stable">
+            <description>
+                <p>Upgraded UI framework to slint 1.17.</p>
+                <p>Added system tray icon, as well as starting minimized to tray by default.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.2.0</url>
+        </release>
         <release version="v0.1.5" date="2026-06-01" type="stable">
             <description>
                 <p>Small maintenance update.</p>
