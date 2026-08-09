@@ -44,7 +44,7 @@ slint-build = "1.17.1"
 
 [dev-dependencies]
 i-slint-backend-testing = "1.17.1"
-serial_test = "3.4.0"
+serial_test = "4.0.0"
 tempfile = "3.27.0"
 
 [profile.release]
