@@ -1,0 +1,18 @@
+export component TrayIcon inherits SystemTrayIcon {
+    tooltip: "Turbo Clicker";
+    icon: @image-url("../packages/io.github.heathcliff26.turbo-clicker.svg");
+
+    callback toggle-window;
+    callback quit;
+
+    clicked => {
+        toggle-window();
+    }
+
+    Menu {
+        MenuItem {
+            title: "Quit";
+            activated => { quit(); }
+        }
+    }
+}
