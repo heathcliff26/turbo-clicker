@@ -53,10 +53,34 @@ async fn main() -> Result<(), Box<dyn Error>> {
     register_settings_changed(&app, autoclicker_delay);
     register_configure_hotkey(&app, global_hotkey);
 
-    app.run()?;
+    if let Err(e) = run_app_minimized_to_tray(app.as_weak()) {
+        eprintln!("Failed to run app minimized to tray: {e}");
+        app.run()?;
+    }
 
     save_global_state(&app);
 
+    Ok(())
+}
+
+/// Attempt to initialize the tray icon and run the app. Returns an error if the tray icon could not be initialized.
+fn run_app_minimized_to_tray(app: slint::Weak<AppWindow>) -> Result<(), slint::PlatformError> {
+    let tray = TrayIcon::new()?;
+    tray.on_toggle_window(move || {
+        let Some(app) = app.upgrade() else {
+            return;
+        };
+        if app.window().is_visible() {
+            let _ = app.hide();
+        } else {
+            let _ = app.show();
+        }
+    });
+
+    tray.on_quit(|| slint::quit_event_loop().unwrap());
+
+    tray.show()?;
+    slint::run_event_loop()?;
     Ok(())
 }
 
