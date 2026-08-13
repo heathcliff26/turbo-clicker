@@ -4,4 +4,7 @@ set -e
 
 base_dir="$(dirname "${BASH_SOURCE[0]}" | xargs realpath | xargs dirname)"
 
-podman run -v "${base_dir}:/app:z" ghcr.io/heathcliff26/rust-qt-builder:latest "$@"
+# renovate: datasource=docker depName=ghcr.io/heathcliff26/rust-builder versioning=loose extractVersion=^(?<version>.*)$
+export BUILDER_VERSION=202608131527
+
+podman run -v "${base_dir}:/app:z" "ghcr.io/heathcliff26/rust-qt-builder:${BUILDER_VERSION}" "$@"
