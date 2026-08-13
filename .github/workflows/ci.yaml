@@ -12,6 +12,7 @@ on:
       - "src/*"
       - "ui/*"
       - "packages/*"
+      - "hack/containerized"
   pull_request:
     branches: ["main"]
     paths:
@@ -20,6 +21,7 @@ on:
       - "src/*"
       - "ui/*"
       - "packages/*"
+      - "hack/containerized"
       - ".github/workflows/ci.yaml"
       - "README.md"
   merge_group:
