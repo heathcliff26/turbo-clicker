@@ -27,6 +27,8 @@ The user needs to accept remote access permissions for the app.
 
 ## Installation
 
+**Note:** On GNOME there is no native System Tray support, as such you need to install an extension like [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/).
+
 ### Fedora Copr
 
 The app is available as an rpm by using the fedora copr repository [heathcliff26/turbo-clicker](https://copr.fedorainfracloud.org/coprs/heathcliff26/turbo-clicker/).
