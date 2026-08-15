@@ -40,6 +40,15 @@ validate-metainfo:
 install-deps:
 	hack/install-deps.sh
 
+# Build rpm with code in current workdir using packit
+packit:
+	packit build locally
+
+# Build rpm of upstream code using packit + mock
+packit-mock:
+	packit build in-mock --resultdir tmp
+	rm *.src.rpm
+
 # Clean up generated files
 clean:
 	hack/clean.sh
@@ -63,6 +72,8 @@ help:
 	validate \
 	validate-metainfo \
 	install-deps \
+	packit \
+	packit-mock \
 	clean \
 	help \
 	$(NULL)
