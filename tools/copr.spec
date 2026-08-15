@@ -16,6 +16,7 @@ URL:            https://github.com/heathcliff26/turbo-clicker
 Source:         %{url}/archive/refs/tags/v%{version}.tar.gz
 
 Requires: polkit
+Recommends: (gnome-shell-extension-appindicator if gnome-shell)
 
 BuildRequires: cargo >= 1.87
 BuildRequires: qt6-qtbase-devel qt6-qtwayland-devel fontconfig-devel
