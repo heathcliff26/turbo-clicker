@@ -34,19 +34,25 @@
     <screenshots>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.8/screenshots/window-dark.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.2.0/screenshots/window-dark.png
             </image>
             <caption>Main window (Dark Theme)</caption>
         </screenshot>
         <screenshot type="default">
             <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.0.8/screenshots/window-light.png
+                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.2.0/screenshots/window-light.png
             </image>
             <caption>Main window (Light Theme)</caption>
         </screenshot>
     </screenshots>
 
     <releases>
+        <release version="v0.2.1" date="2026-08-15" type="stable">
+            <description>
+                <p>Small fix for rpm dependency handling.</p>
+            </description>
+            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.2.1</url>
+        </release>
         <release version="v0.2.0" date="2026-08-09" type="stable">
             <description>
                 <p>Upgraded UI framework to slint 1.17.</p>
