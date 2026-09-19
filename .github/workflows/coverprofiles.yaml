@@ -21,7 +21,7 @@ jobs:
     uses: heathcliff26/ci/.github/workflows/testcover-report.yaml@main
     secrets: inherit
     permissions:
-      contents: read
+      contents: write
     with:
       coverprofile: "target/coverage/lcov.info"
       script: "xvfb-run -a make coverprofile"
