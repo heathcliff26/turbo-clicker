@@ -1,169 +1,179 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
-    <id>io.github.heathcliff26.turbo-clicker</id>
-
-    <name>Turbo Clicker</name>
-    <summary>Graphical auto-clicker app</summary>
-
-    <metadata_license>MIT</metadata_license>
-    <project_license>Apache-2.0</project_license>
-
-    <description>
-        <p>
+  <id>io.github.heathcliff26.turbo-clicker</id>
+  <name>Turbo Clicker</name>
+  <summary>Graphical auto-clicker app</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <description>
+    <p>
             Turbo Clicker is a GUI based auto-clicker for Linux (Wayland). It simulates virtual input via x11/wayland-client.
         </p>
-        <p>
+    <p>
             The user needs to accept remote access permissions for the app.
         </p>
-    </description>
-
-    <url type="homepage">https://github.com/heathcliff26/turbo-clicker</url>
-    <developer id="io.github.heathcliff26">
-        <name>Heathcliff</name>
-    </developer>
-
-    <content_rating type="oars-1.1" />
-
-    <launchable type="desktop-id">io.github.heathcliff26.turbo-clicker.desktop</launchable>
-
-    <branding>
-        <color type="primary" scheme_preference="light">#FFFFFF</color>
-        <color type="primary" scheme_preference="dark">#141414</color>
-    </branding>
-
-    <screenshots>
-        <screenshot type="default">
-            <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.2.0/screenshots/window-dark.png
-            </image>
-            <caption>Main window (Dark Theme)</caption>
-        </screenshot>
-        <screenshot type="default">
-            <image type="source">
-                https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.2.0/screenshots/window-light.png
-            </image>
-            <caption>Main window (Light Theme)</caption>
-        </screenshot>
-    </screenshots>
-
-    <releases>
-        <release version="v0.2.1" date="2026-08-15" type="stable">
-            <description>
-                <p>Small fix for rpm dependency handling.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.2.1</url>
-        </release>
-        <release version="v0.2.0" date="2026-08-09" type="stable">
-            <description>
-                <p>Upgraded UI framework to slint 1.17.</p>
-                <p>Added system tray icon, as well as starting minimized to tray by default.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.2.0</url>
-        </release>
-        <release version="v0.1.5" date="2026-06-01" type="stable">
-            <description>
-                <p>Small maintenance update.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.5</url>
-        </release>
-        <release version="v0.1.4" date="2026-03-27" type="stable">
-            <description>
-                <p>Fixed problem in build CI where resulting binary artifact would not run.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.4</url>
-        </release>
-        <release version="v0.1.3" date="2026-03-01" type="stable">
-            <description>
-                <p>Small maintenance update.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.3</url>
-        </release>
-        <release version="v0.1.2" date="2026-02-01" type="stable">
-            <description>
-                <p>Small maintenance update.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.2</url>
-        </release>
-        <release version="v0.1.1" date="2026-01-01" type="stable">
-            <description>
-                <p>Small maintenance update.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.1</url>
-        </release>
-        <release version="v0.1.0" date="2025-12-17" type="stable">
-            <description>
-                <p>Breaking change: Run app as current user.</p>
-                <p>Use virtual inputs instead of uinput.</p>
-                <p>Add option to trigger autoclick with a global hotkey.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.1.0</url>
-        </release>
-
-        <release version="v0.0.8" date="2025-12-16" type="stable">
-            <description>
-                <p>Fix autoclick not working on Fedora 43.</p>
-                <p>Add new tab to test autoclicks in the app.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.8</url>
-        </release>
-
-        <release version="v0.0.7" date="2025-11-01" type="stable">
-            <description>
-                <p>Update dependencies</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.7</url>
-        </release>
-
-        <release version="v0.0.6" date="2025-10-01" type="stable">
-            <description>
-                <p>Update dependencies</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.6</url>
-        </release>
-
-        <release version="v0.0.5" date="2025-09-01" type="stable">
-            <description>
-                <p>Update dependencies</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.5</url>
-        </release>
-
-        <release version="v0.0.4" date="2025-08-03" type="stable">
-            <description>
-                <p>Redesigned UI to use pages instead of popups.</p>
-                <p>Changed backend to QT6 from winit.</p>
-                <p>Save application state and settings across instances.</p>
-                <p>Fix missing icon in dash.</p>
-                <p>Run app as root instead of changing device permissions.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.4</url>
-        </release>
-
-        <release version="v0.0.3" date="2025-08-01" type="stable">
-            <description>
-                <p>Reduce binary size.</p>
-                <p>Small performance improvement.</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.3</url>
-        </release>
-
-        <release version="v0.0.2" date="2025-07-30" type="stable">
-            <description>
-                <p>Enabled installation as rpm via fedora copr</p>
-                <p>Increased font size to improve readability</p>
-                <p>Added about menu</p>
-                <p>Fixed missing device permissions</p>
-                <p>Made error message for missing device permissions more verbose</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.2</url>
-        </release>
-
-        <release version="v0.0.1" date="2025-07-27" type="stable">
-            <description>
-                <p>Initial release</p>
-            </description>
-            <url type="details">https://github.com/heathcliff26/turbo-clicker/releases/tag/v0.0.1</url>
-        </release>
-    </releases>
-
+  </description>
+  <developer id="io.github.heathcliff26">
+    <name>Heathcliff</name>
+  </developer>
+  <launchable type="desktop-id">io.github.heathcliff26.turbo-clicker.desktop</launchable>
+  <url type="homepage">https://github.com/heathcliff26/turbo-clicker</url>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Main window (Dark Theme)</caption>
+      <image type="source">https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.2.0/screenshots/window-dark.png</image>
+    </screenshot>
+    <screenshot type="default">
+      <caption>Main window (Light Theme)</caption>
+      <image type="source">https://raw.githubusercontent.com/heathcliff26/turbo-clicker/refs/tags/v0.2.0/screenshots/window-light.png</image>
+    </screenshot>
+  </screenshots>
+  <branding>
+    <color type="primary" scheme_preference="light">#FFFFFF</color>
+    <color type="primary" scheme_preference="dark">#141414</color>
+  </branding>
+  <releases>
+    <release type="stable" version="v0.2.2-alpha.0" date="2026-10-04T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>*(container)* [**breaking**] Update image ghcr.io/heathcliff26/rust-qt-builder to v202609090334</li>
+          <li>⚙️ Miscellaneous Tasks:</li>
+          <li>Add new changelog workflow</li>
+          <li>Enforce conventional commits</li>
+          <li>💼 Other:</li>
+          <li>Remove moved builder status badge</li>
+          <li>Fix coverprofiles permissions</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="v0.2.1" date="2026-08-15T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Move to container repo</p>
+        <p>Add note for GNOME dependency</p>
+        <p>Install appindicator deps when needed</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.2.0" date="2026-08-09T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>*(container)* Update image docker.io/library/rust to v1.97.0</li>
+          <li>*(github-release)* Update goreleaser/goreleaser to v2.17.0</li>
+          <li>🐛 Bug Fixes:</li>
+          <li>*(container)* Update image docker.io/library/rust to v1.97.1</li>
+          <li>*(github-release)* Update goreleaser/goreleaser to v2.17.1</li>
+          <li>💼 Other:</li>
+          <li>Fix release workflow using old artifact name</li>
+          <li>Move renovate and Link Check to tekton</li>
+          <li>Remove obsolete Renovate status badge</li>
+          <li>Run cargo upgrade</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="v0.1.5" date="2026-06-01T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>*(github-release)* Update goreleaser/goreleaser to v2.16.0</li>
+          <li>*(container)* Update image docker.io/library/rust to v1.96.0</li>
+          <li>💼 Other:</li>
+          <li>Add make command for installing dependencies</li>
+          <li>Fix permissions for coverprofile workflow</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="v0.1.4" date="2026-03-27T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Fix binary not linked against qt6</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.1.3" date="2026-03-01T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Remove audit workflow</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.1.2" date="2026-02-01T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Remove unneeded prepare step in renovate workflow</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.1.1" date="2026-01-01T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Install dependencies when release crate</p>
+        <p>Exclude test files from coverage</p>
+        <p>Check more often if the autoclicker should be exited</p>
+        <p>Do not actually move mouse</p>
+        <p>Use tempdir library for testing</p>
+        <p>Add workflow to audit dependencies</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.1.0" date="2025-12-17T00:00:00Z">
+      <description>
+        <p>This release updates documentation:</p>
+        <ul>
+          <li>Update docs to reflect changes in behaviour</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="v0.0.8" date="2025-12-16T00:00:00Z">
+      <description>
+        <p>This release updates documentation:</p>
+        <ul>
+          <li>Update screenshots</li>
+          <li>💼 Other:</li>
+          <li>Enable signing artifacts in release workflow</li>
+        </ul>
+      </description>
+    </release>
+    <release type="stable" version="v0.0.5" date="2025-09-01T00:00:00Z">
+      <description>
+        <p>🐛 Bug Fixes:</p>
+        <p>*(deps)* Update cargo</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.0.4" date="2025-08-03T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Fix style to fluent</p>
+        <p>Add step to publish to crates.io</p>
+        <p>Update app to use pages instead of popups and Menu</p>
+        <p>Add settings page with option to enabled dark mode</p>
+        <p>Drop unneeded cargo vendor</p>
+        <p>Increase about slint elements size slightly</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.0.3" date="2025-08-01T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Use atomic bool instead of mutex</p>
+        <p>Fully install app on system</p>
+        <p>Remove leading slash for files</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.0.2" date="2025-07-30T00:00:00Z">
+      <description>
+        <p>💼 Other:</p>
+        <p>Remove unneeded inputs</p>
+        <p>Add display for made with slint logo</p>
+        <p>Additionally force-reload icons</p>
+        <p>Add udev rule for uinput permissions</p>
+        <p>Add instructions for installing rpm</p>
+      </description>
+    </release>
+    <release type="stable" version="v0.0.1" date="2025-07-27T00:00:00Z">
+      <description>
+        <p>⚙️ Miscellaneous Tasks:</p>
+        <p>Trigger on ui or icon changes</p>
+        <p>💼 Other:</p>
+        <p>Add link to latest release for installation instructions</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1"/>
 </component>
