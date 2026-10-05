@@ -70,3 +70,4 @@ jobs:
       cmd: "make release"
       artifact: "dist/*"
       artifact-name: "turbo-clicker"
+      cache: true
