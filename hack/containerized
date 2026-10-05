@@ -7,4 +7,7 @@ base_dir="$(dirname "${BASH_SOURCE[0]}" | xargs realpath | xargs dirname)"
 # renovate: datasource=docker depName=ghcr.io/heathcliff26/rust-qt-builder extractVersion=^(?<version>.*)$
 export BUILDER_VERSION=202609090334
 
-podman run -v "${base_dir}:/app:z" "ghcr.io/heathcliff26/rust-qt-builder:${BUILDER_VERSION}" "$@"
+podman run -t --rm \
+    --name turbo-clicker-builder \
+    -v "${base_dir}:/app:z" \
+    "ghcr.io/heathcliff26/rust-qt-builder:${BUILDER_VERSION}" "$@"

@@ -38,6 +38,38 @@ archives:
     files:
       - strip_parent: true
         src: "packages/*"
+nfpms:
+  - id: linux
+    package_name: "{{ .ProjectName }}"
+    file_name_template: "{{ .PackageName }}-linux-{{ .Arch }}"
+    maintainer: Heathcliff <heathcliff@heathcliff.eu>
+    description: |
+      GUI based auto-clicker for Linux (Wayland).
+      It simulates virtual input via x11/wayland-client.
+      The user needs to accept remote access permissions for the app.
+    license: Apache-2.0
+    homepage: https://github.com/heathcliff26/{{ .ProjectName }}
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
+    contents:
+      - dst: /usr/share/licenses/{{ .PackageName }}
+        type: dir
+      - dst: /usr/share/doc/{{ .PackageName }}
+        type: dir
+      - src: LICENSE
+        dst: /usr/share/licenses/{{ .PackageName }}/LICENSE
+      - src: README.md
+        dst: /usr/share/doc/{{ .PackageName }}/README.md
+      - src: packages/io.github.heathcliff26.{{ .PackageName }}.desktop
+        dst: /usr/share/applications/io.github.heathcliff26.{{ .PackageName }}.desktop
+      - src: packages/io.github.heathcliff26.{{ .PackageName }}.svg
+        dst: /usr/share/icons/hicolor/scalable/apps/io.github.heathcliff26.{{ .PackageName }}.svg
+      - src: io.github.heathcliff26.{{ .PackageName }}.metainfo.xml
+        dst: /usr/share/metainfo/io.github.heathcliff26.{{ .PackageName }}.metainfo.xml
+    rpm:
+      summary: GUI based auto-clicker for Linux
 
 changelog:
   disable: true

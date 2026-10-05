@@ -62,11 +62,11 @@ jobs:
     with:
       cmd: "hack/containerized make validate"
 
-  build-binary:
+  build:
     uses: heathcliff26/ci/.github/workflows/run-script.yaml@main
     permissions:
       contents: read
     with:
       cmd: "make release"
-      artifact: "dist/turbo-clicker_linux-*.tar.gz"
+      artifact: "dist/*"
       artifact-name: "turbo-clicker"

@@ -6,7 +6,7 @@ build:
 
 # Build the binary in release mode and create release bundle
 release:
-	hack/containerized goreleaser release --skip=announce,publish,validate --clean
+	hack/containerized hack/release.sh
 
 # Run cargo test
 test: install-deps
