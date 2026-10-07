@@ -2,23 +2,23 @@ import { Page } from "page.slint";
 import { Button, VerticalBox } from "std-widgets.slint";
 
 export component CounterPage inherits Page {
-    title: "Click Counter";
-
+    title: @tr("Click Counter");
 
     property <int> counter: 0;
     VerticalBox {
         Text {
-            text: "Counter: \{root.counter}";
+            text: @tr("Counter: {}", root.counter);
         }
 
         Button {
-            text: "Click Me";
+            text: @tr("Click Me");
             clicked => {
                 root.counter += 1;
             }
         }
+
         Button {
-            text: "Reset Counter";
+            text: @tr("Reset Counter");
             clicked => {
                 root.counter = 0;
             }

@@ -3,16 +3,16 @@ import { GlobalState } from "../global_state.slint";
 import { Switch, Button } from "std-widgets.slint";
 
 export component SettingsPage inherits Page {
-    title: "Settings";
+    title: @tr("Settings");
     padding: 10px;
     alignment: start;
 
     Switch {
-        text: "Dark Mode";
+        text: @tr("Dark Mode");
         checked <=> GlobalState.dark-mode;
     }
     Button {
-        text: "Configure Hotkey";
+        text: @tr("Configure Hotkey");
         clicked => {
             GlobalState.configure-hotkey();
         }

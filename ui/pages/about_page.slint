@@ -3,7 +3,7 @@ import { Page } from "page.slint";
 import { GlobalState } from "../global_state.slint";
 
 export component AboutPage inherits Page {
-    title: "About";
+    title: @tr("About");
     padding-top: 50px;
 
     Text {
@@ -12,12 +12,12 @@ export component AboutPage inherits Page {
     }
 
     Text {
-        text: "Version: v" + GlobalState.version;
+        text: @tr("Version: v{}", GlobalState.version);
         horizontal-alignment: center;
     }
 
     Text {
-        text: "Commit: " + GlobalState.commit;
+        text: @tr("Commit: {}", GlobalState.commit);
         horizontal-alignment: center;
     }
 
