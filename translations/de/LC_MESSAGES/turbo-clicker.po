@@ -1,0 +1,118 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2026-10-07 18:54+0000\n"
+"PO-Revision-Date: 2026-10-07 18:54+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ui/pages/counter_page.slint:5
+msgctxt "CounterPage"
+msgid "Click Counter"
+msgstr "Klickzähler"
+
+#: ui/pages/counter_page.slint:10
+msgctxt "CounterPage"
+msgid "Counter: {}"
+msgstr "Zähler: {}"
+
+#: ui/pages/counter_page.slint:14
+msgctxt "CounterPage"
+msgid "Click Me"
+msgstr "Klick mich"
+
+#: ui/pages/counter_page.slint:21
+msgctxt "CounterPage"
+msgid "Reset Counter"
+msgstr "Zähler zurücksetzen"
+
+#: ui/pages/main_page.slint:26
+msgctxt "MainPage"
+msgid "App"
+msgstr "App"
+
+#: ui/pages/main_page.slint:30
+msgctxt "MainPage"
+msgid "Delay between clicks (ms):"
+msgstr "Verzögerung zwischen Klicks (ms):"
+
+#: ui/pages/main_page.slint:59
+msgctxt "MainPage"
+msgid "Auto-click Duration (s): "
+msgstr "Laufzeit des Klickers (s): "
+
+#: ui/pages/main_page.slint:67
+msgctxt "MainPage"
+msgid "Auto-click start delay (s): "
+msgstr "Startverzögerung des Klickers (s): "
+
+#: ui/pages/main_page.slint:78
+msgctxt "MainPage"
+msgid "Start Auto-click"
+msgstr "Klicker starten"
+
+#: ui/pages/settings_page.slint:6
+msgctxt "SettingsPage"
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: ui/pages/settings_page.slint:11
+msgctxt "SettingsPage"
+msgid "Dark Mode"
+msgstr "Dunkelmodus"
+
+#: ui/pages/settings_page.slint:15
+msgctxt "SettingsPage"
+msgid "Configure Hotkey"
+msgstr "Hotkey konfigurieren"
+
+#: ui/pages/about_page.slint:6
+msgctxt "AboutPage"
+msgid "About"
+msgstr "Über"
+
+#: ui/pages/about_page.slint:15
+msgctxt "AboutPage"
+msgid "Version: v{}"
+msgstr "Version: v{}"
+
+#: ui/pages/about_page.slint:20
+msgctxt "AboutPage"
+msgid "Commit: {}"
+msgstr "Commit: {}"
+
+#: ui/global_state.slint:17
+msgctxt "GlobalState"
+msgid "unknown"
+msgstr "unbekannt"
+
+#: ui/app-window.slint:25
+msgctxt "AppWindow"
+msgid "App"
+msgstr "App"
+
+#: ui/app-window.slint:25
+msgctxt "AppWindow"
+msgid "Click Counter"
+msgstr "Klickzähler"
+
+#: ui/app-window.slint:25
+msgctxt "AppWindow"
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: ui/app-window.slint:25
+msgctxt "AppWindow"
+msgid "About"
+msgstr "Über"
+
+#: ui/tray.slint:14
+msgctxt "TrayIcon"
+msgid "Quit"
+msgstr "Beenden"

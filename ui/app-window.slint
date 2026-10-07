@@ -1,10 +1,14 @@
 import { GlobalState } from "global_state.slint";
-import { MainPage, AboutPage, SettingsPage, CounterPage } from "pages/pages.slint";
+import {
+    MainPage,
+    AboutPage,
+    SettingsPage,
+    CounterPage,
+} from "pages/pages.slint";
 import { NavBar } from "nav-bar.slint";
 import { TrayIcon } from "tray.slint";
 
 export { GlobalState, TrayIcon }
-
 export component AppWindow inherits Window {
     title: "Turbo Clicker";
     icon: @image-url("../packages/io.github.heathcliff26.turbo-clicker.svg");
@@ -18,7 +22,7 @@ export component AppWindow inherits Window {
 
     VerticalLayout {
         nav-bar := NavBar {
-            model: ["App", "Click Counter", "Settings", "About"];
+            model: [@tr("App"), @tr("Click Counter"), @tr("Settings"), @tr("About")];
         }
 
         if(nav-bar.current-item == 0): MainPage { }

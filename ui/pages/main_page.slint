@@ -23,11 +23,11 @@ component OptionalIntInput inherits Rectangle {
 }
 
 export component MainPage inherits Page {
-    title: "App";
+    title: @tr("App");
 
     HorizontalBox {
         Text {
-            text: "Delay between clicks (ms):";
+            text: @tr("Delay between clicks (ms):");
             vertical-alignment: center;
         }
 
@@ -56,7 +56,7 @@ export component MainPage inherits Page {
     }
 
     OptionalIntInput {
-        label: "Auto-click Duration (s): ";
+        label: @tr("Auto-click Duration (s): ");
         value <=> GlobalState.duration;
         enabled <=> GlobalState.use-duration;
         minimum: 1;
@@ -64,7 +64,7 @@ export component MainPage inherits Page {
     }
 
     OptionalIntInput {
-        label: "Auto-click start delay (s): ";
+        label: @tr("Auto-click start delay (s): ");
         value <=> GlobalState.start-delay;
         enabled <=> GlobalState.use-start-delay;
         minimum: 1;
@@ -75,7 +75,7 @@ export component MainPage inherits Page {
     Rectangle { }
 
     Button {
-        text: "Start Auto-click";
+        text: @tr("Start Auto-click");
         clicked => {
             GlobalState.start-auto-click();
         }

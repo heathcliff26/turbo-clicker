@@ -14,7 +14,7 @@ export global GlobalState {
 
     // Application version information. Needs to be populated from backend.
     in-out property <string> version: "-";
-    in-out property <string> commit: "unknown";
+    in-out property <string> commit: @tr("unknown");
 
     callback start-auto-click();
     callback settings-changed();
