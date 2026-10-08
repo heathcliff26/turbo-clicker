@@ -1,6 +1,6 @@
 import { Page } from "page.slint";
 import { GlobalState } from "../global_state.slint";
-import { Switch, Button } from "std-widgets.slint";
+import { Switch, Button, VerticalBox, ComboBox } from "std-widgets.slint";
 
 export component SettingsPage inherits Page {
     title: @tr("Settings");
@@ -15,6 +15,21 @@ export component SettingsPage inherits Page {
         text: @tr("Configure Hotkey");
         clicked => {
             GlobalState.configure-hotkey();
+        }
+    }
+    VerticalBox {
+        Text {
+            text: @tr("Select Language:");
+        }
+
+        ComboBox {
+            // This list needs to be kept in sync with the backend
+            model: [@tr("English"), @tr("German")];
+            current-index: GlobalState.selected-language;
+            selected(val) => {
+                GlobalState.selected-language = self.current-index;
+                GlobalState.change-language();
+            }
         }
     }
 }

@@ -52,6 +52,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     register_start_auto_click(&app, autoclicker, autoclicker_delay.clone());
     register_settings_changed(&app, autoclicker_delay);
     register_configure_hotkey(&app, global_hotkey);
+    register_change_language(&app);
 
     if let Err(e) = run_app_minimized_to_tray(app.as_weak()) {
         eprintln!("Failed to run app minimized to tray: {e}");
@@ -93,9 +94,11 @@ fn init_global_state(app: &AppWindow) {
             None
         }
     };
-    if let Some(state) = state {
-        state.update_app(app);
-    }
+    let state = state.unwrap_or_default();
+    state.update_app(app);
+
+    let lang = state::get_language_from_app(app);
+    slint::select_bundled_translation(&lang).expect("Should set language");
 }
 
 /// Save the global state to file.
@@ -165,6 +168,19 @@ fn register_configure_hotkey(app: &AppWindow, global_hotkey: hotkey::HotkeyPorta
             tokio::spawn(async move {
                 global_hotkey.configure_hotkey().await;
             });
+        }
+    });
+}
+
+/// Register the callback for changing the language.
+fn register_change_language(app: &AppWindow) {
+    let app_weak = app.as_weak();
+
+    app.global::<GlobalState>().on_change_language({
+        move || {
+            let app = app_weak.unwrap();
+            let lang = state::get_language_from_app(&app);
+            slint::select_bundled_translation(&lang).expect("Should set language");
         }
     });
 }
