@@ -1,6 +1,8 @@
 import { Palette } from "std-widgets.slint";
 
 export global GlobalState {
+    // Note: Default values are set in the backend.
+
     // The delay between clicks in milliseconds.
     in-out property <int> delay: 20;
     // The delay in seconds before starting the auto-click.
@@ -11,6 +13,7 @@ export global GlobalState {
     in-out property <bool> use-duration: true;
 
     in-out property <bool> dark-mode: true;
+    in-out property <int> selected-language: 0;
 
     // Application version information. Needs to be populated from backend.
     in-out property <string> version: "-";
@@ -19,6 +22,7 @@ export global GlobalState {
     callback start-auto-click();
     callback settings-changed();
     callback configure-hotkey();
+    callback change-language();
 
     public function setDelay(value: int) {
         if (value < 20) {

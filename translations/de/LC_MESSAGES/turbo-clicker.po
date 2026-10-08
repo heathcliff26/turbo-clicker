@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-10-07 18:54+0000\n"
+"POT-Creation-Date: 2026-10-08 12:56+0000\n"
 "PO-Revision-Date: 2026-10-07 18:54+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -11,6 +11,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ui/pages/about_page.slint:6
+msgctxt "AboutPage"
+msgid "About"
+msgstr "Über"
+
+#: ui/pages/about_page.slint:15
+msgctxt "AboutPage"
+msgid "Version: v{}"
+msgstr "Version: v{}"
+
+#: ui/pages/about_page.slint:20
+msgctxt "AboutPage"
+msgid "Commit: {}"
+msgstr "Commit: {}"
 
 #: ui/pages/counter_page.slint:5
 msgctxt "CounterPage"
@@ -72,25 +87,22 @@ msgctxt "SettingsPage"
 msgid "Configure Hotkey"
 msgstr "Hotkey konfigurieren"
 
-#: ui/pages/about_page.slint:6
-msgctxt "AboutPage"
-msgid "About"
-msgstr "Über"
+#: ui/pages/settings_page.slint:22
+msgctxt "SettingsPage"
+msgid "Select Language:"
+msgstr "Sprache auswählen:"
 
-#: ui/pages/about_page.slint:15
-msgctxt "AboutPage"
-msgid "Version: v{}"
-msgstr "Version: v{}"
+#. This list needs to be kept in sync with the backend
+#: ui/pages/settings_page.slint:27
+msgctxt "SettingsPage"
+msgid "English"
+msgstr "Englisch"
 
-#: ui/pages/about_page.slint:20
-msgctxt "AboutPage"
-msgid "Commit: {}"
-msgstr "Commit: {}"
-
-#: ui/global_state.slint:17
-msgctxt "GlobalState"
-msgid "unknown"
-msgstr "unbekannt"
+#. This list needs to be kept in sync with the backend
+#: ui/pages/settings_page.slint:27
+msgctxt "SettingsPage"
+msgid "German"
+msgstr "Deutsch"
 
 #: ui/app-window.slint:25
 msgctxt "AppWindow"
@@ -111,6 +123,11 @@ msgstr "Einstellungen"
 msgctxt "AppWindow"
 msgid "About"
 msgstr "Über"
+
+#: ui/global_state.slint:20
+msgctxt "GlobalState"
+msgid "unknown"
+msgstr "unbekannt"
 
 #: ui/tray.slint:14
 msgctxt "TrayIcon"

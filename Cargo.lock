@@ -4715,6 +4715,7 @@ dependencies = [
  "serial_test",
  "slint",
  "slint-build",
+ "sys-locale",
  "tempfile",
  "tokio",
 ]

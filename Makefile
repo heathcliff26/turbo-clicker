@@ -49,6 +49,11 @@ packit-mock:
 	packit build in-mock --resultdir tmp
 	rm *.src.rpm
 
+# Extract and update the translation files from the ui.
+# Does not provide the actual translation
+update-translations:
+	hack/update-translations.sh
+
 # Clean up generated files
 clean:
 	hack/clean.sh

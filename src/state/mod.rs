@@ -10,6 +10,8 @@ pub const XDG_STATE_HOME_DIR: &str = "io.github.heathcliff26.turbo-clicker";
 pub const XDG_STATE_HOME: &str = "XDG_STATE_HOME";
 pub const XDG_STATE_HOME_DEFAULT: &str = ".local/state";
 pub const HOME: &str = "HOME";
+// This list needs to be kept in sync with the frontend
+const LANGUAGES: &[&str] = &["en", "de"];
 
 #[cfg(test)]
 mod test;
@@ -24,6 +26,8 @@ pub struct State {
     pub use_start_delay: bool,
     pub use_duration: bool,
     pub dark_mode: bool,
+    #[serde(default)]
+    pub language: String,
 }
 
 impl State {
@@ -38,6 +42,7 @@ impl State {
             use_start_delay: global_state.get_use_start_delay(),
             use_duration: global_state.get_use_duration(),
             dark_mode: global_state.get_dark_mode(),
+            language: get_language_from_index(global_state.get_selected_language()),
         }
     }
 
@@ -69,6 +74,9 @@ impl State {
         global_state.set_use_start_delay(self.use_start_delay);
         global_state.set_use_duration(self.use_duration);
         global_state.set_dark_mode(self.dark_mode);
+
+        let lang = get_language(&self.language);
+        global_state.set_selected_language(get_language_index(&lang));
     }
 
     /// Save the state to user specific state file.
@@ -78,6 +86,20 @@ impl State {
         let file = fs::File::create(path)?;
         serde_json::to_writer(file, self)?;
         Ok(())
+    }
+}
+
+impl Default for State {
+    fn default() -> Self {
+        Self {
+            delay: 20,
+            start_delay: 1,
+            duration: 1,
+            use_start_delay: true,
+            use_duration: true,
+            dark_mode: true,
+            language: "".to_string(),
+        }
     }
 }
 
@@ -117,4 +139,37 @@ fn create_parent_folder_if_not_exists(path: &str) -> Result<(), Box<dyn Error>> 
         };
     }
     Ok(())
+}
+
+pub fn get_language_from_app(app: &AppWindow) -> String {
+    let global_state = app.global::<GlobalState>();
+
+    let i = global_state.get_selected_language();
+    get_language_from_index(i)
+}
+
+fn get_language(lang: &str) -> String {
+    if !lang.is_empty() {
+        return lang.to_string();
+    }
+
+    let lang = sys_locale::get_locale().unwrap_or_default();
+    lang.split(&['-', '_'][..])
+        .next()
+        .unwrap_or_default()
+        .to_string()
+}
+
+fn get_language_from_index(i: i32) -> String {
+    if i < 0 || i >= LANGUAGES.len() as i32 {
+        return LANGUAGES[0].to_string();
+    }
+    LANGUAGES[i as usize].to_string()
+}
+
+fn get_language_index(lang: &str) -> i32 {
+    LANGUAGES
+        .iter()
+        .position(|&x| x == lang)
+        .unwrap_or_default() as i32
 }

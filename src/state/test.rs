@@ -10,6 +10,7 @@ fn state_from_app() {
         use_start_delay: false,
         use_duration: true,
         dark_mode: true,
+        language: "de".to_string(),
     };
 
     i_slint_backend_testing::init_no_event_loop();
@@ -21,6 +22,7 @@ fn state_from_app() {
     global_state.set_use_start_delay(expected_state.use_start_delay);
     global_state.set_use_duration(expected_state.use_duration);
     global_state.set_dark_mode(expected_state.dark_mode);
+    global_state.set_selected_language(1);
 
     assert_eq!(
         expected_state,
@@ -38,6 +40,7 @@ fn state_update_app() {
         use_start_delay: true,
         use_duration: false,
         dark_mode: false,
+        language: "de".to_string(),
     };
 
     i_slint_backend_testing::init_no_event_loop();
@@ -75,6 +78,11 @@ fn state_update_app() {
         global_state.get_dark_mode(),
         "GlobalState dark_mode should match State dark_mode"
     );
+    assert_eq!(
+        1,
+        global_state.get_selected_language(),
+        "GlobalState language should match State language"
+    )
 }
 
 #[test]
@@ -112,6 +120,7 @@ fn state_from_file() {
         use_start_delay: true,
         use_duration: true,
         dark_mode: false,
+        language: "de".to_string(),
     };
 
     assert_eq!(
@@ -134,6 +143,7 @@ fn state_save_to_file() {
         use_start_delay: true,
         use_duration: true,
         dark_mode: true,
+        language: "en".to_string(),
     };
 
     let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
@@ -217,4 +227,55 @@ fn get_state_file_path_home_unset() {
     unsafe {
         env::set_var(HOME, home_dir);
     }
+}
+
+#[test]
+fn default_state() {
+    i_slint_backend_testing::init_no_event_loop();
+    let app = AppWindow::new().expect("Should create AppWindow");
+
+    let app_state = State::from_app(&app);
+    let mut default_state = State::default();
+
+    assert!(
+        default_state.language.is_empty(),
+        "Default language should be empty"
+    );
+    default_state.language = app_state.language.clone();
+
+    assert_eq!(
+        default_state, app_state,
+        "State from new app should match default state"
+    );
+}
+
+#[test]
+fn get_language_from_parameter() {
+    assert_eq!(
+        "test".to_string(),
+        get_language("test"),
+        "Should return the given language"
+    )
+}
+
+#[test]
+fn get_language_no_input() {
+    assert!(
+        !get_language("").is_empty(),
+        "Should read an language from system locale"
+    )
+}
+
+#[test]
+fn get_language_from_index_out_of_bounds() {
+    assert_eq!(
+        LANGUAGES[0].to_string(),
+        get_language_from_index(-1),
+        "Should return the first language"
+    );
+    assert_eq!(
+        LANGUAGES[0].to_string(),
+        get_language_from_index(LANGUAGES.len() as i32),
+        "Should return the first language"
+    );
 }
