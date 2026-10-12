@@ -1,15 +1,21 @@
 # Changelog
 
-Version v0.2.2-alpha.0
+Version v0.3.0
 --------------------
-Released: 2026-10-04
+Released: 2026-10-12
 
 🚀 Features:
 - *(container)* [**breaking**] Update image ghcr.io/heathcliff26/rust-qt-builder to v202609090334
+- Use goreleaser to build rpm package
+- Add german translation to ui
+- Add option to select language
 
 ⚙️ Miscellaneous Tasks:
 - Add new changelog workflow
 - Enforce conventional commits
+- *(release)* Bump crate version to v0.2.2-alpha.0
+- Use cache for builds
+- *(builder)* Update image ghcr.io/heathcliff26/rust-qt-builder to v202610090432
 
 💼 Other:
 - Remove moved builder status badge

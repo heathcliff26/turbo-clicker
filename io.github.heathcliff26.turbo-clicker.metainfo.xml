@@ -33,14 +33,20 @@
     <color type="primary" scheme_preference="dark">#141414</color>
   </branding>
   <releases>
-    <release type="stable" version="v0.2.2-alpha.0" date="2026-10-04T00:00:00Z">
+    <release type="stable" version="v0.3.0" date="2026-10-12T00:00:00Z">
       <description>
         <p>This release adds the following features:</p>
         <ul>
           <li>*(container)* [**breaking**] Update image ghcr.io/heathcliff26/rust-qt-builder to v202609090334</li>
+          <li>Use goreleaser to build rpm package</li>
+          <li>Add german translation to ui</li>
+          <li>Add option to select language</li>
           <li>⚙️ Miscellaneous Tasks:</li>
           <li>Add new changelog workflow</li>
           <li>Enforce conventional commits</li>
+          <li>*(release)* Bump crate version to v0.2.2-alpha.0</li>
+          <li>Use cache for builds</li>
+          <li>*(builder)* Update image ghcr.io/heathcliff26/rust-qt-builder to v202610090432</li>
           <li>💼 Other:</li>
           <li>Remove moved builder status badge</li>
           <li>Fix coverprofiles permissions</li>
