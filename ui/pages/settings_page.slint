@@ -25,11 +25,7 @@ export component SettingsPage inherits Page {
         ComboBox {
             // This list needs to be kept in sync with the backend
             model: [@tr("English"), @tr("German")];
-            current-index: GlobalState.selected-language;
-            selected(val) => {
-                GlobalState.selected-language = self.current-index;
-                GlobalState.change-language();
-            }
+            current-index <=> GlobalState.selected-language;
         }
     }
 }
