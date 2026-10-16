@@ -49,9 +49,9 @@ serial_test = "4.0.1"
 tempfile = "3.27.0"
 
 [features]
-default = ["enigo-wayland"]
-enigo-wayland = ["enigo/wayland"]
-enigo-libei = ["enigo/libei_tokio"]
+default = ["wayland"]
+wayland = ["enigo/wayland"]
+libei = ["enigo/libei_tokio"]
 
 [profile.release]
 strip = "symbols"
