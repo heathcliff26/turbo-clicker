@@ -21,7 +21,7 @@ ashpd = { version = "0.13.13", default-features = false, features = [
     "tokio",
     "global_shortcuts",
 ] }
-enigo = { version = "0.6.1", features = ["wayland"] }
+enigo = { version = "0.6.1" }
 futures-util = "0.3.33"
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.151"
@@ -47,6 +47,11 @@ slint-build = "1.17.1"
 i-slint-backend-testing = "1.17.1"
 serial_test = "4.0.1"
 tempfile = "3.27.0"
+
+[features]
+default = ["enigo-wayland"]
+enigo-wayland = ["enigo/wayland"]
+enigo-libei = ["enigo/libei_tokio"]
 
 [profile.release]
 strip = "symbols"
