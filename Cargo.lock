@@ -4763,7 +4763,7 @@ dependencies = [
 
 [[package]]
 name = "turbo-clicker"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "ashpd 0.13.13",
  "enigo",

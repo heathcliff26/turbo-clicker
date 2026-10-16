@@ -1,5 +1,23 @@
 # Changelog
 
+Version v0.4.0
+--------------------
+Released: 2026-10-16
+
+🚀 Features:
+- Make minimized start configurable
+- Enable libei support for flatpak
+
+🐛 Bug Fixes:
+- Save settings when changing language
+- *(ci)* Install grcov from upstream release
+
+🚜 Refactor:
+- Drop prefix from feature names
+
+⚙️ Miscellaneous Tasks:
+- Synced file(s) with heathcliff26/ci
+
 Version v0.3.0
 --------------------
 Released: 2026-10-12
@@ -16,6 +34,7 @@ Released: 2026-10-12
 - *(release)* Bump crate version to v0.2.2-alpha.0
 - Use cache for builds
 - *(builder)* Update image ghcr.io/heathcliff26/rust-qt-builder to v202610090432
+- *(release)* Bump crate version to v0.3.0
 
 💼 Other:
 - Remove moved builder status badge

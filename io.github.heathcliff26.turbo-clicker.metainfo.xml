@@ -33,6 +33,22 @@
     <color type="primary" scheme_preference="dark">#141414</color>
   </branding>
   <releases>
+    <release type="stable" version="v0.4.0" date="2026-10-16T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Make minimized start configurable</li>
+          <li>Enable libei support for flatpak</li>
+          <li>🐛 Bug Fixes:</li>
+          <li>Save settings when changing language</li>
+          <li>*(ci)* Install grcov from upstream release</li>
+          <li>🚜 Refactor:</li>
+          <li>Drop prefix from feature names</li>
+          <li>⚙️ Miscellaneous Tasks:</li>
+          <li>Synced file(s) with heathcliff26/ci</li>
+        </ul>
+      </description>
+    </release>
     <release type="stable" version="v0.3.0" date="2026-10-12T00:00:00Z">
       <description>
         <p>This release adds the following features:</p>
@@ -47,6 +63,7 @@
           <li>*(release)* Bump crate version to v0.2.2-alpha.0</li>
           <li>Use cache for builds</li>
           <li>*(builder)* Update image ghcr.io/heathcliff26/rust-qt-builder to v202610090432</li>
+          <li>*(release)* Bump crate version to v0.3.0</li>
           <li>💼 Other:</li>
           <li>Remove moved builder status badge</li>
           <li>Fix coverprofiles permissions</li>
