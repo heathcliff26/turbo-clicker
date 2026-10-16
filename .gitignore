@@ -3,6 +3,7 @@
 
 # Release build output
 /dist
+/bin
 
 # Test coverage report
 /*.profraw
