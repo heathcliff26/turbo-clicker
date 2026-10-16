@@ -10,6 +10,7 @@ fn state_from_app() {
         use_start_delay: false,
         use_duration: true,
         dark_mode: true,
+        minimize_to_tray: false,
         language: "de".to_string(),
     };
 
@@ -22,6 +23,7 @@ fn state_from_app() {
     global_state.set_use_start_delay(expected_state.use_start_delay);
     global_state.set_use_duration(expected_state.use_duration);
     global_state.set_dark_mode(expected_state.dark_mode);
+    global_state.set_minimize_to_tray(expected_state.minimize_to_tray);
     global_state.set_selected_language(1);
 
     assert_eq!(
@@ -40,6 +42,7 @@ fn state_update_app() {
         use_start_delay: true,
         use_duration: false,
         dark_mode: false,
+        minimize_to_tray: true,
         language: "de".to_string(),
     };
 
@@ -77,6 +80,11 @@ fn state_update_app() {
         state.dark_mode,
         global_state.get_dark_mode(),
         "GlobalState dark_mode should match State dark_mode"
+    );
+    assert_eq!(
+        state.minimize_to_tray,
+        global_state.get_minimize_to_tray(),
+        "GlobalState minimize_to_tray should match State minimize_to_tray"
     );
     assert_eq!(
         1,
@@ -120,6 +128,7 @@ fn state_from_file() {
         use_start_delay: true,
         use_duration: true,
         dark_mode: false,
+        minimize_to_tray: false,
         language: "de".to_string(),
     };
 
@@ -143,6 +152,7 @@ fn state_save_to_file() {
         use_start_delay: true,
         use_duration: true,
         dark_mode: true,
+        minimize_to_tray: true,
         language: "en".to_string(),
     };
 

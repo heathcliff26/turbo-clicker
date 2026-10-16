@@ -17,7 +17,7 @@ find ui/ -name \*.slint | xargs slint-tr-extractor -o "${pot_file}"
 for lang in "en" "de"; do
     echo "Updating ${lang} translations"
     msgmerge -U --lang="${lang}" "${translations_dir}/${lang}/LC_MESSAGES/${app_name}.po" "${pot_file}"
-    rm "${translations_dir}/${lang}/LC_MESSAGES/${app_name}.po~"
+    rm -f "${translations_dir}/${lang}/LC_MESSAGES/${app_name}.po~"
 done
 
 rm "${pot_file}"

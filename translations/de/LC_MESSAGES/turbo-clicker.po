@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-10-08 12:56+0000\n"
+"POT-Creation-Date: 2026-10-16 12:05+0000\n"
 "PO-Revision-Date: 2026-10-07 18:54+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -84,22 +84,27 @@ msgstr "Dunkelmodus"
 
 #: ui/pages/settings_page.slint:15
 msgctxt "SettingsPage"
+msgid "Start minimized"
+msgstr "Minimiert starten"
+
+#: ui/pages/settings_page.slint:19
+msgctxt "SettingsPage"
 msgid "Configure Hotkey"
 msgstr "Hotkey konfigurieren"
 
-#: ui/pages/settings_page.slint:22
+#: ui/pages/settings_page.slint:26
 msgctxt "SettingsPage"
 msgid "Select Language:"
 msgstr "Sprache auswählen:"
 
 #. This list needs to be kept in sync with the backend
-#: ui/pages/settings_page.slint:27
+#: ui/pages/settings_page.slint:31
 msgctxt "SettingsPage"
 msgid "English"
 msgstr "Englisch"
 
 #. This list needs to be kept in sync with the backend
-#: ui/pages/settings_page.slint:27
+#: ui/pages/settings_page.slint:31
 msgctxt "SettingsPage"
 msgid "German"
 msgstr "Deutsch"
@@ -124,12 +129,12 @@ msgctxt "AppWindow"
 msgid "About"
 msgstr "Über"
 
-#: ui/global_state.slint:20
-msgctxt "GlobalState"
-msgid "unknown"
-msgstr "unbekannt"
-
 #: ui/tray.slint:14
 msgctxt "TrayIcon"
 msgid "Quit"
 msgstr "Beenden"
+
+#: ui/global_state.slint:21
+msgctxt "GlobalState"
+msgid "unknown"
+msgstr "unbekannt"
