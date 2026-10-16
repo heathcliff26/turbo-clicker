@@ -13,6 +13,7 @@ export global GlobalState {
     in-out property <bool> use-duration: true;
 
     in-out property <bool> dark-mode: true;
+    in-out property <bool> minimize-to-tray: false;
     in-out property <int> selected-language: 0;
 
     // Application version information. Needs to be populated from backend.
@@ -41,6 +42,10 @@ export global GlobalState {
 
     changed dark-mode => {
         setColorScheme();
+        settings-changed();
+    }
+
+    changed minimize-to-tray => {
         settings-changed();
     }
 

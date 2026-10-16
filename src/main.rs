@@ -67,8 +67,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
 /// Attempt to initialize the tray icon and run the app. Returns an error if the tray icon could not be initialized.
 fn run_app_minimized_to_tray(app: slint::Weak<AppWindow>) -> Result<(), slint::PlatformError> {
     let tray = TrayIcon::new()?;
+    let app_clone = app.clone();
     tray.on_toggle_window(move || {
-        let Some(app) = app.upgrade() else {
+        let Some(app) = app_clone.upgrade() else {
             return;
         };
         if app.window().is_visible() {
@@ -81,6 +82,11 @@ fn run_app_minimized_to_tray(app: slint::Weak<AppWindow>) -> Result<(), slint::P
     tray.on_quit(|| slint::quit_event_loop().unwrap());
 
     tray.show()?;
+    if let Some(app) = app.upgrade()
+        && !app.global::<GlobalState>().get_minimize_to_tray()
+    {
+        app.show()?;
+    }
     slint::run_event_loop()?;
     Ok(())
 }

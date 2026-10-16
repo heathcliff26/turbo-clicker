@@ -11,6 +11,10 @@ export component SettingsPage inherits Page {
         text: @tr("Dark Mode");
         checked <=> GlobalState.dark-mode;
     }
+    Switch {
+        text: @tr("Start minimized");
+        checked <=> GlobalState.minimize-to-tray;
+    }
     Button {
         text: @tr("Configure Hotkey");
         clicked => {

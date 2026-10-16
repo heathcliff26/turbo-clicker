@@ -27,6 +27,8 @@ pub struct State {
     pub use_duration: bool,
     pub dark_mode: bool,
     #[serde(default)]
+    pub minimize_to_tray: bool,
+    #[serde(default)]
     pub language: String,
 }
 
@@ -42,6 +44,7 @@ impl State {
             use_start_delay: global_state.get_use_start_delay(),
             use_duration: global_state.get_use_duration(),
             dark_mode: global_state.get_dark_mode(),
+            minimize_to_tray: global_state.get_minimize_to_tray(),
             language: get_language_from_index(global_state.get_selected_language()),
         }
     }
@@ -74,6 +77,7 @@ impl State {
         global_state.set_use_start_delay(self.use_start_delay);
         global_state.set_use_duration(self.use_duration);
         global_state.set_dark_mode(self.dark_mode);
+        global_state.set_minimize_to_tray(self.minimize_to_tray);
 
         let lang = get_language(&self.language);
         global_state.set_selected_language(get_language_index(&lang));
@@ -98,6 +102,7 @@ impl Default for State {
             use_start_delay: true,
             use_duration: true,
             dark_mode: true,
+            minimize_to_tray: false,
             language: "".to_string(),
         }
     }
