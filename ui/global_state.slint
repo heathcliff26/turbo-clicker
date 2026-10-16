@@ -43,4 +43,9 @@ export global GlobalState {
         setColorScheme();
         settings-changed();
     }
+
+    changed selected-language => {
+        change-language();
+        settings-changed();
+    }
 }
