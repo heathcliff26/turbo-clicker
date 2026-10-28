@@ -8,6 +8,7 @@ use std::sync::{Arc, atomic::AtomicU64, atomic::Ordering};
 
 mod autoclicker;
 mod hotkey;
+mod instance;
 mod state;
 
 #[cfg(test)]
@@ -22,6 +23,12 @@ slint::include_modules!();
 // Need 2 threads here, one will be blocked by the Slint event loop.
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
 async fn main() -> Result<(), Box<dyn Error>> {
+    let instance = instance::Instance::init(APP_ID)?;
+    if !instance.is_primary() {
+        println!("There is already an instance of this app running, exiting...");
+        return Ok(());
+    }
+
     let autoclicker = match autoclicker::Autoclicker::new() {
         Ok(ac) => ac,
         Err(e) => {
