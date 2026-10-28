@@ -23,8 +23,9 @@ slint::include_modules!();
 // Need 2 threads here, one will be blocked by the Slint event loop.
 #[tokio::main(flavor = "multi_thread", worker_threads = 2)]
 async fn main() -> Result<(), Box<dyn Error>> {
-    let instance = instance::Instance::init(APP_ID)?;
+    let mut instance = instance::Instance::init(APP_ID)?;
     if !instance.is_primary() {
+        instance.send("show").await?;
         println!("There is already an instance of this app running, exiting...");
         return Ok(());
     }
@@ -55,6 +56,26 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     let global_hotkey = hotkey::HotkeyPortal::register().await?;
     autoclicker.trigger_on_hotkey(global_hotkey.clone(), Arc::clone(&autoclicker_delay));
+
+    let app_weak = app.as_weak();
+    instance.listen(move |msg| {
+        if msg != "show" {
+            println!("Received unknown message: {msg}");
+            return;
+        }
+
+        let app_weak = app_weak.clone();
+        if let Err(e) = slint::invoke_from_event_loop(move || {
+            let Some(app) = app_weak.upgrade() else {
+                return;
+            };
+            if let Err(e) = app.show() {
+                eprintln!("Failed to show window: {e}");
+            }
+        }) {
+            eprintln!("Failed to show window: {e}");
+        }
+    });
 
     register_start_auto_click(&app, autoclicker, autoclicker_delay.clone());
     register_settings_changed(&app, autoclicker_delay);
