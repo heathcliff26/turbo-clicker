@@ -75,7 +75,7 @@ impl Instance {
         };
         let task = tokio::spawn(async move {
             while let Ok((stream, _)) = listener.accept().await {
-                let mut buf = Vec::with_capacity(4096);
+                let mut buf = [0; 4096];
                 let callback = callback.clone();
                 tokio::spawn(async move {
                     loop {
@@ -83,7 +83,7 @@ impl Instance {
                             eprintln!("Failed to read from socket: {e}");
                             continue;
                         }
-                        match stream.try_read_buf(&mut buf) {
+                        match stream.try_read(&mut buf) {
                             Ok(0) => break,
                             Ok(n) => {
                                 callback(&String::from_utf8_lossy(&buf[..n]));
