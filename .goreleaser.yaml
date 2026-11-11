@@ -68,6 +68,16 @@ nfpms:
         dst: /usr/share/icons/hicolor/scalable/apps/io.github.heathcliff26.{{ .PackageName }}.svg
       - src: io.github.heathcliff26.{{ .PackageName }}.metainfo.xml
         dst: /usr/share/metainfo/io.github.heathcliff26.{{ .PackageName }}.metainfo.xml
+    overrides:
+      rpm:
+        dependencies:
+          - fontconfig
+          - glibc
+          - libgcc
+          - libstdc++
+          - libxkbcommon
+          - qt6-qtbase
+          - qt6-qtbase-gui
     rpm:
       summary: GUI based auto-clicker for Linux
 
