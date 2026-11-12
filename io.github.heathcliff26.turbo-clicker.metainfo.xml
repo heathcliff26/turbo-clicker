@@ -33,6 +33,23 @@
     <color type="primary" scheme_preference="dark">#141414</color>
   </branding>
   <releases>
+    <release type="stable" version="v0.5.0" date="2026-11-12T00:00:00Z">
+      <description>
+        <p>This release adds the following features:</p>
+        <ul>
+          <li>Ensure only single instance of app runs at once</li>
+          <li>Show running instance when starting 2nd one</li>
+          <li>🐛 Bug Fixes:</li>
+          <li>Add library dependencies to rpm</li>
+          <li>*(deps)* Update cargo</li>
+          <li>⚙️ Miscellaneous Tasks:</li>
+          <li>Synced file(s) with heathcliff26/ci</li>
+          <li>Synced file(s) with heathcliff26/ci</li>
+          <li>*(ci)* Remove gemfury job</li>
+          <li>*(builder)* Update image rust-qt-builder to v202611110607</li>
+        </ul>
+      </description>
+    </release>
     <release type="stable" version="v0.4.0" date="2026-10-16T00:00:00Z">
       <description>
         <p>This release adds the following features:</p>
@@ -46,6 +63,7 @@
           <li>Drop prefix from feature names</li>
           <li>⚙️ Miscellaneous Tasks:</li>
           <li>Synced file(s) with heathcliff26/ci</li>
+          <li>*(release)* Bump crate version to v0.4.0</li>
         </ul>
       </description>
     </release>

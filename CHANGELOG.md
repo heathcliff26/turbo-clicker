@@ -1,5 +1,23 @@
 # Changelog
 
+Version v0.5.0
+--------------------
+Released: 2026-11-12
+
+🚀 Features:
+- Ensure only single instance of app runs at once
+- Show running instance when starting 2nd one
+
+🐛 Bug Fixes:
+- Add library dependencies to rpm
+- *(deps)* Update cargo
+
+⚙️ Miscellaneous Tasks:
+- Synced file(s) with heathcliff26/ci
+- Synced file(s) with heathcliff26/ci
+- *(ci)* Remove gemfury job
+- *(builder)* Update image rust-qt-builder to v202611110607
+
 Version v0.4.0
 --------------------
 Released: 2026-10-16
@@ -17,6 +35,7 @@ Released: 2026-10-16
 
 ⚙️ Miscellaneous Tasks:
 - Synced file(s) with heathcliff26/ci
+- *(release)* Bump crate version to v0.4.0
 
 Version v0.3.0
 --------------------
