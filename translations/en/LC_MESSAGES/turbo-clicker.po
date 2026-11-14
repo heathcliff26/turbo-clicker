@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2026-10-16 12:05+0000\n"
+"POT-Creation-Date: 2026-11-20 13:51+0000\n"
 "PO-Revision-Date: 2026-10-07 18:54+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -89,22 +89,27 @@ msgstr "Start minimized"
 
 #: ui/pages/settings_page.slint:19
 msgctxt "SettingsPage"
+msgid "Autostart"
+msgstr "Autostart"
+
+#: ui/pages/settings_page.slint:23
+msgctxt "SettingsPage"
 msgid "Configure Hotkey"
 msgstr "Configure Hotkey"
 
-#: ui/pages/settings_page.slint:26
+#: ui/pages/settings_page.slint:30
 msgctxt "SettingsPage"
 msgid "Select Language:"
 msgstr "Select Language:"
 
 #. This list needs to be kept in sync with the backend
-#: ui/pages/settings_page.slint:31
+#: ui/pages/settings_page.slint:35
 msgctxt "SettingsPage"
 msgid "English"
 msgstr "English"
 
 #. This list needs to be kept in sync with the backend
-#: ui/pages/settings_page.slint:31
+#: ui/pages/settings_page.slint:35
 msgctxt "SettingsPage"
 msgid "German"
 msgstr "German"
@@ -134,7 +139,7 @@ msgctxt "TrayIcon"
 msgid "Quit"
 msgstr "Quit"
 
-#: ui/global_state.slint:21
+#: ui/global_state.slint:22
 msgctxt "GlobalState"
 msgid "unknown"
 msgstr "unknown"

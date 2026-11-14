@@ -7,6 +7,7 @@ use std::error::Error;
 use std::sync::{Arc, atomic::AtomicU64, atomic::Ordering};
 
 mod autoclicker;
+mod autostart;
 mod hotkey;
 mod instance;
 mod state;
@@ -81,6 +82,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     register_settings_changed(&app, autoclicker_delay);
     register_configure_hotkey(&app, global_hotkey);
     register_change_language(&app);
+    register_change_autostart(&app);
 
     if let Err(e) = run_app_minimized_to_tray(app.as_weak()) {
         eprintln!("Failed to run app minimized to tray: {e}");
@@ -217,4 +219,31 @@ fn register_change_language(app: &AppWindow) {
             slint::select_bundled_translation(&lang).expect("Should set language");
         }
     });
+}
+
+/// Register the callback for changing autostart.
+fn register_change_autostart(app: &AppWindow) {
+    let app_weak = app.as_weak();
+
+    app.global::<GlobalState>().on_change_autostart({
+        move || {
+            let app = app_weak.unwrap();
+            let global_state = app.global::<GlobalState>();
+            let value = global_state.get_autostart();
+            set_autostart(value);
+        }
+    });
+}
+
+/// Enable/Disable autostart
+fn set_autostart(enable: bool) {
+    if enable {
+        if let Err(e) = autostart::enable_autostart() {
+            eprintln!("Failed to enable autostart: {e}");
+        }
+    } else {
+        if let Err(e) = autostart::disable_autostart() {
+            eprintln!("Failed to disable autostart: {e}");
+        }
+    }
 }

@@ -1,3 +1,5 @@
+use crate::autostart;
+
 use super::slint_generatedAppWindow::{AppWindow, GlobalState};
 use serde::{Deserialize, Serialize};
 use slint::ComponentHandle;
@@ -81,6 +83,8 @@ impl State {
 
         let lang = get_language(&self.language);
         global_state.set_selected_language(get_language_index(&lang));
+
+        global_state.set_autostart(autostart::is_autostart_enabled());
     }
 
     /// Save the state to user specific state file.

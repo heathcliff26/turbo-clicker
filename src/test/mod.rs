@@ -2,7 +2,7 @@ use super::*;
 use crate::autoclicker::Autoclicker;
 use serial_test::serial;
 use std::sync::atomic::Ordering;
-use std::{env, time::Duration};
+use std::{env, fs, time::Duration};
 use tokio::time::sleep;
 
 #[test]
@@ -85,5 +85,52 @@ fn test_register_settings_changed() {
 
     unsafe {
         env::remove_var(state::XDG_STATE_HOME);
+    }
+}
+
+#[test]
+#[serial]
+fn test_register_change_autostart() {
+    let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
+    unsafe {
+        env::set_var(autostart::XDG_CONFIG_HOME, tmp_dir.path());
+    }
+    let autostart_dir = tmp_dir.path().join("autostart");
+    fs::create_dir(&autostart_dir).expect("Should create autostart directory");
+
+    let autostart_path = autostart_dir.join(autostart::AUTOSTART_FILE_NAME);
+    assert!(
+        !autostart::is_autostart_enabled(),
+        "Autostart should be disabled before creating the file"
+    );
+
+    i_slint_backend_testing::init_no_event_loop();
+    let app = AppWindow::new().expect("Should create AppWindow");
+
+    register_change_autostart(&app);
+
+    app.global::<GlobalState>().set_autostart(true);
+    app.global::<GlobalState>().invoke_change_autostart();
+
+    assert!(
+        autostart::is_autostart_enabled(),
+        "Autostart should be enabled after creating the file"
+    );
+    assert_eq!(
+        autostart::AUTOSTART_FILE,
+        fs::read_to_string(&autostart_path).expect("Should read autostart file")
+    );
+
+    app.global::<GlobalState>().set_autostart(false);
+    app.global::<GlobalState>().invoke_change_autostart();
+
+    assert!(
+        !autostart::is_autostart_enabled(),
+        "Autostart should be disabled after removing the file"
+    );
+    assert!(!autostart_path.exists(), "Autostart file should be removed");
+
+    unsafe {
+        env::remove_var(autostart::XDG_CONFIG_HOME);
     }
 }
