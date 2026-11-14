@@ -29,7 +29,7 @@ install_app() {
 
     echo "Installing desktop file"
     install -Dm644 "${base_dir}/${APP_ID}.desktop" "${share_dir}/applications/${APP_ID}.desktop"
-    sed -i "s#/usr/bin/turbo-clicker#${bin_dir}/${BINARY}#g" "${share_dir}/applications/${APP_ID}.desktop"
+    sed -i "s#Exec=${BINARY}#Exec=${bin_dir}/${BINARY}#g" "${share_dir}/applications/${APP_ID}.desktop"
 
     echo "Installing icon"
     install -Dm644 "${base_dir}/${APP_ID}.svg" "${share_dir}/icons/hicolor/scalable/apps/${APP_ID}.svg"

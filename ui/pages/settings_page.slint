@@ -15,6 +15,10 @@ export component SettingsPage inherits Page {
         text: @tr("Start minimized");
         checked <=> GlobalState.minimize-to-tray;
     }
+    Switch {
+        text: @tr("Autostart");
+        checked <=> GlobalState.autostart;
+    }
     Button {
         text: @tr("Configure Hotkey");
         clicked => {

@@ -204,11 +204,14 @@ fn get_state_file_path_empty_env_variable() {
         env::set_var(XDG_STATE_HOME, "");
     }
 
-    let home_dir = env::var(HOME).expect("HOME variable should be set");
+    let home_dir = env::home_dir().expect("HOME variable should be set");
 
     let path = get_state_file_path();
     assert_eq!(
-        format!("{home_dir}/{XDG_STATE_HOME_DEFAULT}/{XDG_STATE_HOME_DIR}/state.json"),
+        format!(
+            "{}/{XDG_STATE_HOME_DEFAULT}/{XDG_STATE_HOME_DIR}/state.json",
+            home_dir.display()
+        ),
         path,
         "Path should match"
     );
@@ -221,7 +224,7 @@ fn get_state_file_path_empty_env_variable() {
 #[test]
 #[serial]
 fn get_state_file_path_home_unset() {
-    let home_dir = env::var(HOME).expect("HOME variable should be set");
+    let home_dir = env::home_dir().expect("HOME variable should be set");
     unsafe {
         env::set_var(XDG_STATE_HOME, "");
         env::remove_var(HOME);
