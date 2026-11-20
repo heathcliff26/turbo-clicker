@@ -53,6 +53,7 @@ tempfile = "3.27.0"
 default = ["wayland", "tokio/fs", "tokio/io-util"]
 wayland = ["enigo/wayland"]
 libei = ["enigo/libei_tokio"]
+flatpak = ["libei", "ashpd/background", "ashpd/flatpak"]
 
 [profile.release]
 strip = "symbols"
