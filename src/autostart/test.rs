@@ -1,6 +1,7 @@
 use super::*;
 use serial_test::serial;
-use std::fs;
+use std::{fs, time::Duration};
+use tokio::time::sleep;
 
 #[test]
 #[serial]
@@ -41,9 +42,9 @@ fn get_autostart_file_uses_home_when_config_home_is_empty() {
     }
 }
 
-#[test]
+#[tokio::test]
 #[serial]
-fn enable_and_disable_autostart() {
+async fn enable_and_disable_autostart() {
     let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
     unsafe {
         env::set_var(XDG_CONFIG_HOME, tmp_dir.path().as_os_str());
@@ -53,14 +54,15 @@ fn enable_and_disable_autostart() {
 
     let autostart_path = autostart_dir.join(AUTOSTART_FILE_NAME);
     assert!(
-        !is_autostart_enabled(),
+        !is_autostart_enabled().await,
         "Autostart should be disabled before creating the file"
     );
 
-    enable_autostart().expect("Should enable autostart");
+    enable_autostart().await.expect("Should enable autostart");
+    sleep(Duration::from_millis(10)).await;
 
     assert!(
-        is_autostart_enabled(),
+        is_autostart_enabled().await,
         "Autostart should be enabled after creating the file"
     );
     assert_eq!(
@@ -68,10 +70,11 @@ fn enable_and_disable_autostart() {
         fs::read_to_string(&autostart_path).expect("Should read autostart file")
     );
 
-    disable_autostart().expect("Should disable autostart");
+    disable_autostart().await.expect("Should disable autostart");
+    sleep(Duration::from_millis(10)).await;
 
     assert!(
-        !is_autostart_enabled(),
+        !is_autostart_enabled().await,
         "Autostart should be disabled after removing the file"
     );
     assert!(!autostart_path.exists(), "Autostart file should be removed");

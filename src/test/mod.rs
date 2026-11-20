@@ -5,9 +5,9 @@ use std::sync::atomic::Ordering;
 use std::{env, fs, time::Duration};
 use tokio::time::sleep;
 
-#[test]
+#[tokio::test]
 #[serial]
-fn test_init_global_state() {
+async fn test_init_global_state() {
     unsafe {
         env::set_var(state::XDG_STATE_HOME, "testdata");
     }
@@ -88,9 +88,9 @@ fn test_register_settings_changed() {
     }
 }
 
-#[test]
+#[tokio::test]
 #[serial]
-fn test_register_change_autostart() {
+async fn test_register_change_autostart() {
     let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
     unsafe {
         env::set_var(autostart::XDG_CONFIG_HOME, tmp_dir.path());
@@ -100,7 +100,7 @@ fn test_register_change_autostart() {
 
     let autostart_path = autostart_dir.join(autostart::AUTOSTART_FILE_NAME);
     assert!(
-        !autostart::is_autostart_enabled(),
+        !autostart::is_autostart_enabled().await,
         "Autostart should be disabled before creating the file"
     );
 
@@ -111,9 +111,10 @@ fn test_register_change_autostart() {
 
     app.global::<GlobalState>().set_autostart(true);
     app.global::<GlobalState>().invoke_change_autostart();
+    sleep(Duration::from_millis(10)).await;
 
     assert!(
-        autostart::is_autostart_enabled(),
+        autostart::is_autostart_enabled().await,
         "Autostart should be enabled after creating the file"
     );
     assert_eq!(
@@ -123,9 +124,10 @@ fn test_register_change_autostart() {
 
     app.global::<GlobalState>().set_autostart(false);
     app.global::<GlobalState>().invoke_change_autostart();
+    sleep(Duration::from_millis(10)).await;
 
     assert!(
-        !autostart::is_autostart_enabled(),
+        !autostart::is_autostart_enabled().await,
         "Autostart should be disabled after removing the file"
     );
     assert!(!autostart_path.exists(), "Autostart file should be removed");

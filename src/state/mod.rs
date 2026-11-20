@@ -84,7 +84,15 @@ impl State {
         let lang = get_language(&self.language);
         global_state.set_selected_language(get_language_index(&lang));
 
-        global_state.set_autostart(autostart::is_autostart_enabled());
+        let weak_app = app.as_weak();
+        tokio::spawn(async move {
+            let autostart_enabled = autostart::is_autostart_enabled().await;
+            if let Err(error) = weak_app.upgrade_in_event_loop(move |app| {
+                app.global::<GlobalState>().set_autostart(autostart_enabled);
+            }) {
+                eprintln!("Failed to update autostart state: {error}");
+            }
+        });
     }
 
     /// Save the state to user specific state file.
