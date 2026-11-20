@@ -44,8 +44,21 @@ for exclude in "${excludes[@]}"; do
     ignored_flags+=("--ignore" "$exclude")
 done
 
-${grcov} . --binary-path ./target/debug/deps/ -s . -t html --branch --ignore-not-existing "${ignored_flags[@]}" -o target/coverage/html
-${grcov} . --binary-path ./target/debug/deps/ -s . -t lcov --branch --ignore-not-existing "${ignored_flags[@]}" -o target/coverage/lcov.info
+name="$(cargo metadata --no-deps --format-version 1 | jq -r .packages[0].name)"
+name_pattern="${name//-/_}-*"
+binary_path="./target/debug/deps/"
+if [ ! -d "${binary_path}" ]; then
+    test_binary="$(find "./target/debug/build/${name}" -type f -perm -111 -name "${name_pattern}" -print -quit 2>/dev/null)"
+    if [ -n "${test_binary}" ]; then
+        binary_path="$(dirname "${test_binary}")/"
+    fi
+fi
+
+rm -rf target/coverage/html
+rm -f target/coverage/lcov.info
+
+${grcov} . --binary-path "${binary_path}" -s . -t html --branch --ignore-not-existing "${ignored_flags[@]}" -o target/coverage/html
+${grcov} . --binary-path "${binary_path}" -s . -t lcov --branch --ignore-not-existing "${ignored_flags[@]}" -o target/coverage/lcov.info
 
 if compgen -G "./*.profraw" >/dev/null; then
     rm ./*.profraw
