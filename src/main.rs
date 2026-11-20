@@ -7,6 +7,7 @@ use std::error::Error;
 use std::sync::{Arc, atomic::AtomicU64, atomic::Ordering};
 
 mod autoclicker;
+#[cfg_attr(feature = "flatpak", path = "autostart/flatpak.rs")]
 mod autostart;
 mod hotkey;
 mod instance;

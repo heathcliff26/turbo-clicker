@@ -90,6 +90,7 @@ fn test_register_settings_changed() {
 
 #[tokio::test]
 #[serial]
+#[cfg(not(feature = "flatpak"))]
 async fn test_register_change_autostart() {
     let tmp_dir = tempfile::tempdir().expect("Should create temporary directory");
     unsafe {
