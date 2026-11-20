@@ -1,6 +1,6 @@
 use std::env;
-use std::fs::File;
-use std::io::Write;
+use tokio::fs;
+use tokio::io::AsyncWriteExt;
 
 #[cfg(test)]
 mod test;
@@ -26,20 +26,20 @@ fn get_autostart_file() -> String {
 
 /// Check if the autostart file exists.
 /// Does not checks if it is correct.
-pub fn is_autostart_enabled() -> bool {
+pub async fn is_autostart_enabled() -> bool {
     let path = get_autostart_file();
     std::path::Path::new(&path).exists()
 }
 
 /// Enable autostart
-pub fn enable_autostart() -> Result<(), std::io::Error> {
+pub async fn enable_autostart() -> Result<(), std::io::Error> {
     let path = get_autostart_file();
-    let mut file = File::create(path)?;
-    file.write_all(AUTOSTART_FILE.as_bytes())
+    let mut file = fs::File::create(path).await?;
+    file.write_all(AUTOSTART_FILE.as_bytes()).await
 }
 
 /// Disable autostart
-pub fn disable_autostart() -> Result<(), std::io::Error> {
+pub async fn disable_autostart() -> Result<(), std::io::Error> {
     let path = get_autostart_file();
-    std::fs::remove_file(path)
+    fs::remove_file(path).await
 }

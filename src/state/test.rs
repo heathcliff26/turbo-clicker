@@ -33,8 +33,8 @@ fn state_from_app() {
     );
 }
 
-#[test]
-fn state_update_app() {
+#[tokio::test]
+async fn state_update_app() {
     let state = State {
         delay: 200,
         start_delay: 20,

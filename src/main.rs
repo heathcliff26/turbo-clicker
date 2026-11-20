@@ -237,13 +237,15 @@ fn register_change_autostart(app: &AppWindow) {
 
 /// Enable/Disable autostart
 fn set_autostart(enable: bool) {
-    if enable {
-        if let Err(e) = autostart::enable_autostart() {
-            eprintln!("Failed to enable autostart: {e}");
+    tokio::spawn(async move {
+        if enable {
+            if let Err(e) = autostart::enable_autostart().await {
+                eprintln!("Failed to enable autostart: {e}");
+            }
+        } else {
+            if let Err(e) = autostart::disable_autostart().await {
+                eprintln!("Failed to disable autostart: {e}");
+            }
         }
-    } else {
-        if let Err(e) = autostart::disable_autostart() {
-            eprintln!("Failed to disable autostart: {e}");
-        }
-    }
+    });
 }
