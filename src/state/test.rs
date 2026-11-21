@@ -1,6 +1,8 @@
 use super::*;
 use serial_test::serial;
 
+const HOME: &str = "HOME";
+
 #[test]
 fn state_from_app() {
     let expected_state = State {
@@ -218,27 +220,6 @@ fn get_state_file_path_empty_env_variable() {
 
     unsafe {
         env::remove_var(XDG_STATE_HOME);
-    }
-}
-
-#[test]
-#[serial]
-fn get_state_file_path_home_unset() {
-    let home_dir = env::home_dir().expect("HOME variable should be set");
-    unsafe {
-        env::set_var(XDG_STATE_HOME, "");
-        env::remove_var(HOME);
-    }
-
-    let path = get_state_file_path();
-    assert_eq!(
-        format!("./{XDG_STATE_HOME_DEFAULT}/{XDG_STATE_HOME_DIR}/state.json"),
-        path,
-        "Path should match"
-    );
-
-    unsafe {
-        env::set_var(HOME, home_dir);
     }
 }
 

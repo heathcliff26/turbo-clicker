@@ -39,6 +39,8 @@ tokio = { version = "1.54.1", features = [
     "sync",
     "time",
     "signal",
+    "fs",
+    "io-util",
 ] }
 
 [build-dependencies]
@@ -50,7 +52,7 @@ serial_test = "4.0.1"
 tempfile = "3.27.0"
 
 [features]
-default = ["wayland", "tokio/fs", "tokio/io-util"]
+default = ["wayland"]
 wayland = ["enigo/wayland"]
 libei = ["enigo/libei_tokio"]
 flatpak = ["libei", "ashpd/background", "ashpd/flatpak"]

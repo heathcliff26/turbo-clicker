@@ -11,7 +11,6 @@ use std::path::Path;
 pub const XDG_STATE_HOME_DIR: &str = "io.github.heathcliff26.turbo-clicker";
 pub const XDG_STATE_HOME: &str = "XDG_STATE_HOME";
 pub const XDG_STATE_HOME_DEFAULT: &str = ".local/state";
-pub const HOME: &str = "HOME";
 // This list needs to be kept in sync with the frontend
 const LANGUAGES: &[&str] = &["en", "de"];
 
@@ -121,22 +120,29 @@ impl Default for State {
 }
 
 /// Read the XDG state directory from the environment and return the full path to the state file.
-fn get_state_file_path() -> String {
+pub fn get_state_dir_path() -> String {
     let mut path = match env::var(XDG_STATE_HOME) {
         Ok(path) if !path.is_empty() => Some(path),
         _ => None,
     };
 
     if path.is_none() {
-        path = match env::var(HOME) {
-            Ok(home) if !home.is_empty() => Some(format!("{home}/{XDG_STATE_HOME_DEFAULT}")),
+        path = match env::home_dir() {
+            Some(home) if !home.is_empty() => {
+                Some(format!("{}/{XDG_STATE_HOME_DEFAULT}", home.display()))
+            }
             _ => None,
         }
     }
 
     let path = path.unwrap_or(format!("./{XDG_STATE_HOME_DEFAULT}"));
 
-    format!("{path}/{XDG_STATE_HOME_DIR}/state.json")
+    format!("{path}/{XDG_STATE_HOME_DIR}")
+}
+
+/// Read the XDG state directory from the environment and return the full path to the state file.
+fn get_state_file_path() -> String {
+    format!("{}/state.json", get_state_dir_path())
 }
 
 /// Create the parent directory of the given file if it does not exist
