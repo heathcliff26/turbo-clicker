@@ -1,5 +1,25 @@
 # Changelog
 
+Version v0.6.0
+--------------------
+Released: 2026-11-21
+
+🚀 Features:
+- Add option for autostarting app
+- Implement autostart for flatpak
+
+🐛 Bug Fixes:
+- Adapt to new rust behaviour for coverage
+- *(deps)* Update cargo
+- Track autostart state for flatpak
+
+🚜 Refactor:
+- Change autostart module to async
+
+⚙️ Miscellaneous Tasks:
+- *(builder)* Update image rust-qt-builder to v202611121610
+- *(builder)* Update image rust-qt-builder to v202611200611
+
 Version v0.5.0
 --------------------
 Released: 2026-11-12
@@ -17,6 +37,7 @@ Released: 2026-11-12
 - Synced file(s) with heathcliff26/ci
 - *(ci)* Remove gemfury job
 - *(builder)* Update image rust-qt-builder to v202611110607
+- *(release)* Bump crate version to v0.5.0
 
 Version v0.4.0
 --------------------
