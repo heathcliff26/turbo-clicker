@@ -7,7 +7,7 @@
     <body>
         <div class="container">
     <nav class="breadcrumb is-right" aria-label="breadcrumbs">
-        <ul><li><a href="../../index.html">top_level</a></li><li><a href="./index.html">src&#x2F;autostart</a></li><li class="is-active"><a href="#">mod.rs</a></li>
+        <ul><li><a href="../../index.html">top_level</a></li><li><a href="./index.html">src/autostart</a></li><li class="is-active"><a href="#">mod.rs</a></li>
         </ul>
     </nav>
     <nav class="level">
@@ -23,7 +23,7 @@
         <div>
             <p class="heading">Functions</p>
             <p class="title has-text-success">
-                <abbr title="7 / 7">100 %</abbr></p>
+                <abbr title="7 / 7">100.0 %</abbr></p>
         </div>
     </div>
 
@@ -32,7 +32,7 @@
         <div>
             <p class="heading">Branches</p>
             <p class="title has-text-success">
-                <abbr title="0 / 0">100 %</abbr></p>
+                <abbr title="0 / 0">100.0 %</abbr></p>
         </div>
     </div>
 
@@ -229,7 +229,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">    include_str!(&quot;..&#x2F;..&#x2F;packages&#x2F;io.github.heathcliff26.turbo-clicker.desktop&quot;);</pre>
+                <pre class="has-background-white py-0 px-2">    include_str!(&quot;../../packages/io.github.heathcliff26.turbo-clicker.desktop&quot;);</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -261,7 +261,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Returns the (likely) path to the autostart file</pre>
+                <pre class="has-background-white py-0 px-2">/// Returns the (likely) path to the autostart file</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -341,7 +341,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">            Some(home) =&gt; format!(&quot;{}&#x2F;{}&quot;, home.display(), XDG_CONFIG_HOME_DEFAULT).to_string(),</pre>
+                <pre class="has-background-success-light py-0 px-2">            Some(home) =&gt; format!(&quot;{}/{}&quot;, home.display(), XDG_CONFIG_HOME_DEFAULT).to_string(),</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -357,7 +357,7 @@
             </div>
             <div class="column has-background-danger-light p-0"
                  role="cell">
-                <pre class="has-background-danger-light py-0 px-2">            None =&gt; format!(&quot;.&#x2F;{XDG_CONFIG_HOME_DEFAULT}&quot;).to_string(),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            None =&gt; format!(&quot;./{XDG_CONFIG_HOME_DEFAULT}&quot;).to_string(),</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -421,7 +421,7 @@
             </div>
             <div class="column has-background-success-light p-0"
                  role="cell">
-                <pre class="has-background-success-light py-0 px-2">    format!(&quot;{}&#x2F;autostart&#x2F;{AUTOSTART_FILE_NAME}&quot;, path).to_string()</pre>
+                <pre class="has-background-success-light py-0 px-2">    format!(&quot;{}/autostart/{AUTOSTART_FILE_NAME}&quot;, path).to_string()</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -469,7 +469,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Check if the autostart file exists.</pre>
+                <pre class="has-background-white py-0 px-2">/// Check if the autostart file exists.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -485,7 +485,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Does not checks if it is correct.</pre>
+                <pre class="has-background-white py-0 px-2">/// Does not checks if it is correct.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -581,7 +581,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Enable autostart</pre>
+                <pre class="has-background-white py-0 px-2">/// Enable autostart</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -693,7 +693,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Disable autostart</pre>
+                <pre class="has-background-white py-0 px-2">/// Disable autostart</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -764,7 +764,7 @@
         <footer class="footer">
             
                 <div class="content has-text-centered">
-                    <p class="heading">Date: 2026-11-21 08:09</p>
+                    <p class="heading">Date: 2026-11-27 06:45</p>
                 </div>
             
         </footer>

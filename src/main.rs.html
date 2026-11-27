@@ -32,7 +32,7 @@
         <div>
             <p class="heading">Branches</p>
             <p class="title has-text-success">
-                <abbr title="0 / 0">100 %</abbr></p>
+                <abbr title="0 / 0">100.0 %</abbr></p>
         </div>
     </div>
 
@@ -53,7 +53,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">#![doc = include_str!(concat!(env!(&quot;CARGO_MANIFEST_DIR&quot;), &quot;&#x2F;README.md&quot;))]</pre>
+                <pre class="has-background-white py-0 px-2">#![doc = include_str!(concat!(env!(&quot;CARGO_MANIFEST_DIR&quot;), &quot;/README.md&quot;))]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -69,7 +69,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F; Prevent console window in addition to Slint window in Windows release builds when, e.g., starting the app via file manager. Ignored on other platforms.</pre>
+                <pre class="has-background-white py-0 px-2">// Prevent console window in addition to Slint window in Windows release builds when, e.g., starting the app via file manager. Ignored on other platforms.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -197,7 +197,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">#[cfg_attr(feature = &quot;flatpak&quot;, path = &quot;autostart&#x2F;flatpak.rs&quot;)]</pre>
+                <pre class="has-background-white py-0 px-2">#[cfg_attr(feature = &quot;flatpak&quot;, path = &quot;autostart/flatpak.rs&quot;)]</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -437,7 +437,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F; Need 2 threads here, one will be blocked by the Slint event loop.</pre>
+                <pre class="has-background-white py-0 px-2">// Need 2 threads here, one will be blocked by the Slint event loop.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -1605,7 +1605,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Attempt to initialize the tray icon and run the app. Returns an error if the tray icon could not be initialized.</pre>
+                <pre class="has-background-white py-0 px-2">/// Attempt to initialize the tray icon and run the app. Returns an error if the tray icon could not be initialized.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -2037,7 +2037,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Initialize the global state from the saved state file.</pre>
+                <pre class="has-background-white py-0 px-2">/// Initialize the global state from the saved state file.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -2293,7 +2293,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Save the global state to file.</pre>
+                <pre class="has-background-white py-0 px-2">/// Save the global state to file.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -2421,7 +2421,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Register the callback for clicking the &quot;Start Auto-click&quot; button.</pre>
+                <pre class="has-background-white py-0 px-2">/// Register the callback for clicking the &quot;Start Auto-click&quot; button.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -2933,7 +2933,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Register the callback for setting changes.</pre>
+                <pre class="has-background-white py-0 px-2">/// Register the callback for setting changes.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -3237,7 +3237,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Register the callback for configuring the hotkey.</pre>
+                <pre class="has-background-white py-0 px-2">/// Register the callback for configuring the hotkey.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -3429,7 +3429,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Register the callback for changing the language.</pre>
+                <pre class="has-background-white py-0 px-2">/// Register the callback for changing the language.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -3637,7 +3637,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Register the callback for changing autostart.</pre>
+                <pre class="has-background-white py-0 px-2">/// Register the callback for changing autostart.</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -3861,7 +3861,7 @@
             </div>
             <div class="column has-background-white p-0"
                  role="cell">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; Enable&#x2F;Disable autostart</pre>
+                <pre class="has-background-white py-0 px-2">/// Enable/Disable autostart</pre>
             </div>
         </div><div class="columns p-0 m-0" role="row">
             <div
@@ -4076,7 +4076,7 @@
         <footer class="footer">
             
                 <div class="content has-text-centered">
-                    <p class="heading">Date: 2026-11-21 08:09</p>
+                    <p class="heading">Date: 2026-11-27 06:45</p>
                 </div>
             
         </footer>
