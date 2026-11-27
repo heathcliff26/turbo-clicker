@@ -1,20 +1,24 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "docker:enableMajor",
-    ":disableRateLimiting",
-    ":dependencyDashboard",
-    ":semanticCommits",
-    ":automergeDigest",
-    "github>heathcliff26/ci//renovate/automerge-rust.json5",
-    "github>heathcliff26/ci//renovate/commitMessage.json5",
-    "github>heathcliff26/ci//renovate/customManagers.json5",
-    "github>heathcliff26/ci//renovate/group-cargo.json5",
-    "github>heathcliff26/ci//renovate/labels.json5",
-    "github>heathcliff26/ci//renovate/semanticCommits.json5"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    'docker:enableMajor',
+    ':disableRateLimiting',
+    ':dependencyDashboard',
+    ':semanticCommits',
+    ':automergeDigest',
+    'github>heathcliff26/ci//renovate/automerge-rust.json5',
+    'github>heathcliff26/ci//renovate/commitMessage.json5',
+    'github>heathcliff26/ci//renovate/customManagers.json5',
+    'github>heathcliff26/ci//renovate/group-cargo.json5',
+    'github>heathcliff26/ci//renovate/labels.json5',
+    'github>heathcliff26/ci//renovate/semanticCommits.json5',
   ],
-  "assigneesFromCodeOwners": true,
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "suppressNotifications": ["prIgnoreNotification"],
+  assigneesFromCodeOwners: true,
+  dependencyDashboard: {
+    title: 'Renovate Dashboard 🤖',
+  },
+  suppressNotifications: [
+    'prIgnoreNotification',
+  ],
 }
